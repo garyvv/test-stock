@@ -15,10 +15,6 @@ class WeChatMessage{
 
     public function test(){
         $url = env('HTTP_WEBSITE', 'garylv.com');
-
-        echo $url;
-        exit;
-
         $options = config('wechat');
         $app = new Application($options);
         $server = $app->server;
