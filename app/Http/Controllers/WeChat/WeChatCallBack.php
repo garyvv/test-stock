@@ -16,12 +16,10 @@ class WeChatCallBack
 
     public function callBack()
     {
-        \Log::debug(Input::all());
-        \Log::debug('===========callback==============');
         $config = config('wechat');
         $app = new Application($config);
         $url = Input::get('url','/');
-        \Log::debug('=================stop=====================');
+//        \Log::debug($url);
         $oauth = $app->oauth;
         // 获取 OAuth 授权结果用户信息
         $user = $oauth->user();

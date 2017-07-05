@@ -21,7 +21,7 @@ Route::get('/user', function (Request $request) {
 Route::match(['get','post'],'wechat_oauth_callback','WeChat\WeChatController@oauthCallback');
 Route::match(['get','post'],'wechat_message','WeChat\WeChatMessage@test');
 Route::match(['get','post'],'authlogin','WeChat\WeChatAuthLogin@authlogin');
-Route::match(['get','post'],'other','WeChat\WeChatAuthLogin@other');
+Route::match(['get','post'],'login','WeChat\WeChatAuthLogin@login');
 Route::match(['get','post'],'callback','WeChat\WeChatCallBack@callback');
 Route::any('wechat_msg', ['uses' => 'WechatMsgController@index', 'as' => 'wechat_msg']);
 Route::get('v1/wechat_login', ['middleware' => 'wechat.auth', 'uses' => 'WeChat\WeChatController@login']);

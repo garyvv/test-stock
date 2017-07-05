@@ -12,37 +12,33 @@ use EasyWeChat\Message\Text;
 use Illuminate\Support\Facades\Input;
 
 
+
 class WeChatAuthLogin{
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function authLogin(){
-        \Log::debug(Input::all());
 
         $check = Input::get('check',0);
-        $url = Input::get('url','/');
+//        $url = Input::get('url','/');
+        $url = Input::get('url','/api/authlogin');
         $config = config('wechat');
         $config['oauth']['callback'] = '/api/callback?url='.$url;
 
         // 未登录
         if (empty(session('wechat_user')) || $check == '1') {
-            \Log::debug('===========success=============');
             $app = new Application($config);
             $oauth = $app->oauth;
 //            $_SESSION['target_url'] = 'api/callback';
             return $oauth->redirect();
-            // 这里不一定是return，如果你的框架action不是返回内容的话你就得使用
-            // $oauth->redirect()->send();
         }
         // 已经登录过
         $user = session('wechat_user');
-        echo '<pre>';
-        var_dump($user);
-        exit;
-
+        $info = $user['original'];//用户具体信息
+        return view('wechat.authlogin',compact('user','info'));
     }
 
-    public function other(){
-        echo 'success';
-        exit;
-    }
+
 }
 
