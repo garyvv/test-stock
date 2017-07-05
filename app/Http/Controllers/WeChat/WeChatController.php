@@ -57,7 +57,6 @@ class WeChatController
         $openid = $userInfo['id'];
         $token = md5($openid . 'wxauth' . time());
         session(['token' => $token]);
-
 //        这里采用的是同域前端工程，使用localStorage，如果是不同子域名，可以在这里setCookie，前端从cookie拿token。必须是同一主域名，因为setCookie无法跨域
         return view('wechat.login', compact('userId', 'url', 'token'));
     }
