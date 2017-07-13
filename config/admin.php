@@ -53,7 +53,7 @@ return [
             'file'   => 'file',
         ],
 
-        'host' => 'http://study.garylv.com/upload/',
+        'host' => 'http://' . env('WEB_DOMAIN') . '/upload/',
     ],
 
     /*
