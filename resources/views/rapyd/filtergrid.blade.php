@@ -1,9 +1,10 @@
-{!! Rapyd::head() !!}
+@extends('admin')
 @section('title','供销商列表')
-    <h1>供销商列表</h1>
 
+@section('content')
+<div style="padding:2%">
     <div class="pull-right" style="margin-bottom: 15px">{!! $filter !!}</div>
-    <p>
-        {!! $grid !!}
-    </p>
-
+<br><hr>
+    {!! $grid !!}
+</div>
+@endsection
