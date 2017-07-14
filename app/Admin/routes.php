@@ -15,6 +15,9 @@ Route::group([
     $router->get('/sellers', 'SellerController@index');
     $router->any('/sellers/edit', 'SellerController@edit');
 
+    $router->get('/customers', 'CustomerController@index');
+    $router->any('/customers/edit', 'CustomerController@edit');
+
     $router->get('/depots', 'DepotController@index');
     $router->any('/depots/edit', 'DepotController@edit');
 

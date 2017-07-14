@@ -35,6 +35,7 @@ class CategoryController extends Controller
         $grid->add('wholesale_price', '批发售价', true);
         $grid->add('retail_price', '零售价格', true);
         $grid->add('purchasing_price', '入货价格', true);
+        $grid->add('vip_price', '会员价格', true);
         $grid->add('total', '库存数量', true);
         $grid->add('total_in', '总进货', true);
         $grid->add('total_sale', '总销售', true);
@@ -42,7 +43,7 @@ class CategoryController extends Controller
 
         $grid->edit('/admin/categories/edit', '操作', 'show|modify|delete');
         $grid->orderBy('category_id', 'desc');
-        $grid->paginate(10);
+        $grid->paginate(self::DEFAULT_PER_PAGE);
 
         return view('rapyd.filtergrid', compact('filter', 'grid'));
     }
@@ -55,10 +56,11 @@ class CategoryController extends Controller
         $edit->add('name', '商品类名', 'text')->rule('required|min:3');
         $edit->add('seller_id', '经销商', 'select')->options(StSeller::pluck("name", "seller_id")->toArray());
         $edit->add('depot_id', '仓库位置', 'select')->options(StDepot::pluck("name", "depot_id")->toArray());
-        $edit->add('wholesale_price', '批发价', 'number');
+        $edit->add('wholesale_price', '批发价', 'text');
         $edit->add('retail_price', '零售价', 'text');
         $edit->add('purchasing_price', '入货价', 'text');
-        $edit->add('option_name', '规格', 'textarea');
+        $edit->add('vip_price', '会员价', 'text');
+        $edit->add('option_name', '规格', 'textarea')->attributes(array('rows' => 4));
 
         return $edit->view('rapyd.edit', compact('edit'));
 

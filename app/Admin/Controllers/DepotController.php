@@ -29,7 +29,7 @@ class DepotController extends Controller
         $grid->add('user_id', '管理员');
         $grid->edit('/admin/depots/edit', '操作', 'show|modify|delete');
         $grid->orderBy('depot_id', 'desc');
-        $grid->paginate(10);
+        $grid->paginate(self::DEFAULT_PER_PAGE);
 
         return view('rapyd.filtergrid', compact('filter', 'grid'));
     }
