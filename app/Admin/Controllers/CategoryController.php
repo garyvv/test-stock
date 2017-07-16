@@ -2,8 +2,6 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
-
 use App\Models\StCategory;
 use App\Models\StSeller;
 use App\Models\StDepot;
@@ -12,11 +10,12 @@ use Zofe\Rapyd\DataEdit\DataEdit;
 use Zofe\Rapyd\DataGrid\DataGrid;
 use Zofe\Rapyd\DataFilter\DataFilter;
 
-class CategoryController extends Controller
+class CategoryController extends BaseController
 {
 
     public function index()
     {
+
         $filter = DataFilter::source(StCategory::with('seller', 'depot'));
         $filter->add('name', '商品类名', 'text');
         $filter->add('seller_id', '经销商', 'select')->options(StSeller::pluck("name", "seller_id")->toArray());

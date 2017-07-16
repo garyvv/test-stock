@@ -2,15 +2,13 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
-
 use App\Models\StDepot;
 
 use Zofe\Rapyd\DataEdit\DataEdit;
 use Zofe\Rapyd\DataGrid\DataGrid;
 use Zofe\Rapyd\DataFilter\DataFilter;
 
-class DepotController extends Controller
+class DepotController extends BaseController
 {
 
     public function index()
