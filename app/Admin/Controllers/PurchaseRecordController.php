@@ -15,7 +15,11 @@ class PurchaseRecordController extends BaseController
     public function index()
     {
         $filter = DataFilter::source(StPurchaseRecord::with('category'));
-        $filter->add('purchase_time', '入货时间', 'daterange')->format('Y-m-d', 'zh-CN');
+        $filter->add('purchase_time', '入货时间', 'daterange')
+            ->format('Y-m-d', 'zh-CN');
+        $filter->add('category_id', '货品', 'select')
+            ->options(['' => '全部商品'] + StPurchaseRecord::rapydAllCategories()->pluck('name', 'category_id')->toArray());
+
         $filter->submit('筛选');
         $filter->reset('重置');
         $filter->link('admin/purchase-records/edit', '新增');
@@ -25,12 +29,12 @@ class PurchaseRecordController extends BaseController
 
         $grid->add('purchase_record_id', 'ID', true)->style("width:100px");
         $grid->add('category.name', '货品名称');
-        $grid->add('quantity', '入货数量');
-        $grid->add('total', '入货总价');
-        $grid->add('purchase_time', '入货时间');
+        $grid->add('quantity', '入货数量', true);
+        $grid->add('total', '入货总价', true);
+        $grid->add('purchase_time', '入货时间', true);
         $grid->add('comment', '备注');
         $grid->add('category.seller.address', '供应商地址');
-        $grid->add('category.seller.name', '供应商');
+        $grid->add('category.seller.name', '供应商', true);
         $grid->add('category.option_name', '货品规格');
 
         $grid->edit('/admin/purchase-records/edit', '操作', 'show|modify|delete');
