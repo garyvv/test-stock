@@ -2,15 +2,13 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
-
 use App\Models\StCustomer;
 
 use Zofe\Rapyd\DataEdit\DataEdit;
 use Zofe\Rapyd\DataGrid\DataGrid;
 use Zofe\Rapyd\DataFilter\DataFilter;
 
-class CustomerController extends Controller
+class CustomerController extends BaseController
 {
 
     public function index()

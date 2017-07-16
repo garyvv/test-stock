@@ -2,7 +2,6 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\StCustomer;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Column;
@@ -24,7 +23,7 @@ use App\Models\StSeller;
 use App\Models\StDepot;
 use App\Models\StCategory;
 
-class HomeController extends Controller
+class HomeController extends BaseController
 {
     public function index()
     {

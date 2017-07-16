@@ -15,6 +15,8 @@
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
         </a>
+        <!-- Navbar Title -->
+            {{--<p style="position: absolute;padding-top: 15px;left: 40%;font-weight: 700">title</p>--}}
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">

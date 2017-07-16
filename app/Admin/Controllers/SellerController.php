@@ -2,19 +2,18 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
-
 use App\Models\StSeller;
 
 use Zofe\Rapyd\DataEdit\DataEdit;
 use Zofe\Rapyd\DataGrid\DataGrid;
 use Zofe\Rapyd\DataFilter\DataFilter;
 
-class SellerController extends Controller
+class SellerController extends BaseController
 {
 
     public function index()
     {
+
         $filter = DataFilter::source(new StSeller());
         $filter->add('name', '供销商名称', 'text');
         $filter->submit('筛选');
@@ -45,7 +44,7 @@ class SellerController extends Controller
         $edit = DataEdit::source(new StSeller());
         $edit->label('经销商信息');
         $edit->link("/admin/sellers", "列表", "TR")->back();
-        $edit->add('name', '经销商名称', 'text')->rule('required|min:5');
+        $edit->add('name', '经销商名称', 'text')->rule('required|min:2');
 
         $edit->add('contact', '联系人', 'text');
         $edit->add('address', '地址', 'textarea')->attributes(array('rows' => 2));
