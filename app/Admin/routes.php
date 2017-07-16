@@ -24,4 +24,7 @@ Route::group([
     $router->get('/categories', 'CategoryController@index');
     $router->any('/categories/edit', 'CategoryController@edit');
 
+    $router->get('/purchase-records', 'PurchaseRecordController@index');
+    $router->any('/purchase-records/edit', 'PurchaseRecordController@edit');
+
 });
