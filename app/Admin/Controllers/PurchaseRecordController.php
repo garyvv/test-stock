@@ -14,7 +14,11 @@ class PurchaseRecordController extends BaseController
 
     public function index()
     {
+        $title = '入货列表';
         $filter = DataFilter::source(StPurchaseRecord::with('category'));
+        $filter->link('admin/purchase-records/edit', '新增', 'TR', ['class'=> 'btn btn-default-stock']);
+        $filter->link('admin/purchase-records?export=1', '导出', 'TR', ['class'=> 'btn btn-default-stock']);
+
         $filter->add('purchase_time', '入货时间', 'daterange')
             ->format('Y-m-d', 'zh-CN');
         $filter->add('category_id', '货品', 'select')
@@ -22,11 +26,11 @@ class PurchaseRecordController extends BaseController
 
         $filter->submit('筛选');
         $filter->reset('重置');
-        $filter->link('admin/purchase-records/edit', '新增');
         $filter->build();
 
         $grid = DataGrid::source($filter);
 
+        $grid->attributes(array("class"=>"table table-bordered table-striped table-hover"));
         $grid->add('purchase_record_id', 'ID', true)->style("width:100px");
         $grid->add('category.name', '货品名称');
         $grid->add('quantity', '入货数量', true);
@@ -40,10 +44,12 @@ class PurchaseRecordController extends BaseController
         $grid->edit('/admin/purchase-records/edit', '操作', 'show|modify|delete');
         $grid->orderBy('purchase_record_id', 'desc');
         $grid->paginate(self::DEFAULT_PER_PAGE);
-
         $grid->build();
 
-        return view('rapyd.filtergrid', compact('filter', 'grid'));
+        if (Input::get('export') == 1) {
+            return $grid->buildCSV($title,'Ymd');
+        }
+        return view('rapyd.filtergrid', compact('filter', 'grid', 'title'));
     }
 
     public function edit()
