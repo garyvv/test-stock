@@ -4,61 +4,94 @@ namespace App\Admin\Controllers;
 
 use App\Models\StCustomer;
 
-use Zofe\Rapyd\DataEdit\DataEdit;
-use Zofe\Rapyd\DataGrid\DataGrid;
-use Zofe\Rapyd\DataFilter\DataFilter;
+use Encore\Admin\Controllers\ModelForm;
+use Encore\Admin\Facades\Admin;
+use Encore\Admin\Grid;
+use Encore\Admin\Layout\Content;
+use Encore\Admin\Form;
 
 class CustomerController extends BaseController
 {
 
+    use ModelForm;
+
     public function index()
     {
-        $filter = DataFilter::source(new StCustomer());
-        $filter->add('name', '客户名', 'text');
-        $filter->add('identifier', '客户编号', 'text');
-        $filter->submit('筛选');
-        $filter->reset('重置');
-        $filter->link('admin/customers/edit', '新增');
-        $filter->build();
+        return Admin::content(function (Content $content) {
 
-        $grid = DataGrid::source($filter);
+            $content->header('客户列表');
+            $content->description('客户的信息列表');
 
-        $grid->add('customer_id', 'ID', true)->style("width:100px");
-        $grid->add('name', '客户名');
-        $grid->add('identifier', '客户编号');
-        $grid->add('{{ ($gender == 1) ? "男":"女" }}', '性别');
-        $grid->add('telephone', '联系电话');
-        $grid->add('mobile', '手机号码');
-        $grid->add('address', '地址');
-        $grid->add('buy_times', '购买次数', true);
-        $grid->add('total_buy', '消费总额', true);
-        $grid->add('comment', '备注');
-
-        $grid->edit('/admin/customers/edit', '操作', 'show|modify|delete');
-        $grid->orderBy('customer_id', 'desc');
-        $grid->paginate(self::DEFAULT_PER_PAGE);
-
-        return view('rapyd.filtergrid', compact('filter', 'grid'));
+            $content->body($this->grid());
+        });
     }
 
-    public function edit()
+    public function edit($id)
     {
-        $edit = DataEdit::source(new StCustomer());
-        $edit->label('客户信息');
-        $edit->link("/admin/customers", "列表", "TR")->back();
+        return Admin::content(function (Content $content) use ($id) {
 
-        $edit->add('name', '客户名', 'text')->rule('required|min:2');;
-        $edit->add('identifier', '客户编号', 'text');
-//        $edit->add('avatar', '头像', 'image')->move('upload/customers/')->preview(80,80);
-        $edit->add('gender', '性别', 'select')->options(StCustomer::GENDER_TEXT);
-        $edit->add('telephone', '联系电话', 'number');
-        $edit->add('mobile', '手机号码', 'number');
-        $edit->add('address', '地址', 'textarea')->attributes(array('rows' => 2));
-        $edit->add('buy_times', '购买次数', 'number');
-        $edit->add('total_buy', '消费总额', 'text');
-        $edit->add('comment', '备注', 'textarea')->attributes(array('rows' => 3));
+            $content->header('客户信息');
+            $content->description('编辑客户信息');
 
-        return $edit->view('rapyd.edit', compact('edit'));
+            $content->body($this->form()->edit($id));
+        });
+    }
 
+    protected function grid()
+    {
+        return Admin::grid(StCustomer::class, function (Grid $grid) {
+
+            $grid->model()->orderBy('customer_id', 'DESC');
+
+            $grid->customer_id('ID')->sortable();
+            $grid->name('客户名');
+            $grid->identifier('客户编号');
+            $grid->gender('性别')->display(function ($gender) {
+                return $gender == 1 ? '男' : '女';
+            });
+            $grid->telephone('联系电话');
+            $grid->mobile('手机号码');
+            $grid->address('地址');
+            $grid->buy_times('购买次数')->sortable();
+            $grid->total_buy('消费总额')->sortable();
+            $grid->comment('备注');
+
+            $grid->filter(function ($filter) {
+//                $filter->useModal();  // 是否合并
+
+                $filter->disableIdFilter();
+
+                $filter->equal('identifier', '客户编号');
+                $filter->like('name', '客户名');
+            });
+
+
+        });
+    }
+
+    public function create()
+    {
+        return Admin::content(function (Content $content) {
+
+            $content->header('客户信息');
+            $content->description('新增客户信息');
+
+            $content->body($this->form());
+        });
+    }
+
+    protected function form()
+    {
+        return Admin::form(StCustomer::class, function (Form $form) {
+
+            $form->text('name', '昵称');
+            $form->image('avatar', '头像');
+            $form->text('identifier', '客户编号');
+            $form->radio('gender', '性别')->options(['0' => '女', '1' => '男'])->default('1');
+            $form->mobile('telephone','固话')->options(['mask' => '9999-9999999']);
+            $form->mobile('mobile','手机号码')->options(['mask' => '99999999999']);
+            $form->text('address','地址');
+            $form->textarea('comment','备注');
+        });
     }
 }
