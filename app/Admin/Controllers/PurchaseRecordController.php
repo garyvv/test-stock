@@ -5,6 +5,7 @@ namespace App\Admin\Controllers;
 use App\Models\StCategory;
 use App\Models\StPurchaseRecord;
 
+use Illuminate\Support\Facades\Input;
 use Zofe\Rapyd\DataEdit\DataEdit;
 use Zofe\Rapyd\DataGrid\DataGrid;
 use Zofe\Rapyd\DataFilter\DataFilter;

@@ -6,6 +6,7 @@ use App\Models\StCategory;
 use App\Models\StSeller;
 use App\Models\StDepot;
 
+use Illuminate\Support\Facades\Input;
 use Zofe\Rapyd\DataEdit\DataEdit;
 use Zofe\Rapyd\DataGrid\DataGrid;
 use Zofe\Rapyd\DataFilter\DataFilter;

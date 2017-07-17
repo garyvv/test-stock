@@ -1,6 +1,7 @@
 <?php
 namespace App\Admin\Controllers;
 use App\Models\StCustomer;
+use Illuminate\Support\Facades\Input;
 use Zofe\Rapyd\DataEdit\DataEdit;
 use Zofe\Rapyd\DataGrid\DataGrid;
 use Zofe\Rapyd\DataFilter\DataFilter;
