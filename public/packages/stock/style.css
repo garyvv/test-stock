@@ -34,3 +34,9 @@
     color: #ffffff;
     opacity: .7;
 }
+
+.rpd-edit{
+    background: #ffffff !important;
+    padding: 2% 10% !important;
+    border-radius: 5px !important;
+}

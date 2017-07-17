@@ -2,6 +2,8 @@
 @section('content')
     {!! Rapyd::head() !!}
     <div style="padding:2%">
-        {!! $edit !!}
+        <div class="rpd-edit">
+            {!! $edit !!}
+        </div>
     </div>
 @endsection

@@ -37,7 +37,7 @@ class SellerController extends BaseController
 
         $grid->edit('/admin/sellers/edit', '操作', 'show|modify|delete');
 //        $grid->link('/admin/sellers/edit',"新增", "TL");
-        $grid->orderBy('seller_id', 'desc');
+        $grid->orderBy('seller_id', 'ASC');
         $grid->paginate(self::DEFAULT_PER_PAGE);
         $grid->build();
 
