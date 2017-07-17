@@ -17,16 +17,19 @@ class CategoryController extends BaseController
     {
 
         $filter = DataFilter::source(StCategory::with('seller', 'depot'));
+        $filter->link('admin/categories/edit', '新增', 'TR', ['class'=> 'btn btn-default-stock']);
+        $filter->link('admin/categories?export=1', '导出', 'TR', ['class'=> 'btn btn-default-stock']);
+
         $filter->add('name', '商品类名', 'text');
         $filter->add('seller_id', '经销商', 'select')->options(StSeller::pluck("name", "seller_id")->toArray());
         $filter->add('depot_id', '仓库位置', 'select')->options(StDepot::pluck("name", "depot_id")->toArray());
         $filter->submit('筛选');
         $filter->reset('重置');
-        $filter->link('admin/categories/edit', '新增');
         $filter->build();
 
         $grid = DataGrid::source($filter);
 
+        $grid->attributes(array("class"=>"table table-bordered table-striped table-hover"));
         $grid->add('category_id', 'ID', true)->style("width:100px");
         $grid->add('name', '商品类名');
         $grid->add('seller.name', '经销商');
@@ -44,7 +47,11 @@ class CategoryController extends BaseController
         $grid->orderBy('category_id', 'desc');
         $grid->paginate(self::DEFAULT_PER_PAGE);
 
-        return view('rapyd.filtergrid', compact('filter', 'grid'));
+        $title = '商品分类列表';
+        if (Input::get('export') == 1) {
+            return $grid->buildCSV($title,'Ymd');
+        }
+        return view('rapyd.filtergrid', compact('filter', 'grid', 'title'));
     }
 
     public function edit()

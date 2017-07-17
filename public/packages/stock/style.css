@@ -1,0 +1,36 @@
+.btn-default-stock{
+    margin: 0 2px;
+    background: none;
+    border: 1px solid #2cc6ba;
+    color: #2cc6ba;
+}
+.btn-default-stock:hover{
+    background: #2cc6ba;
+    color: #ffffff;
+}
+
+
+.btn-default{
+    margin: 0 2px;
+    background: #CECECE;
+    border: 1px solid #CECECE;
+    color: #ffffff;
+}
+.btn-default:hover{
+    background: #ffffff;
+    color: #CECECE;
+}
+
+
+.btn-primary{
+    margin: 0 2px;
+    background: #2cc6ba;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+}
+.btn-primary:hover{
+    background: #2cc6ba;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    opacity: .7;
+}

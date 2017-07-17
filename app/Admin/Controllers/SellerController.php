@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Models\StSeller;
 
+use Illuminate\Support\Facades\Input;
 use Zofe\Rapyd\DataEdit\DataEdit;
 use Zofe\Rapyd\DataGrid\DataGrid;
 use Zofe\Rapyd\DataFilter\DataFilter;
@@ -15,14 +16,17 @@ class SellerController extends BaseController
     {
 
         $filter = DataFilter::source(new StSeller());
+        $filter->link('admin/sellers/edit', '新增', 'TR', ['class'=> 'btn btn-default-stock']);
+        $filter->link('admin/sellers?export=1', '导出', 'TR', ['class'=> 'btn btn-default-stock']);
+
         $filter->add('name', '供销商名称', 'text');
         $filter->submit('筛选');
         $filter->reset('重置');
-        $filter->link('admin/sellers/edit', '新增');
         $filter->build();
 
         $grid = DataGrid::source($filter);
 
+        $grid->attributes(array("class"=>"table table-bordered table-striped table-hover"));
         $grid->add('seller_id', 'ID', true)->style("width:100px");
         $grid->add('name', '名称');
         $grid->add('contact', '联系人');
@@ -35,8 +39,14 @@ class SellerController extends BaseController
 //        $grid->link('/admin/sellers/edit',"新增", "TL");
         $grid->orderBy('seller_id', 'desc');
         $grid->paginate(self::DEFAULT_PER_PAGE);
+        $grid->build();
 
-        return view('rapyd.filtergrid', compact('filter', 'grid'));
+        $title = '供应商列表';
+        if (Input::get('export') == 1) {
+            return $grid->buildCSV($title,'Ymd');
+        }
+
+        return view('rapyd.filtergrid', compact('filter', 'grid', 'title'));
     }
 
     public function edit()
