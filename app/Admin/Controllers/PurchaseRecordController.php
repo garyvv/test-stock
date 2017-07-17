@@ -15,12 +15,12 @@ class PurchaseRecordController extends BaseController
 
     public function index()
     {
-        $title = '入货列表';
+        $title = '进货列表';
         $filter = DataFilter::source(StPurchaseRecord::with('category'));
         $filter->link('admin/purchase-records/edit', '新增', 'TR', ['class'=> 'btn btn-default-stock']);
         $filter->link('admin/purchase-records?export=1', '导出', 'TR', ['class'=> 'btn btn-default-stock']);
 
-        $filter->add('purchase_time', '入货时间', 'daterange')
+        $filter->add('purchase_time', '进货日期', 'daterange')
             ->format('Y-m-d', 'zh-CN');
         $filter->add('category_id', '货品', 'select')
             ->options(['' => '全部商品'] + StPurchaseRecord::rapydAllCategories()->pluck('name', 'category_id')->toArray());
@@ -34,9 +34,11 @@ class PurchaseRecordController extends BaseController
         $grid->attributes(array("class"=>"table table-bordered table-striped table-hover"));
         $grid->add('purchase_record_id', 'ID', true)->style("width:100px");
         $grid->add('category.name', '货品名称');
-        $grid->add('quantity', '入货数量', true);
-        $grid->add('total', '入货总价', true);
-        $grid->add('purchase_time', '入货时间', true);
+        $grid->add('quantity', '进货数量', true);
+        $grid->add('category.purchasing_price', '入货价');
+        $grid->add('total', '进货总价', true);
+        $grid->add('freight', '运费', true);
+        $grid->add('purchase_time', '进货日期', true);
         $grid->add('comment', '备注');
         $grid->add('category.seller.address', '供应商地址');
         $grid->add('category.seller.name', '供应商', true);
@@ -56,11 +58,11 @@ class PurchaseRecordController extends BaseController
     public function edit()
     {
         $edit = DataEdit::source(new StPurchaseRecord());
-        $edit->label('入货信息');
+        $edit->label('进货信息');
         $edit->link("/admin/purchase-records", "列表", "TR")->back();
         $edit->add('category_id', '货品名', 'select')->options(StCategory::pluck("name", "category_id")->toArray());
-        $edit->add('quantity', '入货数量', 'number');
-        $edit->add('purchase_time', '入货时间', 'date')->format('Y-m-d', 'zh-CN');
+        $edit->add('quantity', '进货数量', 'number');
+        $edit->add('purchase_time', '进货时间', 'date')->format('Y-m-d', 'zh-CN');
         $edit->add('total', '总价', 'text');
         $edit->add('comment', '备注', 'textarea')->attributes(array('rows' => 3));
 
