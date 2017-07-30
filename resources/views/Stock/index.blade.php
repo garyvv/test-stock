@@ -9,7 +9,7 @@
             src="{{ URL::asset('/weui/weui.min.css') }}"></script>
     {{--<script type="text/javascript"--}}
             {{--src="{{ URL::asset('/weui/weui.css') }}"></script>--}}
-    <title>inventory</title>
+    <title>库存管理</title>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 </head>
@@ -17,18 +17,9 @@
     .background{
         background-color: #999;
     }
-    .top_title{
-        text-align: center;
-        /*height: 0.2rem;*/
-    }
     .weui-media-box__thumb{
         border-radius: 50%;
         overflow: hidden;
-    }
-    .top{
-        /*display: inline-block;*/
-        width: 100%;
-        /*width: 100px;*/
     }
     .avatar{
         display: inline-block;
@@ -37,18 +28,19 @@
         /*display: inline-block;*/
         width: 100px;
     }
+    .weui-cell__hd img{
+        width: 40px;
+        margin-right: 10px;
+    }
     .name{
         display: inline-block;
     }
 </style>
 <body class="background">
 <div class="weui-cells">
-<div class="top_title">
-    库存管理
-</div>
 <div class="top">
     {{--<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">--}}
-        <div class="weui-media-box__hd avatar">
+        <div class="weui-media-box__hd avatar" style="padding: 10px">
             <a href="{{ url('/stock/userCenter') }}">
                 <img class="weui-media-box__thumb" src="images/avatar.jpg">
             </a>
@@ -63,8 +55,8 @@
 
 </div>
 <div class="weui-cells">
-    <a class="weui-cell weui-cell_access" href="{{ url('/stock/category') }}">
-        <div class="weui-cell__hd"><img src=""></div>
+    <a class="weui-cell weui-cell_access" href="{{ url('/category') }}">
+        <div class="weui-cell__hd"><img src="images/category.png"></div>
         <div class="weui-cell__bd">
             <p>类别管理</p>
         </div>
@@ -72,7 +64,7 @@
         </div>
     </a>
     <a class="weui-cell weui-cell_access" href="javascript:;">
-        <div class="weui-cell__hd"><img src=""></div>
+        <div class="weui-cell__hd"><img src="images/seller.png"></div>
         <div class="weui-cell__bd">
             <p>供应商管理</p>
         </div>
@@ -80,7 +72,7 @@
         </div>
     </a>
     <a class="weui-cell weui-cell_access" href="javascript:;">
-        <div class="weui-cell__hd"><img src=""></div>
+        <div class="weui-cell__hd"><img src="images/order_depot.png"></div>
         <div class="weui-cell__bd">
             <p>仓库管理</p>
         </div>

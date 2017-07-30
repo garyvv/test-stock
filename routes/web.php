@@ -11,20 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/stock', function () {
-    return view('stock.index');
-});
 
 
 //Stock
-Route::match(['get','post'],'/stock','Stock\IndexController@index');
-Route::match(['get','post'],'/stock/userCenter','Stock\UserInfoController@index');
-Route::match(['get','post'],'/stock/category','Stock\CategoryController@index');
-Route::match(['get','post'],'/stock/categoryDetail','Stock\CategoryController@detail');
-Route::match(['get','post'],'/stock/categoryEdit','Stock\CategoryController@edit');
+Route::match(['get','post'],'/','Stock\IndexController@index');
+Route::match(['get','post'],'/userCenter','Stock\UserInfoController@index');
+Route::match(['get','post'],'/category','Stock\CategoryController@CateList');
+Route::match(['get','post'],'/categoryDetail','Stock\CategoryController@detail');
+Route::match(['get','post'],'/categoryEdit','Stock\CategoryController@edit');
 
 
 Route::group([

@@ -9,7 +9,7 @@
             src="{{ URL::asset('../weui/weui.min.css') }}"></script>
     {{--<script type="text/javascript"--}}
     {{--src="{{ URL::asset('/weui/weui.css') }}"></script>--}}
-    <title>inventory</title>
+    <title>库存管理</title>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 </head>
@@ -35,16 +35,22 @@
 </div>
 
 <div class="weui-cells">
-
-    <a href="{{ url('/stock/categoryDetail') }}">
+    @foreach ($cateLists as $cateList)
+    <a href="{{ url('/categoryDetail') }}">
         <div class="weui-cell">
             {{--<div class="weui-cell__hd"><img src=""></div>--}}
             <div class="weui-cell__bd">
-                <p>类别名称</p>
+                <p>ID：{{$cateList->category_id}}</p>
+                <p>名称：{{$cateList->name}}</p>
+                <p>仓库：{{$cateList->depot_name}}</p>
+                <p>零售价：￥{{$cateList->retail_price}}</p>
+                <p>规格：{{$cateList->option_name}}</p>
             </div>
             <div class="weui-cell__ft"><img class="images" src="../images/avatar.jpg"></div>
         </div>
     </a>
+    @endforeach
+
     <a href="{{ url('/stock/categoryDetail') }}">
         <div class="weui-cell">
             {{--<div class="weui-cell__hd"></div>--}}
