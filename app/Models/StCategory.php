@@ -47,4 +47,17 @@ class StCategory extends Model
             )
             ->groupBy('c.category_id');
     }
+
+    public static function getCateLists(){
+        return DB::table('st_categories AS c')
+            ->leftJoin('st_depots AS d', 'c.depot_id', 'd.depot_id')
+            ->select(
+                'c.category_id',
+                'c.name',
+                'd.name AS depot_name',
+                'c.retail_price',
+                'c.option_name'
+            )
+            ->get();
+    }
 }

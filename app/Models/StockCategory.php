@@ -9,5 +9,4 @@ class StockCategory extends Model
 {
     //
     protected $table = 'st_categories';
-
 }

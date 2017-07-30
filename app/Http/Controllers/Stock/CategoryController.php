@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Stock;
 
+use App\Models\StCategory;
 use App\Models\StockSeller;
 use App\Models\StockDepot;
 use App\Models\StockCategory;
@@ -12,13 +13,19 @@ class CategoryController extends Controller
 {
 
     public function index() {
-        if($_POST){
-            echo "success";
-            exit;
-        }
-//        $userInfo = StockUser::all();
         return view('Stock.category');
     }
+
+    public function CateList(){
+//        new StCategory();
+        $cateLists = StCategory::getCateLists();
+
+//        echo '<pre>';
+//        var_dump($cateLists);
+//        exit;
+        return view('Stock.categoryList',compact('cateLists'));
+    }
+
     public function detail() {
         if($_POST){
             echo "success";
