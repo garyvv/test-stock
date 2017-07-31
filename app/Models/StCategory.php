@@ -60,4 +60,51 @@ class StCategory extends Model
             )
             ->get();
     }
+
+    public function getCateDetail($cid){
+        return DB::table('st_categories AS c')
+            ->leftJoin('st_purchase_records AS pr', 'c.category_id', 'pr.category_id')
+            ->leftJoin('st_depots AS d', 'c.depot_id', 'd.depot_id')
+            ->leftJoin('st_orders AS o', 'c.category_id', 'o.category_id')
+            ->leftJoin('st_sellers AS s', 'c.seller_id', 's.seller_id')
+            ->select(
+                'c.category_id',
+                'c.seller_id',
+                'c.depot_id',
+                'c.name',
+                'c.option_name',
+                'c.purchasing_price',
+                'c.wholesale_price',
+                'c.retail_price',
+                'c.vip_price',
+                'pr.quantity',
+                's.name AS seller_name',
+                'd.name AS depot_name',
+                's.address',
+                's.contact',
+                'phone',
+                DB::raw('sum(pr.quantity) AS purchase_amount'),
+                DB::raw('sum(o.quantity) AS selling_amount')
+            )
+            ->where('c.category_id',$cid)
+            ->groupBy('c.category_id')
+            ->first();
+    }
+
+    public static function getSellers(){
+        return DB::table('st_sellers')
+            ->select(
+                'seller_id',
+                'name'
+            )
+            ->get();
+    }
+    public static function getDepots(){
+        return DB::table('st_depots')
+            ->select(
+                'depot_id',
+                'name'
+            )
+            ->get();
+    }
 }

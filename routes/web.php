@@ -17,8 +17,8 @@
 Route::match(['get','post'],'/','Stock\IndexController@index');
 Route::match(['get','post'],'/userCenter','Stock\UserInfoController@index');
 Route::match(['get','post'],'/category','Stock\CategoryController@CateList');
-Route::match(['get','post'],'/categoryDetail','Stock\CategoryController@detail');
-Route::match(['get','post'],'/categoryEdit','Stock\CategoryController@edit');
+Route::match(['get','post'],'/categoryDetail/{id}','Stock\CategoryController@detail');
+Route::match(['get','post'],'/categoryEdit/{id}','Stock\CategoryController@edit');
 
 
 Route::group([

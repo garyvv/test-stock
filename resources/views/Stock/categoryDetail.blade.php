@@ -9,13 +9,14 @@
             src="{{ URL::asset('../weui/weui.min.css') }}"></script>
     {{--<script type="text/javascript"--}}
     {{--src="{{ URL::asset('/weui/weui.css') }}"></script>--}}
-    <title>inventory</title>
+    <title>详情页</title>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-<a href="{{url('/stock/categoryEdit')}}">
+<div></div>
+<a href="{{url('/categoryEdit')}}/{{$detail->category_id}}">
 <div class="weui-msg">
     <div class="weui-msg__icon-area"></div>
     <div class="weui-msg__text-area">
@@ -27,12 +28,45 @@
 <div class="weui-cells">
     <div class="weui-cell">
         <div class="weui-cell__bd">
-            <p>标题文字</p>
+            <p>类别名称:{{$detail->name}}</p>
+            <p>商品规格:{{$detail->option_name}}</p>
         </div>
-        <div class="weui-cell__ft">说明文字</div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <p>入货价</p>
+            <p>￥{{$detail->purchasing_price}}</p>
+        </div>
+        <div class="weui-cell__bd">
+            <p>批发价</p>
+            <p>￥{{$detail->wholesale_price}}</p>
+        </div>
+        <div class="weui-cell__bd">
+            <p>零售价</p>
+            <p>￥{{$detail->retail_price}}</p>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <p>总入货</p>
+            <p>{{$detail->purchase_amount}}</p>
+        </div>
+        <div class="weui-cell__bd">
+            <p>总销售</p>
+            <p>{{$detail->selling_amount}}</p>
+        </div>
+        <div class="weui-cell__bd">
+            <p>现库存</p>
+            <p>{{$detail->inventory}}</p>
+        </div>
     </div>
 </div>
-
+<div>
+    <p>供应商：{{$detail->seller_name}}</p>
+    <p>地址：{{$detail->address}}</p>
+    <p>联系人：{{$detail->contact}}</p>
+    <p>联系电话：{{$detail->phone}}</p>
+</div>
 
 </body>
 

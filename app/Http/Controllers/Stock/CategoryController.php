@@ -8,6 +8,7 @@ use App\Models\StockDepot;
 use App\Models\StockCategory;
 use DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
 class CategoryController extends Controller
 {
@@ -17,57 +18,24 @@ class CategoryController extends Controller
     }
 
     public function CateList(){
-//        new StCategory();
+
         $cateLists = StCategory::getCateLists();
-
-//        echo '<pre>';
-//        var_dump($cateLists);
-//        exit;
         return view('Stock.categoryList',compact('cateLists'));
+
     }
 
-    public function detail() {
-        if($_POST){
-            echo "success";
-            exit;
-        }
-//        $userInfo = StockUser::all();
-        return view('Stock.categoryDetail');
+    public function detail($cid) {
+
+        $detail = new StCategory();
+        $detail = $detail->getCateDetail($cid);
+        $detail->inventory = $detail->purchase_amount - $detail->selling_amount;//获取库存
+        return view('Stock.categoryDetail',compact('detail'));
     }
-    public function edit() {
-//        $sellers = StockSeller::all();
-//        $depots = StockDepot::all();
-//        $depots = DB::table('st_depots');
-//        echo '<pre>';
-//        var_dump($sellers);
-//        exit;
-        if($_POST){
-//            $id = $_POST['id'];
-            $category = DB::table('st_categories')->where('id', $_POST['id'])->first();
-            if(empty($category)){
-                echo '<pre>';
-                var_dump($_POST);
-                exit;
-                DB::table('st_categories')->insert(
-                    ['name' => $_POST['name']]);
-//                return redirect('/Stock/categoryEdit')->with('保存成功'); //
-//                return redirect('/')->with('message');
-//                echo 1;
-//                exit;
-            }else{
-                echo '<pre>';
-                var_dump($_POST);
-                exit;
-                DB::table('st_categories')
-                    ->where('id', $_POST['id'])
-                    ->update(['name' => $_POST['name']]);
-//                return redirect('/')->with('message');
-//                return redirect('/Stock/categoryEdit')->with('更新成功'); //
-
-            }
-
-        }
-//        $userInfo = StockUser::all();
-        return view('Stock.categoryEdit');
+    public function edit($cid) {
+        $detail = new StCategory();
+        $detail = $detail->getCateDetail($cid);
+        $sellers = StCategory::getSellers();
+        $depots = StCategory::getDepots();
+        return view('Stock.categoryEdit',compact('detail','sellers','depots'));
     }
 }
