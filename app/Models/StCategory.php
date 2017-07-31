@@ -91,6 +91,15 @@ class StCategory extends Model
             ->first();
     }
 
+    public function getCateInfo($cid){
+        return DB::table('st_categories')
+            ->select(
+                'category_id',
+                'name'
+            )
+            ->where('category_id',$cid)
+            ->first();
+    }
     public static function getSellers(){
         return DB::table('st_sellers')
             ->select(

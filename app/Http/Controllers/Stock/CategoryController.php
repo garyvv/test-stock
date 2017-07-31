@@ -18,10 +18,8 @@ class CategoryController extends Controller
     }
 
     public function CateList(){
-
         $cateLists = StCategory::getCateLists();
         return view('Stock.categoryList',compact('cateLists'));
-
     }
 
     public function detail($cid) {
@@ -37,5 +35,38 @@ class CategoryController extends Controller
         $sellers = StCategory::getSellers();
         $depots = StCategory::getDepots();
         return view('Stock.categoryEdit',compact('detail','sellers','depots'));
+    }
+
+    public function update(){
+        $data = Input::all();
+        $cid = $data['category_id'];
+        $cateInfo = new StCategory();
+        $cateInfo = $cateInfo->getCateInfo($cid);
+        if(isset($cateInfo)){//判断是否存在数据
+            $data = array(
+                'category_id'=>$data['category_id'],
+                'name'=>$data['name'],
+                'seller_id'=>$data['seller_id'],
+                'depot_id'=>$data['depot_id'],
+                'wholesale_price'=>$data['wholesale_price'],
+                'retail_price'=>$data['retail_price'],
+                'purchasing_price'=>$data['purchasing_price'],
+                'vip_price'=>$data['vip_price'],
+                'option_name'=>$data['option_name'],
+            );
+            $update = DB::table('st_categories')
+                        ->where('category_id',$cid)
+                        ->update($data);
+            if(!empty($update)){//判断是否有执行更新
+                session(['message'=>'success']);
+                return redirect()->action('Stock\CategoryController@edit',$cid);
+            }else{
+                session(['message'=>'undo']);
+                return redirect()->action('Stock\CategoryController@edit',$cid);
+            }
+        }else{
+            session(['message'=>'fail']);
+            return redirect()->action('Stock\CategoryController@CateList');
+        }
     }
 }

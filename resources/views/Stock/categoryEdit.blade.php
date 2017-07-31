@@ -15,23 +15,22 @@
 </head>
 
 <body>
-<form name="category" method="post" action="{{url('/stock/categoryEdit')}}">
+<form name="category" method="post" action="{{url('/categoryUpdate')}}">
     <input type="hidden" name="_token" value="{{csrf_token()}}"/>
-    <input type="hidden" name="id" value="1"/>
+    <input type="hidden" name="category_id" value="{{$detail->category_id}}"/>
     <div class="weui-cells weui-cells_form">
         <div class="weui-cell">
-            {{--<div class="weui-cell__hd"><label class="weui-label">名称</label></div>--}}
             <div class="weui-cell__bd">
                 <p>名称：</p>
                 <input class="weui-input" type="text" name="name" placeholder="请输入类别名称" value="{{$detail->name}}">
                 <p>供应商：</p>
-                <select id = 'seller'>
+                <select id = 'seller' name="seller_id">
                     @foreach($sellers as $seller)
                     <option value="{{$seller->seller_id}}" @if($detail->seller_id == $seller->seller_id) selected = "selected" @endif>{{$seller->name}}</option>
                     @endforeach
                 </select>
                 <p>存放仓库：</p>
-                <select id = 'seller'>
+                <select id = 'depot' name="depot_id">
                     @foreach($depots as $depot)
                         <option value="{{$depot->depot_id}}" @if($detail->depot_id == $depot->depot_id) selected = "selected" @endif>{{$depot->name}}</option>
                     @endforeach
