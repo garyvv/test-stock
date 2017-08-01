@@ -14,11 +14,12 @@
 
 
 //Stock
-Route::match(['get','post'],'/','Stock\IndexController@index');
-Route::match(['get','post'],'/userCenter','Stock\UserInfoController@index');
-Route::match(['get','post'],'/category','Stock\CategoryController@CateList');
-Route::match(['get','post'],'/categoryDetail','Stock\CategoryController@detail');
-Route::match(['get','post'],'/categoryEdit','Stock\CategoryController@edit');
+Route::get('/','Stock\IndexController@index');
+Route::get('/userCenter','Stock\UserInfoController@index');
+Route::get('/category','Stock\CategoryController@CateList');
+Route::get('/categoryDetail/{id}','Stock\CategoryController@detail');
+Route::get('/categoryEdit/{id}','Stock\CategoryController@edit');
+Route::post('/categoryUpdate','Stock\CategoryController@update');
 
 
 Route::group([
