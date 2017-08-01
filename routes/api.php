@@ -26,10 +26,13 @@ Route::match(['get','post'],'callback','WeChat\WeChatCallBack@callback');
 Route::any('wechat_msg', ['uses' => 'WechatMsgController@index', 'as' => 'wechat_msg']);
 Route::get('v1/wechat_login', ['middleware' => 'wechat.auth', 'uses' => 'WeChat\WeChatController@login']);
 
+
+/**
+ * 业务接口
+ */
 Route::group([
 	'prefix' => 'v1',
+    'namespace' => 'Stock',
 ], function() {
-//	公共
-    Route::get('js_sdk', 'CommonController@jsSdk');
-
+    Route::post('/categories/{category_id}','CategoryController@update');
 });

@@ -16,7 +16,7 @@
 
 <body>
 <div></div>
-<a href="{{url('/categoryEdit')}}/{{$detail->category_id}}">
+<a href="{{url('/categories')}}/{{$detail->category_id}}/edit">
 <div class="weui-msg">
     <div class="weui-msg__icon-area"></div>
     <div class="weui-msg__text-area">

@@ -22,7 +22,7 @@
 
 <div class="weui-cells">
     @foreach ($cateLists as $cateList)
-    <a href="{{ url('/categoryDetail') }}/{{$cateList->category_id}}">
+    <a href="{{ url('/categories') }}/{{$cateList->category_id}}">
         <div class="weui-cell">
             {{--<div class="weui-cell__hd"><img src=""></div>--}}
             <div class="weui-cell__bd">
@@ -37,7 +37,7 @@
     </a>
     @endforeach
 
-    <a href="{{ url('/stock/categoryDetail') }}">
+    <a href="{{ url('/stock/categories') }}">
         <div class="weui-cell">
             {{--<div class="weui-cell__hd"></div>--}}
             <div class="weui-cell__bd">
