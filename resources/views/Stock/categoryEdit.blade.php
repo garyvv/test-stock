@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="../weui/dist/style/weui.css" />
+    {{--<link rel="stylesheet" type="text/css" href="../weui/dist/style/weui.css" />--}}
     <script type="text/javascript"
             src="{{ URL::asset('/weui/weui.min.css') }}"></script>
     {{--<script type="text/javascript"--}}
@@ -66,16 +66,23 @@
         var vip_price = $('#vip_price').val();
         var option_name = $('#option_name').val();
         $.ajax({
-            url: "{{url('api/v1/categories')}}",
+            url: "{{url('api/v1/categories')}}/"+category_id,
             type:"post",     //请求类型
-            data:name,  //请求的数据
+            data:{
+                "name":name,
+                "category_id":category_id,
+                "seller_id":seller_id,
+                "depot_id":depot_id,
+                "wholesale_price":wholesale_price,
+                "retail_price":retail_price,
+                "purchasing_price":purchasing_price,
+                "vip_price":vip_price,
+                "option_name":option_name
+            },  //请求的数据
             dataType:"json",  //数据类型
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-            },
             success: function(data){
-                console.log(1);
-                alert(1);
+                console.log(data);
+//                alert(data);
             },
             error: function(data) {
                 console.log(data);

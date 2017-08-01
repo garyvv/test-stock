@@ -34,5 +34,5 @@ Route::group([
 	'prefix' => 'v1',
     'namespace' => 'Stock',
 ], function() {
-    Route::post('/categories/{category_id}','CategoryController@update');
+    Route::post('/categories/{categoryId}','CategoryController@update');
 });

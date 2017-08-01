@@ -19,8 +19,8 @@ Route::group([
 ], function () {
     Route::get('/','CategoryController@index');
     Route::get('/categories','CategoryController@lists');
-    Route::get('/categories/{category_id}','CategoryController@detail');
-    Route::get('/categories/{category_id}/edit','CategoryController@edit');
+    Route::get('/categories/{categoryId}','CategoryController@detail');
+    Route::get('/categories/{categoryId}/edit','CategoryController@edit');
 });
 
 

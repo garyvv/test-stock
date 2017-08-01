@@ -36,55 +36,35 @@ class CategoryController extends Controller
         return view('Stock.categoryEdit',compact('detail','sellers','depots'));
     }
 
-    public function update(){
-
+    public function update($categoryId){
         $this->requestValidate(
             [
-                'name' => 'required|min:2|max:10',
+                'name' => 'min:2',
             ],
             [
-                'name.required' => 'name 字段不能为空',
                 'name.min' => 'name 字段最少2个字符',
-                'name.max' => 'name 字段最大10个字符',
             ]
         );
 
-        $data = Input::all();
-        $cid = $data['category_id'];
-        $cateInfo = new StCategory();
-        $cateInfo = $cateInfo->getCateInfo($cid);
+        $categoryInfo = StCategory::find($categoryId);
 
-        if(isset($cateInfo)){//判断是否存在数据
-            $data = array(
-                'category_id'=>$data['category_id'],
-                'name'=>$data['name'],
-                'seller_id'=>$data['seller_id'],
-                'depot_id'=>$data['depot_id'],
-                'wholesale_price'=>$data['wholesale_price'],
-                'retail_price'=>$data['retail_price'],
-                'purchasing_price'=>$data['purchasing_price'],
-                'vip_price'=>$data['vip_price'],
-                'option_name'=>$data['option_name'],
-            );
-            $update = DB::table('st_categories')
-                        ->where('category_id',$cid)
-                        ->update($data);
-            if(!empty($update)){//判断是否有执行更新
-                session(['message'=>'success']);
-//                return redirect()->action('Stock\CategoryController@detail',$cid);
-                $message = "success";
-                return json_encode($message);
-            }else{
-                session(['message'=>'undo']);
-//                return redirect()->action('Stock\CategoryController@detail',$cid);
-                $message = "undo";
-                return json_encode($message);
-            }
+        if(!empty($categoryInfo)){//判断是否存在数据
+            $categoryInfo->name = Input::get('name', $categoryInfo->name);
+            $categoryInfo->seller_id = Input::get('seller_id', $categoryInfo->seller_id);
+            $categoryInfo->depot_id = Input::get('depot_id', $categoryInfo->depot_id);
+            $categoryInfo->wholesale_price = Input::get('wholesale_price', $categoryInfo->wholesale_price);
+            $categoryInfo->retail_price = Input::get('retail_price', $categoryInfo->retail_price);
+            $categoryInfo->purchasing_price = Input::get('purchasing_price', $categoryInfo->purchasing_price);
+            $categoryInfo->vip_price = Input::get('vip_price', $categoryInfo->vip_price);
+            $categoryInfo->option_name = Input::get('option_name', $categoryInfo->option_name);
+            $update = $categoryInfo->save();
+
+            $message = "success";
+            return $this->respData($categoryInfo,$message);
+
         }else{
-            session(['message'=>'fail']);
 //            return redirect()->action('Stock\CategoryController@CateList');
-            $message = "fail";
-            return json_encode($message);
+            return $this->respFail('找不到分类');
         }
     }
 }
