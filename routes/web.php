@@ -13,13 +13,16 @@
 
 
 
-//Stock
-Route::get('/','Stock\IndexController@index');
-Route::get('/userCenter','Stock\UserInfoController@index');
-Route::get('/category','Stock\CategoryController@CateList');
-Route::get('/categoryDetail/{id}','Stock\CategoryController@detail');
-Route::get('/categoryEdit/{id}','Stock\CategoryController@edit');
-Route::post('/categoryUpdate','Stock\CategoryController@update');
+//Stock  页面路由
+Route::group([
+    'namespace' => 'Stock'
+], function () {
+    Route::get('/','CategoryController@index');
+    Route::get('/categories','CategoryController@lists');
+    Route::get('/categories/{categoryId}','CategoryController@detail');
+    Route::get('/categories/{categoryId}/edit','CategoryController@edit');
+});
+
 
 
 Route::group([

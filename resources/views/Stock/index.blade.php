@@ -55,7 +55,7 @@
 
 </div>
 <div class="weui-cells">
-    <a class="weui-cell weui-cell_access" href="{{ url('/category') }}">
+    <a class="weui-cell weui-cell_access" href="{{ url('/categories') }}">
         <div class="weui-cell__hd"><img src="images/category.png"></div>
         <div class="weui-cell__bd">
             <p>类别管理</p>
