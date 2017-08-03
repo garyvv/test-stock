@@ -15,40 +15,83 @@
 <form>
     <input type="hidden" name="_token" value="{{csrf_token()}}"/>
     <input type="hidden" id="category_id" name="category_id" value="{{$detail->category_id}}"/>
-    <a href="javascript:;" class="weui_btn weui_btn_primary">按钮</a>
-    <a href="javascript:;" class="weui_btn weui_btn_disabled weui_btn_primary">按钮</a>
-    <a href="javascript:;" class="weui_btn weui_btn_warn">确认</a>
+    {{--<a href="javascript:;" class="weui-btn weui-btn_plain-default">按钮</a>--}}
+    {{--<a href="javascript:;" class="weui-btn weui-btn_primary">按钮</a>--}}
+    {{--<a href="javascript:;" class="weui-btn weui-btn_warn">确认</a>--}}
     <div class="weui-cells weui-cells_form">
-        <div class="weui-cell">
-            <div class="weui-cell__bd">
-                <p>名称：</p>
-                <input class="weui-input" type="text" id="name" name="name" placeholder="请输入类别名称" value="{{$detail->name}}">
-                <p>供应商：</p>
-                <select id = 'seller_id' name="seller_id">
-                    @foreach($sellers as $seller)
-                    <option value="{{$seller->seller_id}}" @if($detail->seller_id == $seller->seller_id) selected = "selected" @endif>{{$seller->name}}</option>
-                    @endforeach
-                </select>
-                <p>存放仓库：</p>
-                <select id = 'depot_id' name="depot_id">
-                    @foreach($depots as $depot)
-                        <option value="{{$depot->depot_id}}" @if($detail->depot_id == $depot->depot_id) selected = "selected" @endif>{{$depot->name}}</option>
-                    @endforeach
-                </select>
-                <p>批发价：</p>
-                <input class="weui-input" type="text" id="wholesale_price" name="wholesale_price" placeholder="请输入批发售价" value="{{$detail->wholesale_price}}">
-                <p>零售价：</p>
-                <input class="weui-input" type="text" id="retail_price" name="retail_price" placeholder="请输入零售价格" value="{{$detail->retail_price}}">
-                <p>入货价：</p>
-                <input class="weui-input" type="text" id="purchasing_price" name="purchasing_price" placeholder="请输入入货价格" value="{{$detail->purchasing_price}}">
-                <p>会员价：</p>
-                <input class="weui-input" type="text" id="vip_price" name="vip_price" placeholder="请输入会员价格" value="{{$detail->vip_price}}">
-                <p>类别规格：</p>
-                <input class="weui-input" type="text" id="option_name" name="option_name" placeholder="请输入类别规格" value="{{$detail->option_name}}">
-                <input type="button" id="submit" onclick="updateCategory()" value="提交">
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    名称：
+                    <input class="weui-input" type="text" id="name" name="name" placeholder="请输入类别名称" value="{{$detail->name}}">
+                </div>
             </div>
-
         </div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    供应商：
+                    <select id = 'seller_id' name="seller_id">
+                        @foreach($sellers as $seller)
+                            <option value="{{$seller->seller_id}}" @if($detail->seller_id == $seller->seller_id) selected = "selected" @endif>{{$seller->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    存放仓库：
+                    <select id = 'depot_id' name="depot_id">
+                        @foreach($depots as $depot)
+                            <option value="{{$depot->depot_id}}" @if($detail->depot_id == $depot->depot_id) selected = "selected" @endif>{{$depot->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    批发价：
+                    <input class="weui-input" type="text" id="wholesale_price" name="wholesale_price" placeholder="请输入批发售价" value="{{$detail->wholesale_price}}">
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>零售价：</p>
+                    <input class="weui-input" type="text" id="retail_price" name="retail_price" placeholder="请输入零售价格" value="{{$detail->retail_price}}">
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>入货价：</p>
+                    <input class="weui-input" type="text" id="purchasing_price" name="purchasing_price" placeholder="请输入入货价格" value="{{$detail->purchasing_price}}">
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>会员价：</p>
+                    <input class="weui-input" type="text" id="vip_price" name="vip_price" placeholder="请输入会员价格" value="{{$detail->vip_price}}">
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>类别规格：</p>
+                    <input class="weui-input" type="text" id="option_name" name="option_name" placeholder="请输入类别规格" value="{{$detail->option_name}}">
+                </div>
+            </div>
+        </div>
+        <input type="button" class="weui-btn weui-btn_primary" id="submit" onclick="updateCategory()" value="提交">
     </div>
 </form>
 </body>
