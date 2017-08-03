@@ -45,6 +45,7 @@ class CategoryController extends Controller
                 'name.min' => 'name 字段最少2个字符',
             ]
         );
+//        return $this->respData(['name' => 'pakhong' ],"update success");
 
         $categoryInfo = StCategory::find($categoryId);
 
