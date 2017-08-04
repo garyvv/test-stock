@@ -36,7 +36,7 @@ class Controller extends BaseController
             'data'      => [],
             'msg'       => $msg
         ];
-        return response()->json($result, Response::HTTP_INTERNAL_SERVER_ERROR);
+        return response()->json($result, Response::HTTP_OK);
     }
     protected function requestValidate($rules, $message)
     {

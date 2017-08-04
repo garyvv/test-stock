@@ -45,7 +45,6 @@ class CategoryController extends Controller
                 'name.min' => 'name 字段最少2个字符',
             ]
         );
-
         $categoryInfo = StCategory::find($categoryId);
 
         if(!empty($categoryInfo)){//判断是否存在数据
@@ -57,13 +56,12 @@ class CategoryController extends Controller
             $categoryInfo->purchasing_price = Input::get('purchasing_price', $categoryInfo->purchasing_price);
             $categoryInfo->vip_price = Input::get('vip_price', $categoryInfo->vip_price);
             $categoryInfo->option_name = Input::get('option_name', $categoryInfo->option_name);
-            $update = $categoryInfo->save();
+            $categoryInfo->save();
 
             $message = "success";
             return $this->respData($categoryInfo,$message);
 
         }else{
-//            return redirect()->action('Stock\CategoryController@CateList');
             return $this->respFail('找不到分类');
         }
     }
