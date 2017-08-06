@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
 
 
 class StCategory extends Model
@@ -58,7 +59,9 @@ class StCategory extends Model
                 'c.retail_price',
                 'c.option_name'
             )
-            ->get();
+//            ->offset(($page-1)*$pagesize)
+//            ->limit($pagesize)
+            ->paginate(10);
     }
 
     public function getCateDetail($cid){

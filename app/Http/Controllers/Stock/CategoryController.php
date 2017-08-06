@@ -3,9 +3,6 @@
 namespace App\Http\Controllers\Stock;
 
 use App\Models\StCategory;
-use App\Models\StockSeller;
-use App\Models\StockDepot;
-use App\Models\StockCategory;
 use DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
@@ -18,8 +15,10 @@ class CategoryController extends Controller
     }
 
     public function lists(){
-        $cateLists = StCategory::getCateLists();
-        return view('Stock.categoryList',compact('cateLists'));
+        $cateLists = new StCategory();
+        $page = Input::get('page');
+        $cateLists = $cateLists->getCateLists();
+        return view('Stock.categoryList',compact('cateLists','page'));
     }
 
     public function detail($cid) {

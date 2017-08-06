@@ -37,16 +37,15 @@
         </div>
     </a>
     @endforeach
-
-    <a href="{{ url('/stock/categories') }}">
-        <div class="weui-cell">
-            {{--<div class="weui-cell__hd"></div>--}}
-            <div class="weui-cell__bd">
-                <p>类别名称</p>
-            </div>
-            <div class="weui-cell__ft"><img class="images" src="../images/avatar.jpg"></div>
+    <div>
+        <div style="display: inline-block;float: left;margin-left: 20%">
+            <a href="{{ url('/categories') }}?page={{$page-1}}" class="weui-btn weui-btn_plain-default">上一页</a>
         </div>
-    </a>
+        <div style="display: inline-block;float: right;margin-right: 20%">
+            <a href="{{ url('/categories') }}?page={{$page+1}}" class="weui-btn weui-btn_plain-default">下一页</a>
+        </div>
+    </div>
+
 
 </div>
 
