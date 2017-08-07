@@ -15,9 +15,7 @@ class CategoryController extends Controller
     }
 
     public function lists(){
-        $cateLists = new StCategory();
-        $page = Input::get('page');
-        $cateLists = $cateLists->getCateLists();
+        $page = Input::get('page') ? Input::get('page') : 1;
         return view('Stock.categoryList',compact('cateLists','page'));
     }
 
@@ -33,6 +31,16 @@ class CategoryController extends Controller
         $sellers = StCategory::getSellers();
         $depots = StCategory::getDepots();
         return view('Stock.categoryEdit',compact('detail','sellers','depots'));
+    }
+
+    public function getLists(){
+//        $cateLists = new StCategory();
+        $per_page = Input::get('per_page');
+//        $cateLists = $cateLists->getCateLists();
+//        $cateLists = $cateLists->toArray();
+        $cateLists = StCategory::getCateLists($per_page)->toArray();
+
+        return $this->respData($cateLists);
     }
 
     public function update($categoryId){
