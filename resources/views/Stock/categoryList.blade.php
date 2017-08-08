@@ -91,7 +91,7 @@
                                 "<p>名称：" + value.name + "</p>" +
                                 "<p>仓库：" + value.depot_name + "</p>" +
                                 "<p>零售价：￥" + value.retail_price + "</p>" +
-                                "<p>规格：" + value.option_name + "</p></div><div class='weui-cell__ft'><img class='images' src='../images/avatar.jpg'></div>" +
+                                "<p>规格：" + value.option_name + "</p></div><div class='weui-cell__ft'><img class='images' src='../images/avatar.JPG'></div>" +
                                 "</div></a>";
                     })
                     $("#cateLists").append(lists);

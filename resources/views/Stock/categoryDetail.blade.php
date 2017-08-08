@@ -21,7 +21,7 @@
 <div class="weui-msg">
     <div class="weui-msg__icon-area"></div>
     <div class="weui-msg__text-area">
-        <h2 class="weui-msg__title"><img src="../images/avatar.jpg"></h2>
+        <h2 class="weui-msg__title"><img src="../images/avatar.JPG"></h2>
     </div>
 </div>
 </a>
