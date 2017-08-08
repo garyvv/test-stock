@@ -34,12 +34,8 @@ class CategoryController extends Controller
     }
 
     public function getLists(){
-//        $cateLists = new StCategory();
         $per_page = Input::get('per_page');
-//        $cateLists = $cateLists->getCateLists();
-//        $cateLists = $cateLists->toArray();
         $cateLists = StCategory::getCateLists($per_page)->toArray();
-
         return $this->respData($cateLists);
     }
 
