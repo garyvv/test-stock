@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
 
 
 class StCategory extends Model
@@ -48,7 +49,7 @@ class StCategory extends Model
             ->groupBy('c.category_id');
     }
 
-    public static function getCateLists(){
+    public static function getCateLists($per_page){
         return DB::table('st_categories AS c')
             ->leftJoin('st_depots AS d', 'c.depot_id', 'd.depot_id')
             ->select(
@@ -58,7 +59,7 @@ class StCategory extends Model
                 'c.retail_price',
                 'c.option_name'
             )
-            ->get();
+            ->paginate($per_page);
     }
 
     public function getCateDetail($cid){
