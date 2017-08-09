@@ -35,5 +35,7 @@ Route::group([
     'namespace' => 'Stock',
 ], function() {
     Route::post('/categories','CategoryController@getLists');
-    Route::post('/categories/{categoryId}','CategoryController@update');
+    Route::post('/categories/{categoryId}/detail','CategoryController@getDetail');
+    Route::post('/categories/{categoryId}/edit','CategoryController@cateEdit');
+    Route::post('/categories/{categoryId}/update','CategoryController@update');
 });
