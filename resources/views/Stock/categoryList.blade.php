@@ -86,22 +86,22 @@
                     jQuery.each(cateLists, function (key, value) {
                         console.log(cateLists);
                         lists +=
-                                "<a href='/categories/" + value.category_id + "' '><div class='weui-cell' style='border-top: 1px solid #d9d9d9;'><div class='weui-cell__bd'>" +
+                                "<a href='/categories/" + value.category_id + "'><div class='weui-cell' style='border-top: 1px solid #d9d9d9;'><div class='weui-cell__bd'>" +
                                 "<p>ID：" + value.category_id + "</p>" +
                                 "<p>名称：" + value.name + "</p>" +
                                 "<p>仓库：" + value.depot_name + "</p>" +
                                 "<p>零售价：￥" + value.retail_price + "</p>" +
-                                "<p>规格：" + value.option_name + "</p></div><div class='weui-cell__ft'><img class='images' src='../images/avatar.jpg'></div>" +
+                                "<p>规格：" + value.option_name + "</p></div><div class='weui-cell__ft'><img class='images' src='../images/avatar.JPG'></div>" +
                                 "</div></a>";
                     })
                     $("#cateLists").append(lists);
                     loading = false;
-            }, 1500)
-        },
-        error: function (data) {
-        },
-    })
-});
+                }, 1500)
+            },
+            error: function (data) {
+            },
+        })
+    });
 
 </script>
 </html>

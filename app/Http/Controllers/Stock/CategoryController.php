@@ -23,19 +23,12 @@ class CategoryController extends Controller
 
     public function detail($cid)
     {
-        $detail = new StCategory();
-        $detail = $detail->getCateDetail($cid);
-        $detail->inventory = $detail->purchase_amount - $detail->selling_amount;//获取库存
-        return view('Stock.categoryDetail', compact('detail'));
+        return view('Stock.categoryDetail', compact('cid'));
     }
 
     public function edit($cid)
     {
-        $detail = new StCategory();
-        $detail = $detail->getCateDetail($cid);
-        $sellers = StCategory::getSellers();
-        $depots = StCategory::getDepots();
-        return view('Stock.categoryEdit', compact('detail', 'sellers', 'depots'));
+        return view('Stock.categoryEdit', compact('cid'));
     }
 
     public function getLists()
@@ -43,6 +36,24 @@ class CategoryController extends Controller
         $per_page = Input::get('per_page');
         $cateLists = StCategory::getCateLists($per_page)->toArray();
         return $this->respData($cateLists);
+    }
+
+    public function getDetail($cid)
+    {
+        $cateDetail = new StCategory();
+        $cateDetail = $cateDetail->getCateDetail($cid);
+        $cateDetail->inventory = $cateDetail->purchase_amount - $cateDetail->selling_amount;//获取库存
+//        $cateDetail = StCategory::getCateDetail($cid);
+        return $this->respData($cateDetail);
+    }
+
+    public function cateEdit($cid){
+        $detail = new StCategory();
+        $detail = $detail->getCateDetail($cid);
+        $detail->sellers = StCategory::getSellers();
+        $detail->depots = StCategory::getDepots();
+        return $this->respData($detail);
+//        echo 1;
     }
 
     public function update($categoryId)
