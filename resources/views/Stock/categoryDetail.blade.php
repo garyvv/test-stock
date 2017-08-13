@@ -25,7 +25,7 @@
 </body>
 <script>
     $(document).ready(function(){
-        var url = API_CATEGORY_GET_LISTS + "/" + "{{$cid}}"+"/detail";
+        var url = API_CATEGORY_BASE_URL + "/{{$cid}}"+"/detail";
         var method = "post";
         var data = {};
         $.ajax({

@@ -12,10 +12,11 @@ use App\Http\Controllers\Controller;
 
 class DemoController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $userInfo = session('wechat_user');
         $openid = $userInfo['id'];
         echo "<pre>";
-	var_export($userInfo);
+        var_export($userInfo);
     }
 }

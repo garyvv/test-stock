@@ -27,7 +27,7 @@
 </body>
 <script>
     $(document).ready(function(){
-        var url = API_CATEGORY_GET_LISTS + "/" + "{{$cid}}"+"/edit";
+        var url = API_CATEGORY_BASE_URL + "/" + "{{$cid}}"+"/edit";
         var method = "post";
         var data = {};
         $.ajax({
@@ -141,7 +141,7 @@
     })
 
     function updateCategory(){
-        var url = API_CATEGORY_UPDATE + "{{$cid}}/update";
+        var url = API_CATEGORY_BASE_URL + "/{{$cid}}/update";
         var data ={};
         data.name = $('#name').val();
         data.category_id = $('#category_id').val();

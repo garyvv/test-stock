@@ -34,7 +34,7 @@
     var loading = false;  //状态标记
     var page = "{{$page}}";//声明页码的全局变量
     $(document).ready(function(){//页面加载完毕后执行
-        var url = API_CATEGORY_GET_LISTS + "?page=" + "{{$page}}";
+        var url = API_CATEGORY_BASE_URL + "?page=" + "{{$page}}";
         var method = "post";
         var data ={};
         data.per_page = 5;
@@ -70,7 +70,7 @@
         loading = true;
         page = parseInt(page) + 1;
         console.log(page);
-        var url = API_CATEGORY_GET_LISTS + "?page=" + page;
+        var url = API_CATEGORY_BASE_URL + "?page=" + page;
         var method = "post";
         var data ={};
         data.per_page = 5;
