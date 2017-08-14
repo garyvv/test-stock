@@ -9,6 +9,7 @@ namespace App\Http\Controllers\WeChat;
 
 use EasyWeChat\Foundation\Application;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redis;
 
 
 class WeChatCallBack
@@ -16,14 +17,14 @@ class WeChatCallBack
 
     public function callBack()
     {
-        $config = config('wechat');
+        $config = config('wechatstock');
         $app = new Application($config);
         $url = Input::get('url','/');
-//        \Log::debug($url);
         $oauth = $app->oauth;
         // 获取 OAuth 授权结果用户信息
         $user = $oauth->user();
-        session(['wechat_user' => $user->toArray()]);
+        Redis::set('wechat_user1',json_encode($user));
+        Redis::expire('wechat_user1',1000);
         header('location:'. $url); // 跳转到 user/profile
 //        header('location:http://authlogin.local.com/api/authlogin' ); // 跳转到 user/profile
     }

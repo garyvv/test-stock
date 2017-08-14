@@ -43,13 +43,13 @@
     {{--<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">--}}
         <div class="weui-media-box__hd avatar" style="padding: 10px">
             <a href="{{ url('/stock/userCenter') }}">
-                <img class="weui-media-box__thumb" src="images/avatar.jpg">
+                <img class="weui-media-box__thumb" src=" {!! $info['headimgurl'] !!}">
             </a>
 
         </div>
         <div class="weui-media-box__bd name">
-            <h4 class="weui-media-box__title">名字</h4>
-            <h4 class="weui-media-box__title">用户组别名称</h4>
+            <h4 class="weui-media-box__title">名字：{{ $info['nickname'] }}</h4>
+            <h4 class="weui-media-box__title">用户组别名称：</h4>
         </div>
     {{--</a>--}}
 </div>

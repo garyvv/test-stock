@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Stock;
 
 use App\Models\StCategory;
 use DB;
+use Illuminate\Support\Facades\Redis;
+use EasyWeChat\Foundation\Application;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 
@@ -12,7 +14,22 @@ class CategoryController extends Controller
 
     public function index()
     {
-        return view('Stock.index');
+        $url = Input::get('url','/');
+        $config = config('wechatstock');
+        $config['oauth']['callback'] = '/api/callback?url='.$url;
+        $user = json_decode(Redis::get('wechat_user'),true);
+
+        // 未登录
+        if (empty($user)) {
+            $app = new Application($config);
+            $oauth = $app->oauth;
+            \Log::debug(2);
+//            $_SESSION['target_url'] = 'api/callback';
+            return $oauth->redirect();
+        }
+        // 已经登录过
+        $info = $user['original'];//用户具体信息
+        return view('Stock.index',compact('info'));
     }
 
     public function lists()
