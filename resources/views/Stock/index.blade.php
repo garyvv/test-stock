@@ -51,7 +51,7 @@
                 success: function (data) {
                     var data = data.data.original;
                     var userInfo = "";
-                    userInfo +=
+                    userInfo += 
                             "<div class='weui-cells'>" +
                             "<div class='top'>" +
                             "<div class='weui-media-box__hd avatar' style='padding: 10px'>" +
