@@ -4,32 +4,15 @@ namespace App\Http\Controllers\Stock;
 
 use App\Models\StCategory;
 use DB;
-use Illuminate\Support\Facades\Redis;
 use EasyWeChat\Foundation\Application;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 
-class CategoryController extends Controller
+class CategoryController extends BaseController
 {
 
     public function index()
     {
-        $url = Input::get('url','/');
-        $config = config('wechatstock');
-        $config['oauth']['callback'] = '/api/callback?url='.$url;
-        $user = json_decode(Redis::get('wechat_user'),true);
-
-        // 未登录
-        if (empty($user)) {
-            $app = new Application($config);
-            $oauth = $app->oauth;
-            \Log::debug(2);
-//            $_SESSION['target_url'] = 'api/callback';
-            return $oauth->redirect();
-        }
-        // 已经登录过
-        $info = $user['original'];//用户具体信息
-        return view('Stock.index',compact('info'));
+        return view('Stock.index');
     }
 
     public function lists()
@@ -46,6 +29,29 @@ class CategoryController extends Controller
     public function edit($cid)
     {
         return view('Stock.categoryEdit', compact('cid'));
+    }
+
+    public function login()
+    {
+        $this->requestValidate([
+            'url' => 'required',
+        ], [
+            'url.required' => '登录成功跳转链接不能为空',
+        ]);
+        $config = config('wechatstock');
+        $url = '?url=' . urlencode(Input::get('url'));
+        $config['oauth']['callback'] = '/api/callback'.$url;
+        $app = new Application($config);
+        $oauth = $app->oauth;
+        return $oauth->redirect();
+    }
+
+    public function getUserInfo()
+    {
+        $this->checkToken();
+        $info = $this->userInfo;
+//        \Log::debug("userInfo:".$info);
+        return $this->respData($info);
     }
 
     public function getLists()
@@ -70,7 +76,6 @@ class CategoryController extends Controller
         $detail->sellers = StCategory::getSellers();
         $detail->depots = StCategory::getDepots();
         return $this->respData($detail);
-//        echo 1;
     }
 
     public function update($categoryId)

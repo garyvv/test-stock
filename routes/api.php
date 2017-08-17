@@ -34,6 +34,8 @@ Route::group([
 	'prefix' => 'v1',
     'namespace' => 'Stock',
 ], function() {
+    Route::post('/','CategoryController@getUserInfo');
+    Route::get('/login','CategoryController@login');
     Route::post('/categories','CategoryController@getLists');
     Route::post('/categories/{categoryId}/detail','CategoryController@getDetail');
     Route::post('/categories/{categoryId}/edit','CategoryController@cateEdit');

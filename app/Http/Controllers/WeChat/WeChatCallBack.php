@@ -9,6 +9,7 @@ namespace App\Http\Controllers\WeChat;
 
 use EasyWeChat\Foundation\Application;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Redis;
 
 
@@ -19,14 +20,17 @@ class WeChatCallBack
     {
         $config = config('wechatstock');
         $app = new Application($config);
-        $url = Input::get('url','/');
+        $targetUrl = Input::get('url','/');
         $oauth = $app->oauth;
         // 获取 OAuth 授权结果用户信息
-        $user = $oauth->user();
-        Redis::set('wechat_user1',json_encode($user));
-        Redis::expire('wechat_user1',1000);
-        header('location:'. $url); // 跳转到 user/profile
-//        header('location:http://authlogin.local.com/api/authlogin' ); // 跳转到 user/profile
+        $user = $oauth->user()->toArray();
+        $token = md5($user['id'] . 'wxauth' . time());
+        \Log::debug("WechatCallBack:".$token);
+        Redis::set($token,json_encode($user));
+        Redis::expire($token,60 * 60 * 24);
+//        setCookie  可根据需要， 比如前端用Vue，拼接参数到url返回给前端
+        $cookie = Cookie::make('token', $token, $minutes = 60 * 24, $path = null, $domain = null, $secure = false, $httpOnly = false);
+        return redirect($targetUrl)->withCookie($cookie);
     }
 }
 
