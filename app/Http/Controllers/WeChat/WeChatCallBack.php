@@ -25,7 +25,7 @@ class WeChatCallBack
         // 获取 OAuth 授权结果用户信息
         $user = $oauth->user()->toArray();
         $token = md5($user['id'] . 'wxauth' . time());
-        \Log::debug("WechatCallBack:".$token);
+        \Log::debug("WechatCallBackToken:".$token);
         Redis::set($token,json_encode($user));
         Redis::expire($token,60 * 60 * 24);
 //        setCookie  可根据需要， 比如前端用Vue，拼接参数到url返回给前端

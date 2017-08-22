@@ -14,9 +14,11 @@
     </div>
     <script>
         var loading = false;  //状态标记
-        var page = "{{$page}}";//声明页码的全局变量
+        var page;//声明页码的全局变量
         $(document).ready(function () {//页面加载完毕后执行
-            var url = API_CATEGORY_CATEGORY_URL + "?page=" + "{{$page}}";
+            page = page > 1 ? 1 : page;
+            console.log(page);
+            var url = API_CATEGORY_CATEGORY_URL + "?page=" + page;
             var method = "post";
             var data = {};
             data.per_page = 5;
@@ -28,6 +30,7 @@
                 success: function (data) {
                     var page = data.data.current_page;//记录当前页码
                     var cateLists = data.data.data;
+                    console.log(cateLists);
                     var lists = "";
                     jQuery.each(cateLists, function (key, value) {
                         lists +=
@@ -62,11 +65,12 @@
                 data: data,  //请求的数据
                 dataType: "json",  //数据类型
                 success: function (data) {
+                    alert(2)
                     var cateLists = data.data.data;
                     var lists = "";
                     setTimeout(function () {
                         jQuery.each(cateLists, function (key, value) {
-                            console.log(cateLists);
+//                            console.log(cateLists);
                             lists +=
                                     "<a href='/categories/" + value.category_id + "'><div class='weui-cell' style='border-top: 1px solid #d9d9d9;'><div class='weui-cell__bd'>" +
                                     "<p>ID：" + value.category_id + "</p>" +
@@ -81,6 +85,7 @@
                     }, 1500)
                 },
                 error: function (data) {
+                    alert(1)
                 },
             })
         });

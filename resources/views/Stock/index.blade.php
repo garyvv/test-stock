@@ -33,25 +33,31 @@
     </div>
 
     <script>
-        var domain = "inventory.local.com";
+
         $(document).ready(function () {
-            var url = API_CATEGORY_BASE_URL;
+            var token = getCookie('token');
+            var url = API_USRS;
             var method = "post";
             var data = {};
-            data.token = getCookie('token');
-            if (data.token == "") {
+//            data.token = getCookie('token');
+//            alert(data.token);
+            if (token=="") {
                 alert("未登录");
                 login();
             }
             $.ajax({
+                headers:{
+                    token:token
+                },
                 url: url,
                 type: method,
                 data: data,
                 dataType: "json",
                 success: function (data) {
+                    console.log(data);
                     var data = data.data.original;
                     var userInfo = "";
-                    userInfo += 
+                    userInfo +=
                             "<div class='weui-cells'>" +
                             "<div class='top'>" +
                             "<div class='weui-media-box__hd avatar' style='padding: 10px'>" +
@@ -95,9 +101,9 @@
                 }
             });
         });
-        function login() {
-            window.location.href = "http://" + domain + "/api/v1/login?url=http://" + domain + "/";
-//        window.location.href = "http://" + domain + "/api/wechat/v1/test_login?url=http://" + domain + "/wechat";
-        }
+//        function login() {
+//            window.location.href = "http://" + domain + "/api/v1/login?url=http://" + domain + "/";
+////        window.location.href = "http://" + domain + "/api/wechat/v1/test_login?url=http://" + domain + "/wechat";
+//        }
     </script>
 @stop
