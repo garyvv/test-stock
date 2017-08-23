@@ -25,7 +25,7 @@ Route::match(['get','post'],'login','WeChat\WeChatAuthLogin@login');
 Route::match(['get','post'],'callback','WeChat\WeChatCallBack@callback');
 Route::any('wechat_msg', ['uses' => 'WechatMsgController@index', 'as' => 'wechat_msg']);
 Route::get('v1/wechat_login', ['middleware' => 'wechat.auth', 'uses' => 'WeChat\WeChatController@login']);
-
+Route::get('v1/login','WechatLoginController@login');
 
 /**
  * 业务接口
@@ -34,8 +34,7 @@ Route::group([
 	'prefix' => 'v1',
     'namespace' => 'Stock',
 ], function() {
-    Route::post('/users','CategoryController@getUserInfo');
-    Route::get('/login','CategoryController@login');
+    Route::post('/users','UserController@getUserInfo');
     Route::post('/categories','CategoryController@getLists');
     Route::post('/categories/{categoryId}/detail','CategoryController@getDetail');
     Route::post('/categories/{categoryId}/edit','CategoryController@cateEdit');

@@ -6,11 +6,16 @@
 
     </div>
     <script>
+        var token = getCookie('token');
+
         $(document).ready(function () {
             var url = API_CATEGORY_CATEGORY_URL + "/{{$cid}}" + "/detail";
             var method = "post";
             var data = {};
             $.ajax({
+                headers:{
+                    token:token
+                },
                 url: url,
                 type: method,
                 data: data,

@@ -6,11 +6,16 @@
 
     </div>
     <script>
+        var token = getCookie('token');
+
         $(document).ready(function () {
             var url = API_CATEGORY_CATEGORY_URL + "/" + "{{$cid}}" + "/edit";
             var method = "post";
             var data = {};
             $.ajax({
+                headers:{
+                    token:token
+                },
                 url: url,
                 type: method,
                 data: data,
@@ -134,6 +139,9 @@
             data.option_name = $('#option_name').val();
             var method = "post";
             $.ajax({
+                headers:{
+                    token:token
+                },
                 url: url,
                 type: method,     //请求类型
                 data: data,  //请求的数据

@@ -17,7 +17,7 @@
 Route::group([
     'namespace' => 'Stock'
 ], function () {
-    Route::get('/',function(){
+    Route::get('/stock',function(){
         return view('Stock.index');
     });
     Route::get('/categories',function(){
