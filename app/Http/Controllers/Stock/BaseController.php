@@ -8,7 +8,6 @@
 namespace App\Http\Controllers\Stock;
 
 use App\Http\Controllers\Controller;
-//use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -19,8 +18,8 @@ class BaseController extends Controller
     public function __construct(Request $request)
     {
 
-        $token = $request->header('token',null);
-        \Log::debug("token:".$token);
+        $token = $request->header('token', null);
+        \Log::debug("token:" . $token);
         if (empty($token)) {
             return $this->respFail('token missing', self::API_CODE_TOKEN_ERROR);
         }

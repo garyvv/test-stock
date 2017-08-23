@@ -39,8 +39,6 @@
             var url = API_USRS;
             var method = "post";
             var data = {};
-//            data.token = getCookie('token');
-//            alert(data.token);
             if (token=="") {
                 alert("未登录");
                 login();

@@ -14,21 +14,24 @@
     </div>
     <script>
         var loading = false;  //状态标记
-        var page;//声明页码的全局变量
+        var page = 1;//声明页码的全局变量
+        var token = getCookie('token');
+
         $(document).ready(function () {//页面加载完毕后执行
-            page = page > 1 ? 1 : page;
-            console.log(page);
             var url = API_CATEGORY_CATEGORY_URL + "?page=" + page;
             var method = "post";
             var data = {};
             data.per_page = 5;
             $.ajax({
+                headers:{
+                    token:token
+                },
                 url: url,
                 type: method,     //请求类型
                 data: data,  //请求的数据
                 dataType: "json",  //数据类型
                 success: function (data) {
-                    var page = data.data.current_page;//记录当前页码
+                    page = data.data.current_page;//记录当前页码
                     var cateLists = data.data.data;
                     console.log(cateLists);
                     var lists = "";
@@ -60,12 +63,14 @@
             var data = {};
             data.per_page = 5;
             $.ajax({
+                headers:{
+                    token:token
+                },
                 url: url,
                 type: method,     //请求类型
                 data: data,  //请求的数据
                 dataType: "json",  //数据类型
                 success: function (data) {
-                    alert(2)
                     var cateLists = data.data.data;
                     var lists = "";
                     setTimeout(function () {

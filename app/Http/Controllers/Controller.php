@@ -10,7 +10,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 
-class Controller extends BaseController
+class Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
