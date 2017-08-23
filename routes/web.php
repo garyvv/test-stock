@@ -17,10 +17,18 @@
 Route::group([
     'namespace' => 'Stock'
 ], function () {
-    Route::get('/','CategoryController@index');
-    Route::get('/categories','CategoryController@lists');
-    Route::get('/categories/{categoryId}','CategoryController@detail');
-    Route::get('/categories/{categoryId}/edit','CategoryController@edit');
+    Route::get('/',function(){
+        return view('Stock.index');
+    });
+    Route::get('/categories',function(){
+        return view('Stock.categoryList');
+    });
+    Route::get('/categories/{categoryId}',function($cid){
+        return view('Stock.categoryDetail', compact('cid'));
+    });
+    Route::get('/categories/{categoryId}/edit',function($cid){
+        return view('Stock.categoryEdit', compact('cid'));
+    });
 });
 
 

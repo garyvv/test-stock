@@ -36,7 +36,8 @@ class Controller extends BaseController
             'data'      => [],
             'msg'       => $msg
         ];
-        return response()->json($result, Response::HTTP_OK);
+//        return response()->json($result, Response::HTTP_OK);
+        throw new \Exception($msg,$code);
     }
     protected function requestValidate($rules, $message)
     {

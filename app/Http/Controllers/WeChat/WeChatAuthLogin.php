@@ -23,7 +23,7 @@ class WeChatAuthLogin{
         $check = Input::get('check',0);
 //        $url = Input::get('url','/');
         $url = Input::get('url','/api/authlogin');
-        $config = config('wechat');
+        $config = config('wechatstock');
         $config['oauth']['callback'] = '/api/callback?url='.$url;
 
         // 未登录
@@ -35,6 +35,7 @@ class WeChatAuthLogin{
         }
         // 已经登录过
         $user = session('wechat_user');
+
         $info = $user['original'];//用户具体信息
         return view('wechat.authlogin',compact('user','info'));
     }
