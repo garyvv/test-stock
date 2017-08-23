@@ -11,7 +11,7 @@ use App\Http\Controllers\Stock\BaseController;
 use EasyWeChat\Foundation\Application;
 use Illuminate\Support\Facades\Input;
 
-class WechatLoginController extends BaseController
+class WechatLoginController extends Controller
 {
     public function login()
     {
