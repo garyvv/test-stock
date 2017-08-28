@@ -10,7 +10,7 @@
 
         $(document).ready(function () {
             var url = API_CATEGORY_CATEGORY_URL + "/{{$cid}}" + "/detail";
-            var method = "post";
+            var method = "get";
             var data = {};
             $.ajax({
                 headers:{

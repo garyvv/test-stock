@@ -30,7 +30,7 @@
     var domain = "inventory.local.com";
 
     function login() {
-        window.location.href = "http://" + domain + "/api/v1/login?url=http://" + domain + "/stock";
+        window.location.href = "http://" + domain + "/api/v1/login?url=http://" + domain + "/";
 //        window.location.href = "http://" + domain + "/api/wechat/v1/test_login?url=http://" + domain + "/wechat";
     }
 
@@ -51,7 +51,7 @@
                         break;
 
                     default:
-                        alert(result.msg);
+//                        alert(result.msg);
                         if (result.code == 2002) login();
                         break;
                 }
