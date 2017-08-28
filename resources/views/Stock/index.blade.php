@@ -55,7 +55,7 @@
                 dataType: "json",
                 success: function (data) {
                     console.log(data);
-                    var data = data.data;
+                    var data = data.data.original;
                     console.log(data);
                     var userInfo = "";
                     userInfo +=

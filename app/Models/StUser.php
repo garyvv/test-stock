@@ -17,7 +17,7 @@ class StUser extends Model
 
     public function getUser($openid){
         return DB::table('st_users')
-            ->select( '*' )
+            ->select( 'uid' )
             ->where('openid',$openid)
             ->first();
     }
