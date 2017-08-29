@@ -32,7 +32,7 @@
 
     function login() {
         window.location.href = "http://" + domain + "/api/v1/login?url=http://" + domain + "/";
-//        window.location.href = "http://" + domain + "/api/wechat/v1/test_login?url=http://" + domain + "/wechat";
+//        window.location.href = "http://" + domain + "/api/v1/test_login/1?url=http://" + domain + "/";
     }
 
     $(function () {

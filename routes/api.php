@@ -26,6 +26,7 @@ Route::match(['get','post'],'callback','WeChat\WeChatCallBack@callback');
 Route::any('wechat_msg', ['uses' => 'WechatMsgController@index', 'as' => 'wechat_msg']);
 Route::get('v1/wechat_login', ['middleware' => 'wechat.auth', 'uses' => 'WeChat\WeChatController@login']);
 Route::get('v1/login','WechatLoginController@login');
+Route::get('v1/test_login/{userId}','WechatLoginController@testLogin');
 
 /**
  * 业务接口
