@@ -54,7 +54,7 @@
                 data: data,
                 dataType: "json",
                 success: function (data) {
-                    var data = data.data.original;
+                    var data = data.data;
                     var userInfo = "";
                     userInfo +=
                             "<div class='weui-cells'>" +
