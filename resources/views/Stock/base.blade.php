@@ -27,7 +27,8 @@
 </body>
 
 <script>
-    var domain = "inventory.local.com";
+//    var domain = "inventory.local.com"; // 本地调试域名
+    var domain = "stock.garylv.com"; // 服务器正式域名
 
     function login() {
         window.location.href = "http://" + domain + "/api/v1/login?url=http://" + domain + "/";
