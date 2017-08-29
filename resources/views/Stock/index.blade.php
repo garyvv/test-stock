@@ -36,8 +36,10 @@
 
         $(document).ready(function () {
             var token = getCookie('token');
+//            alert(token);
+//            token = "";
             var url = API_USRS;
-            var method = "post";
+            var method = "get";
             var data = {};
             if (token=="") {
                 alert("未登录");
@@ -45,14 +47,13 @@
             }
             $.ajax({
                 headers:{
-                    token:token
+                    token:token,
                 },
                 url: url,
                 type: method,
                 data: data,
                 dataType: "json",
                 success: function (data) {
-                    console.log(data);
                     var data = data.data.original;
                     var userInfo = "";
                     userInfo +=
@@ -96,6 +97,11 @@
                             "</a>" +
                             "</div>";
                     $("#userInfo").html(userInfo);
+                },
+                error: function(data){
+                    console.log(data);
+//                    alert(data);
+                    if (result.code == 2002) login();
                 }
             });
         });

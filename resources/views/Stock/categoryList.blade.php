@@ -19,7 +19,7 @@
 
         $(document).ready(function () {//页面加载完毕后执行
             var url = API_CATEGORY_CATEGORY_URL + "?page=" + page;
-            var method = "post";
+            var method = "get";
             var data = {};
             data.per_page = 5;
             $.ajax({
@@ -59,7 +59,7 @@
             page = parseInt(page) + 1;
             console.log(page);
             var url = API_CATEGORY_CATEGORY_URL + "?page=" + page;
-            var method = "post";
+            var method = "get";
             var data = {};
             data.per_page = 5;
             $.ajax({

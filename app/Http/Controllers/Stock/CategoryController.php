@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Stock;
 use App\Models\StCategory;
 use DB;
 use Illuminate\Support\Facades\Input;
-use Symfony\Component\HttpFoundation\Request;
 
 
 class CategoryController extends BaseController
@@ -13,7 +12,7 @@ class CategoryController extends BaseController
 
     public function getLists()
     {
-        $per_page = Input::get('per_page');
+        $per_page = Input::get('per_page', 20);
         $cateLists = StCategory::getCateLists($per_page)->toArray();
         return $this->respData($cateLists);
     }

@@ -52,7 +52,7 @@
                         break;
 
                     default:
-                        alert(result.msg);
+//                        alert(result.msg);
                         if (result.code == 2002) login();
                         break;
                 }
