@@ -33,7 +33,7 @@ class RabbitMQ
 
     private $_user = 'guest';
 
-    private $_passwd = 'guest';
+    private $_password = 'guest';
 
     private $_vHost = '/';
 
@@ -46,8 +46,17 @@ class RabbitMQ
     /**
      * 组件初始化
      */
-    public function init()
+    public function __construct($configFile = 'rabbit-stock')
     {
+        $config = config($configFile);
+        if (!empty($config)) {
+            $this->_host = $config['host'];
+            $this->_port = $config['port'];
+            $this->_user = $config['user'];
+            $this->_password = $config['password'];
+            $this->_exchange = $config['exchange'];
+        }
+
         //脚本退出前，关闭连接
         register_shutdown_function([$this, 'close']);
     }
@@ -208,11 +217,11 @@ class RabbitMQ
     }
 
     /**
-     * @param $passwd
+     * @param $password
      */
-    public function setPasswd($passwd)
+    public function setPassword($password)
     {
-        $this->_passwd = $passwd;
+        $this->_password = $password;
     }
 
     /**
@@ -239,9 +248,9 @@ class RabbitMQ
     {
         if (!$this->_isConnect()) {
             try {
-                $this->_connection = new AMQPConnection($this->_host, $this->_port, $this->_user, $this->_passwd, $this->_vHost);
+                $this->_connection = new AMQPConnection($this->_host, $this->_port, $this->_user, $this->_password, $this->_vHost);
             } catch (\PhpAmqpLib\Exception\AMQPRuntimeException $e) {
-                throw new ErrorException('rabbitMQ server connect error', 500, 1);
+                throw new \ErrorException('rabbitMQ server connect error', 500, 1);
             }
         }
         return $this->_connection;
