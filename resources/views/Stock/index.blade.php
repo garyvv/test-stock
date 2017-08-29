@@ -54,9 +54,7 @@
                 data: data,
                 dataType: "json",
                 success: function (data) {
-                    console.log(data);
                     var data = data.data.original;
-                    console.log(data);
                     var userInfo = "";
                     userInfo +=
                             "<div class='weui-cells'>" +
@@ -103,7 +101,7 @@
                 error: function(data){
                     console.log(data);
 //                    alert(data);
-//                    login();
+                    if (result.code == 2002) login();
                 }
             });
         });
