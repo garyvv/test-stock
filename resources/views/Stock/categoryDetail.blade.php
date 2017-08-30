@@ -9,7 +9,7 @@
         var token = getCookie('token');
 
         $(document).ready(function () {
-            var url = API_CATEGORY_CATEGORY_URL + "/{{$cid}}" + "/detail";
+            var url = API_CATEGORY_URL + "/{{$cid}}" + "/detail";
             var method = "get";
             var data = {};
             $.ajax({

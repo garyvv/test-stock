@@ -29,6 +29,21 @@ Route::group([
     Route::get('/categories/{categoryId}/edit',function($cid){
         return view('Stock.categoryEdit', compact('cid'));
     });
+    Route::get('/sellers',function(){
+        return view('Stock.sellerList');
+    });
+    Route::get('/sellers/{sellerId}',function($sid){
+        return view('Stock.sellerDetail', compact('sid'));
+    });
+    Route::get('/sellers/{sellerId}/edit',function($sid){
+        return view('Stock.sellerEdit', compact('sid'));
+    });
+    Route::get('/depots',function(){
+        return view('Stock.depotList');
+    });
+    Route::get('/purchases',function(){
+        return view('Stock.purchaseList');
+    });
 });
 
 

@@ -79,7 +79,7 @@
                             "<div class='weui-cell__ft'>" +
                             "</div>" +
                             "</a>" +
-                            "<a class='weui-cell weui-cell_access' href='javascript:;'>" +
+                            "<a class='weui-cell weui-cell_access' href='/sellers'>" +
                             "<div class='weui-cell__hd'><img src='images/seller.png'></div>" +
                             "<div class='weui-cell__bd'>" +
                             "<p>供应商管理</p>" +
@@ -87,10 +87,18 @@
                             "<div class='weui-cell__ft'>" +
                             "</div>" +
                             "</a>" +
-                            "<a class='weui-cell weui-cell_access' href='javascript:;'>" +
+                            "<a class='weui-cell weui-cell_access' href='/depots'>" +
                             "<div class='weui-cell__hd'><img src='images/order_depot.png'></div>" +
                             "<div class='weui-cell__bd'>" +
                             "<p>仓库管理</p>" +
+                            "</div>" +
+                            "<div class='weui-cell__ft'>" +
+                            "</div>" +
+                            "</a>" +
+                            "<a class='weui-cell weui-cell_access' href='/purchases'>" +
+                            "<div class='weui-cell__hd'><img src='images/purchase_record.png'></div>" +
+                            "<div class='weui-cell__bd'>" +
+                            "<p>进货记录</p>" +
                             "</div>" +
                             "<div class='weui-cell__ft'>" +
                             "</div>" +

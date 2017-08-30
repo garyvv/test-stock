@@ -18,7 +18,7 @@
         var token = getCookie('token');
 
         $(document).ready(function () {//页面加载完毕后执行
-            var url = API_CATEGORY_URL + "?page=" + page;
+            var url = API_CATEGORY_CATEGORY_URL + "?page=" + page;
             var method = "get";
             var data = {};
             data.per_page = 5;
@@ -58,7 +58,7 @@
             loading = true;
             page = parseInt(page) + 1;
             console.log(page);
-            var url = API_CATEGORY_URL + "?page=" + page;
+            var url = API_CATEGORY_CATEGORY_URL + "?page=" + page;
             var method = "get";
             var data = {};
             data.per_page = 5;
