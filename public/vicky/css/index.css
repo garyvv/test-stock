@@ -17,7 +17,7 @@
 .box img {
     max-width: 100%;
     margin: 0 auto;
-    max-height: 293px;
+    height: 293px;
     width: 100%;
     object-fit: cover;
     object-position: 50% 50%;
