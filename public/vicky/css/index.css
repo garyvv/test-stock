@@ -19,6 +19,8 @@
     margin: 0 auto;
 }
 
+
+
 .font-date {
     margin: 0;
     text-align: right;
@@ -33,4 +35,38 @@
     margin: 0;
     padding: 10px 10px;
     background-color: #F9F9F9;
+    height: 55px;
+    overflow: hidden;
+    color: dimgray;
+}
+.time-story {
+    height: 240px;
+    width: 100%;
+    margin-top: 64px;
+    background: url("../img/index-banner.jpeg") center no-repeat #ffffff;
+    background-size: 100% auto;
+}
+
+.like-story {
+    height: 180px;
+    width: 100%;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #CECECE;
+}
+
+.like-ul {
+    padding-top: 10px;
+}
+
+.like-ul img{
+    width: 180px;
+    height: 115px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.like-ul p{
+    text-align: center;
+    color: lightpink;
 }

@@ -1,0 +1,17 @@
+body {
+    background-color: #f5f7f9;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+}
+.content-block {
+    transform: translate(0px, 0px) translateZ(0px);
+    box-sizing: border-box;
+    position: relative;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    width: 1124px;
+}
+
+
