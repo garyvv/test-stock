@@ -27,4 +27,7 @@ Route::group([
     $router->get('/purchase-records', 'PurchaseRecordController@index');
     $router->any('/purchase-records/edit', 'PurchaseRecordController@edit');
 
+    $router->any('/vicky/story', 'VickyController@index');
+    $router->any('/vicky/story/edit', 'VickyController@edit');
+
 });
