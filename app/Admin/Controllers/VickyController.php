@@ -31,7 +31,7 @@ class VickyController extends BaseController
         $grid->add('id', 'ID', true)->style("width:100px");
         $grid->add('content', '内容');
         $grid->add('datetime', '日期');
-        $grid->add('image', '图片');
+        $grid->add('{!! "<img style=\"height: 50px;width: 50px" src=\'" . $image . "\' />" !!}', '图片');
         $grid->edit('/admin/vicky/story/edit', '操作', 'show|modify|delete');
         $grid->orderBy('datetime', 'desc');
         $grid->paginate(self::DEFAULT_PER_PAGE);
@@ -48,9 +48,9 @@ class VickyController extends BaseController
         $edit = DataEdit::source(new VkStory());
         $edit->label('故事信息');
         $edit->link("/admin/vicky/story", "列表", "TR")->back();
-        $edit->add('content', '内容', 'text')->rule('required|min:5');
+        $edit->add('content', '内容', 'textarea')->attributes(array('rows' => 2))->rule('required|min:5');
         $edit->add('datetime', '时间', 'date')->format('Y-m-d', 'zh-CN');
-        $edit->add('image', '图片', 'image')->move('vicky/img/story/')->preview(80, 80);
+        $edit->add('image', '图片', 'text')->rule('required');
 
         return $edit->view('rapyd.edit', compact('edit'));
 
