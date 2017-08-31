@@ -17,108 +17,21 @@ class HomeController extends Controller
         $result = [
             [
                 'image' => 'http://uc.kewaimiao.com/image/logo.png',
-                'content' => 'hhhhhhhh',
-                'datetime' => '2017年7月8日'
-            ],
-            [
-                'image' => 'http://uc.kewaimiao.com/image/logo.png',
                 'content' => 'sadfasdf',
-                'datetime' => '2017年3月8日'
+                'datetime' => '2017年3月8日',
+                'type' => 1
+            ],
+            [
+                'image' => 'http://img1.maka.im/assets/poster/poster-default-cover.png',
+                'content' => 'hhhhhhhh',
+                'datetime' => '2017年7月8日',
+                'type' => 2
             ],
             [
                 'image' => 'http://uc.kewaimiao.com/image/logo.png',
                 'content' => 'hhhhhhhh',
-                'datetime' => '2017年7月8日'
-            ],
-            [
-                'image' => 'http://uc.kewaimiao.com/image/logo.png',
-                'content' => 'sadfasdf',
-                'datetime' => '2017年3月8日'
-            ],
-            [
-                'image' => 'http://uc.kewaimiao.com/image/logo.png',
-                'content' => 'hhhhhhhh',
-                'datetime' => '2017年7月8日'
-            ],
-            [
-                'image' => 'http://uc.kewaimiao.com/image/logo.png',
-                'content' => 'sadfasdf',
-                'datetime' => '2017年3月8日'
-            ],
-            [
-                'image' => 'http://uc.kewaimiao.com/image/logo.png',
-                'content' => 'hhhhhhhh',
-                'datetime' => '2017年7月8日'
-            ],
-            [
-                'image' => 'http://uc.kewaimiao.com/image/logo.png',
-                'content' => 'sadfasdf',
-                'datetime' => '2017年3月8日'
-            ],
-            [
-                'image' => 'http://uc.kewaimiao.com/image/logo.png',
-                'content' => 'hhhhhhhh',
-                'datetime' => '2017年7月8日'
-            ],
-            [
-                'image' => 'http://uc.kewaimiao.com/image/logo.png',
-                'content' => 'sadfasdf',
-                'datetime' => '2017年3月8日'
-            ],
-            [
-                'image' => 'http://uc.kewaimiao.com/image/logo.png',
-                'content' => 'hhhhhhhh',
-                'datetime' => '2017年7月8日'
-            ],
-            [
-                'image' => 'http://uc.kewaimiao.com/image/logo.png',
-                'content' => 'sadfasdf',
-                'datetime' => '2017年3月8日'
-            ],
-            [
-                'image' => 'http://uc.kewaimiao.com/image/logo.png',
-                'content' => 'hhhhhhhh',
-                'datetime' => '2017年7月8日'
-            ],
-            [
-                'image' => 'http://uc.kewaimiao.com/image/logo.png',
-                'content' => 'sadfasdf',
-                'datetime' => '2017年3月8日'
-            ],
-            [
-                'image' => 'http://uc.kewaimiao.com/image/logo.png',
-                'content' => 'hhhhhhhh',
-                'datetime' => '2017年7月8日'
-            ],
-            [
-                'image' => 'http://uc.kewaimiao.com/image/logo.png',
-                'content' => 'sadfasdf',
-                'datetime' => '2017年3月8日'
-            ],
-            [
-                'image' => 'http://uc.kewaimiao.com/image/logo.png',
-                'content' => 'hhhhhhhh',
-                'datetime' => '2017年7月8日'
-            ],
-            [
-                'image' => 'http://uc.kewaimiao.com/image/logo.png',
-                'content' => 'sadfasdf',
-                'datetime' => '2017年3月8日'
-            ],
-            [
-                'image' => 'http://uc.kewaimiao.com/image/logo.png',
-                'content' => 'hhhhhhhh',
-                'datetime' => '2017年7月8日'
-            ],
-            [
-                'image' => 'http://uc.kewaimiao.com/image/logo.png',
-                'content' => 'sadfasdf',
-                'datetime' => '2017年3月8日'
-            ],
-            [
-                'image' => 'http://uc.kewaimiao.com/image/logo.png',
-                'content' => 'hhhhhhhh',
-                'datetime' => '2017年7月8日'
+                'datetime' => '2017年7月8日',
+                'type' => 1
             ],
         ];
 

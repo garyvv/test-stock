@@ -13,8 +13,11 @@
 </head>
 
 <body>
+@extends('Vicky.header')
 
-@yield('content')
+<section style="margin: 64px 0 0">
+    @yield('content')
+</section>
 
 @extends('Vicky.footer')
 </body>

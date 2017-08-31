@@ -10,8 +10,8 @@ function genPhotoHtml(data) {
         photos =
             "<div class='box'>" +
             "<img class='images' src='" + value.image + "'>" +
-            "<p>" + value.content + "</p>" +
-            "<p>" + value.datetime + "</p>" +
+            "<p class='font-content'>" + value.content + "</p>" +
+            "<p class='font-date'>" + value.datetime + "</p>" +
             "</div>";
 
         $("#photo").append(photos);
