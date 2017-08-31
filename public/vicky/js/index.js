@@ -9,7 +9,7 @@ function genPhotoHtml(data) {
     jQuery.each(data, function (key, value) {
         photos =
             "<div class='box'>" +
-            "<div style='height: 293px;'><img class='images' src='/vicky/img/story/" + value.image + "'></div>" +
+            "<div style='height: 293px;'><img class='images' src='" + value.image + "?x-oss-process=style/card'></div>" +
             "<p class='font-content'>" + value.content + "</p>" +
             "<p class='font-date'>" + value.datetime + "</p>" +
             "</div>";

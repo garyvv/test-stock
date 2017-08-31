@@ -22,8 +22,6 @@
 </body>
 
 <script>
-    var domain = "stock.local.com"; // 本地调试域名
-    //    var domain = "xn--xwtv59b.xn--6qq986b3xl"; // 服务器正式域名
 
     $(function () {
         //.ajaxError事件定位到document对象，文档内所有元素发生ajax请求异常，都将冒泡到document对象的ajaxError事件执行处理
