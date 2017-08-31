@@ -31,7 +31,7 @@ class VickyController extends BaseController
         $grid->add('id', 'ID', true)->style("width:100px");
         $grid->add('content', '内容');
         $grid->add('datetime', '日期');
-        $grid->add('{!! "<img style=\"height: 50px;width: 50px" src=\'" . $image . "\' />" !!}', '图片');
+        $grid->add('{!! "<img style=\"height: 50px;width: 50px\" src=\'" . $image . "\' />" !!}', '图片');
         $grid->edit('/admin/vicky/story/edit', '操作', 'show|modify|delete');
         $grid->orderBy('datetime', 'desc');
         $grid->paginate(self::DEFAULT_PER_PAGE);

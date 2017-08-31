@@ -8,7 +8,7 @@
     width: 220px;
     border: 1px solid #ECECEC;
     border-radius: 5px;
-    margin-right: 30px;
+    margin-right: 92px;
     text-align: center;
     overflow: hidden;
     background: #ffffff;
@@ -23,7 +23,9 @@
     object-position: 50% 50%;
 }
 
-
+.box:nth-child(4n) {
+    margin-right: 0px;
+}
 
 .font-date {
     margin: 0;
