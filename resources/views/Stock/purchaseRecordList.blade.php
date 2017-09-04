@@ -5,8 +5,7 @@
             width: 80px;
         }
     </style>
-    <a href="/categories/add" class='weui-btn weui-btn_primary editButton'>ADD</a>
-    <div id="cateLists">
+    <div id="purchaseRecordLists">
         {{--//数据加载在此--}}
     </div>
     <div class="weui-loadmore">
@@ -19,7 +18,7 @@
         var token = getCookie('token');
 
         $(document).ready(function () {//页面加载完毕后执行
-            var url = API_CATEGORY_URL + "?page=" + page;
+            var url = API_PURCHASE_RECORD_URL + "?page=" + page;
             var method = "get";
             var data = {};
             data.per_page = 5;
@@ -33,20 +32,22 @@
                 dataType: "json",  //数据类型
                 success: function (data) {
                     page = data.data.current_page;//记录当前页码
-                    var cateLists = data.data.data;
-                    console.log(cateLists);
+                    var purchaseRecordLists = data.data.data;
+                    console.log(purchaseRecordLists);
                     var lists = "";
-                    jQuery.each(cateLists, function (key, value) {
+                    jQuery.each(purchaseRecordLists, function (key, value) {
                         lists +=
-                                "<a href='/categories/" + value.category_id + "'><div class='weui-cell' style='border-top: 1px solid #d9d9d9;'><div class='weui-cell__bd'>" +
-                                "<p>ID：" + value.category_id + "</p>" +
-                                "<p>名称：" + value.name + "</p>" +
-                                "<p>仓库：" + value.depot_name + "</p>" +
-                                "<p>零售价：￥" + value.retail_price + "</p>" +
-                                "<p>规格：" + value.option_name + "</p></div><div class='weui-cell__ft'><img class='images' src='../images/avatar.JPG'></div>" +
-                                "</div></a>";
+                                "<a href='/purchase_records/" + value.purchase_record_id + "'><div class='weui-cells'><div class='weui-cell__bd'>" +
+                                "<p>ID：" + value.purchase_record_id + "</p>" +
+                                "<p>商品分类名称：" + value.name + "</p>" +
+                                "<p>购买数量：" + value.quantity + "</p>" +
+                                "<p>购买时间：" + value.purchase_time + "</p>" +
+                                "<p>价格：" + value.total + "</p>" +
+                                "<p>运费：" + value.freight + "</p>" +
+                                "<p>注释：" + value.comment + "</p>" +
+                                "</div></div></a>";
                     })
-                    $("#cateLists").html(lists);
+                    $("#purchaseRecordLists").html(lists);
                 },
                 error: function (data) {
                 },
@@ -59,7 +60,7 @@
             loading = true;
             page = parseInt(page) + 1;
             console.log(page);
-            var url = API_CATEGORY_URL + "?page=" + page;
+            var url = API_PURCHASE_RECORD_URL + "?page=" + page;
             var method = "get";
             var data = {};
             data.per_page = 5;
@@ -72,21 +73,23 @@
                 data: data,  //请求的数据
                 dataType: "json",  //数据类型
                 success: function (data) {
-                    var cateLists = data.data.data;
+                    var purchaseRecordLists = data.data.data;
                     var lists = "";
                     setTimeout(function () {
-                        jQuery.each(cateLists, function (key, value) {
+                        jQuery.each(purchaseRecordLists, function (key, value) {
 //                            console.log(cateLists);
                             lists +=
-                                    "<a href='/categories/" + value.category_id + "'><div class='weui-cell' style='border-top: 1px solid #d9d9d9;'><div class='weui-cell__bd'>" +
-                                    "<p>ID：" + value.category_id + "</p>" +
-                                    "<p>名称：" + value.name + "</p>" +
-                                    "<p>仓库：" + value.depot_name + "</p>" +
-                                    "<p>零售价：￥" + value.retail_price + "</p>" +
-                                    "<p>规格：" + value.option_name + "</p></div><div class='weui-cell__ft'><img class='images' src='../images/avatar.JPG'></div>" +
-                                    "</div></a>";
+                                    "<a href='/purchase_records/" + value.purchase_record_id + "'><div class='weui-cells'><div class='weui-cell__bd'>" +
+                                    "<p>ID：" + value.purchase_record_id + "</p>" +
+                                    "<p>商品分类名称：" + value.name + "</p>" +
+                                    "<p>购买数量：" + value.quantity + "</p>" +
+                                    "<p>购买时间：" + value.purchase_time + "</p>" +
+                                    "<p>价格：" + value.total + "</p>" +
+                                    "<p>运费：" + value.freight + "</p>" +
+                                    "<p>注释：" + value.comment + "</p>" +
+                                    "</div></div></a>";
                         })
-                        $("#cateLists").append(lists);
+                        $("#purchaseRecordLists").append(lists);
                         loading = false;
                     }, 1500)
                 },

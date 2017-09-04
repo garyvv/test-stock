@@ -22,14 +22,6 @@ class StSeller extends Model
             ->paginate($per_page);
     }
 
-    public function getCateDetail($cid){
-        return DB::table('st_categories AS c')
-            ->select(
-            )
-            ->where('c.category_id',$cid)
-            ->groupBy('c.category_id')
-            ->first();
-    }
     public function getSellerDetail($sid)
     {
         return DB::table('st_sellers')

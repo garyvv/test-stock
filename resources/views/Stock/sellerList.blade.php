@@ -5,7 +5,7 @@
             width: 80px;
         }
     </style>
-    <div class="weui-cells" id="sellerLists">
+    <div id="sellerLists">
         {{--//数据加载在此--}}
     </div>
     <div class="weui-loadmore">

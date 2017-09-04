@@ -26,6 +26,9 @@ Route::group([
     Route::get('/categories/{categoryId}',function($cid){
         return view('Stock.categoryDetail', compact('cid'));
     });
+    Route::get('/categories/add',function(){
+        return view('Stock.categoryAdd');
+    });
     Route::get('/categories/{categoryId}/edit',function($cid){
         return view('Stock.categoryEdit', compact('cid'));
     });
@@ -41,8 +44,17 @@ Route::group([
     Route::get('/depots',function(){
         return view('Stock.depotList');
     });
-    Route::get('/purchases',function(){
-        return view('Stock.purchaseList');
+    Route::get('/depots/{depotId}',function($did){
+        return view('Stock.depotDetail', compact('did'));
+    });
+    Route::get('/depots/{depotId}/edit',function($did){
+        return view('Stock.depotEdit', compact('did'));
+    });
+    Route::get('/purchase_records',function(){
+        return view('Stock.purchaseRecordList');
+    });
+    Route::get('/purchase_records/{purchaseRecordId}',function($pid){
+        return view('Stock.purchaseRecordDetail',compact('pid'));
     });
 });
 
