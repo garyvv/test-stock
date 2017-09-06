@@ -40,7 +40,7 @@ Route::group([
     Route::get('/categories/{categoryId}/detail','CategoryController@getDetail');
     Route::post('/categories/{categoryId}/edit','CategoryController@cateEdit');
     Route::post('/categories/{categoryId}/update','CategoryController@update');
-    Route::get('/categories/getForm','CategoryController@getForm');
+    Route::post('/categories/getForm','CategoryController@getForm');
     Route::post('/categories/add','CategoryController@add');
     Route::get('/sellers','SellerController@getLists');
     Route::get('/sellers/{sellerId}/detail','SellerController@getDetail');

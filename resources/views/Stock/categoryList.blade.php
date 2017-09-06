@@ -5,13 +5,13 @@
             width: 80px;
         }
     </style>
-    <a href="/categories/add" class='weui-btn weui-btn_primary editButton'>ADD</a>
+    <a href="/categories/create" class='weui-btn weui-btn_primary ' >CREATE</a>
     <div id="cateLists">
         {{--//数据加载在此--}}
     </div>
     <div class="weui-loadmore">
         <i class="weui-loading"></i>
-        <span class="weui-loadmore__tips">正在加载</span>
+        <span class="weui-loadmore__tips">正在加载</span>s
     </div>
     <script>
         var loading = false;  //状态标记
@@ -52,7 +52,6 @@
                 },
             })
         })
-
 
         $(document.body).infinite(100).on("infinite", function () {//上拉加载
             if (loading) return;

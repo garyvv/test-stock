@@ -1,17 +1,16 @@
 @extends('Stock.base')
 @section('content')
-
     <div id="cateDetail">
-        //detail加载位置
+        {{--detail加载位置--}}
     </div>
     <script>
         var token = getCookie('token');
 
         $(document).ready(function () {
+            console.log(1);
             var url = API_CATEGORY_URL + "/getForm";
             var method = "post";
             var data = {};
-            alert(1);
             $.ajax({
                 headers:{
                     token:token
@@ -22,6 +21,7 @@
                 dataType: "json",
                 success: function (data) {
                     var data = data.data;
+                    console.log(data);
                     var cateDetail = "";
                     cateDetail +=
                             "<form>" +
@@ -123,38 +123,6 @@
                 }
             })
         })
-
-        function addCategory() {
-            var url = API_CATEGORY_URL + "/add";
-            var data = {};
-            data.name = $('#name').val();
-            data.seller_id = $('#seller_id').val();
-            data.depot_id = $('#depot_id').val();
-            data.wholesale_price = $('#wholesale_price').val();
-            data.retail_price = $('#retail_price').val();
-            data.purchasing_price = $('#purchasing_price').val();
-            data.vip_price = $('#vip_price').val();
-            data.option_name = $('#option_name').val();
-            var method = "post";
-            $.ajax({
-                headers:{
-                    token:token
-                },
-                url: url,
-                type: method,     //请求类型
-                data: data,  //请求的数据
-                dataType: "json",  //数据类型
-                success: function (data) {
-                    $.toast(data.msg, function () {
-                        window.location.href = "/categories/" + data.data.category_id;
-//                    console.log(data.data.category_id);
-                    });
-                },
-                error: function (data) {
-                },
-            })
-
-        }
 
     </script>
 @stop
