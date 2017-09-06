@@ -40,4 +40,16 @@ Route::group([
     Route::get('/categories/{categoryId}/detail','CategoryController@getDetail');
     Route::post('/categories/{categoryId}/edit','CategoryController@cateEdit');
     Route::post('/categories/{categoryId}/update','CategoryController@update');
+    Route::post('/categories/getForm','CategoryController@getForm');
+    Route::post('/categories/add','CategoryController@add');
+    Route::get('/sellers','SellerController@getLists');
+    Route::get('/sellers/{sellerId}/detail','SellerController@getDetail');
+    Route::post('/sellers/{sellerId}/edit','SellerController@edit');
+    Route::post('/sellers/{sellerId}/update','SellerController@update');
+    Route::get('/depots','DepotController@getLists');
+    Route::get('/depots/{depotId}/detail','DepotController@getDetail');
+    Route::post('/depots/{depotId}/edit','DepotController@edit');
+    Route::post('/depots/{depotId}/update','DepotController@update');
+    Route::get('/purchase_records','PurchaseRecordController@getLists');
+    Route::get('/purchase_records/{purchaseRecordId}/detail','PurchaseRecordController@getDetail');
 });
