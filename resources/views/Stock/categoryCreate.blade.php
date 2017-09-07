@@ -7,7 +7,6 @@
         var token = getCookie('token');
 
         $(document).ready(function () {
-            console.log(1);
             var url = API_CATEGORY_URL + "/getForm";
             var method = "post";
             var data = {};
@@ -67,7 +66,7 @@
                         } else {
                             cateDetail += ">" + depot.name + "</option>";
                         }
-                    })
+                    });
 
                     cateDetail += "</select>" +
                             "</div>" +
@@ -113,7 +112,7 @@
                             "</div>" +
                             "</div>" +
                             "</div>" +
-                            "<input type='button' class='weui-btn weui-btn_primary' id='submit' onclick='addCategory()' value='提交'>" +
+                            "<input type='button' class='weui-btn weui-btn_primary' id='submit' onclick='create()' value='提交'>" +
                             "</div>" +
                             "</form>";
                     $("#cateDetail").html(cateDetail);
@@ -122,7 +121,41 @@
 
                 }
             })
-        })
+        });
+
+        function create(){
+            var url = API_CATEGORY_URL + "/create";
+            var data = {};
+            data.name = $('#name').val();
+            data.seller_id = $('#seller_id').val();
+            data.depot_id = $('#depot_id').val();
+            data.wholesale_price = $('#wholesale_price').val();
+            data.retail_price = $('#retail_price').val();
+            data.purchasing_price = $('#purchasing_price').val();
+            data.vip_price = $('#vip_price').val();
+            data.option_name = $('#option_name').val();
+            console.log(data);
+            var method = "post";
+            $.ajax({
+                headers: {
+                    token: token
+                },
+                url: url,
+                type: method,
+                data: data,
+                dataType: "json",
+                success: function (data)
+                {
+                    $.toast(data.msg, function () {
+                        window.location.href = "/categories";
+//                    console.log(data.data.category_id);
+                    });
+                },
+                error: function (data) {
+
+                }
+            });
+        };
 
     </script>
 @stop

@@ -59,6 +59,7 @@ class StCategory extends Model
                 'c.retail_price',
                 'c.option_name'
             )
+            ->orderby('c.category_id','desc')
             ->paginate($per_page);
     }
 

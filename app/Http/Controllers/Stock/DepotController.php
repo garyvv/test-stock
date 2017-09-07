@@ -28,11 +28,34 @@ class DepotController extends Controller
         return $this->respData($depotDetail);
     }
 
-    public function edit($did)
+    public function create()
+    {
+        $depot = new StDepot();
+        $depot->name = Input::get('name');
+        $depot->save();
+        $message = "添加成功";
+        return $this->respData('',$message);
+    }
+
+    public function getForm($did)
     {
         $detail = new StDepot();
         $detail = $detail->getDepotDetail($did);
         return $this->respData($detail);
+    }
+
+    public function delete($did)
+    {
+        $depot =  StDepot::find($did);
+        \Log::debug("did:".$did);
+        if(!empty($depot)){
+            $depot->delete();
+            $message = "删除成功";
+            return $this->respData('',$message);
+        }else{
+            $message = "找不到该条信息，请刷新后重试";
+            return $this->respFail('',$message);
+        }
     }
 
     public function update($did)

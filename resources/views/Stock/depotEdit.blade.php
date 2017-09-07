@@ -9,8 +9,8 @@
         var token = getCookie('token');
 
         $(document).ready(function () {
-            var url = API_DEPOT_URL + "/" + "{{$did}}" + "/edit";
-            var method = "post";
+            var url = API_DEPOT_URL + "/" + "{{$did}}" + "/getForm";
+            var method = "get";
             var data = {};
             $.ajax({
                 headers:{
@@ -53,7 +53,7 @@
             var data = {};
             data.depot_id = $('#depot_id').val();
             data.name = $('#name').val();
-            var method = "post";
+            var method = "put";
             $.ajax({
                 headers:{
                     token:token

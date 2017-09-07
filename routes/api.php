@@ -37,19 +37,22 @@ Route::group([
 ], function() {
     Route::get('/users','UserController@getUserInfo');
     Route::get('/categories','CategoryController@getLists');
+    Route::post('/categories/create','CategoryController@create');
     Route::get('/categories/{categoryId}/detail','CategoryController@getDetail');
-    Route::post('/categories/{categoryId}/edit','CategoryController@cateEdit');
-    Route::post('/categories/{categoryId}/update','CategoryController@update');
+    Route::get('/categories/{categoryId}/edit','CategoryController@cateEdit');
+    Route::put('/categories/{categoryId}/update','CategoryController@update');
+    Route::delete('/categories/{categoryId}/delete','CategoryController@delete');
     Route::post('/categories/getForm','CategoryController@getForm');
-    Route::post('/categories/add','CategoryController@add');
     Route::get('/sellers','SellerController@getLists');
     Route::get('/sellers/{sellerId}/detail','SellerController@getDetail');
     Route::post('/sellers/{sellerId}/edit','SellerController@edit');
     Route::post('/sellers/{sellerId}/update','SellerController@update');
     Route::get('/depots','DepotController@getLists');
+    Route::post('/depots/create','DepotController@create');
     Route::get('/depots/{depotId}/detail','DepotController@getDetail');
-    Route::post('/depots/{depotId}/edit','DepotController@edit');
-    Route::post('/depots/{depotId}/update','DepotController@update');
+    Route::get('/depots/{depotId}/getForm','DepotController@getForm');
+    Route::put('/depots/{depotId}/update','DepotController@update');
+    Route::delete('/depots/{depotId}/delete','DepotController@delete');
     Route::get('/purchase_records','PurchaseRecordController@getLists');
     Route::get('/purchase_records/{purchaseRecordId}/detail','PurchaseRecordController@getDetail');
 });

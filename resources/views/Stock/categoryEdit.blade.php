@@ -2,7 +2,7 @@
 @section('content')
 
     <div id="cateDetail">
-        //detail加载位置
+        {{--detail加载位置--}}
 
     </div>
     <script>
@@ -10,7 +10,7 @@
 
         $(document).ready(function () {
             var url = API_CATEGORY_URL + "/" + "{{$cid}}" + "/edit";
-            var method = "post";
+            var method = "get";
             var data = {};
             $.ajax({
                 headers:{
@@ -21,6 +21,7 @@
                 data: data,
                 dataType: "json",
                 success: function (data) {
+                    console.log(data);
                     var data = data.data;
                     var cateDetail = "";
                     cateDetail +=
@@ -40,7 +41,6 @@
                             "<div class='weui-cell__bd'>" +
                             "供应商：" +
                             "<select id = 'seller_id' name='seller_id'>";
-
                     $.each(data.sellers, function (key, seller) {
                         cateDetail += "<option value='" + seller.seller_id + "'";
                         if (data.seller_id == seller.seller_id) {
@@ -49,7 +49,7 @@
                             cateDetail += ">" + seller.name + "</option>";
                         }
 
-                    })
+                    });
 
                     cateDetail += "</select>" +
                             "</div>" +
@@ -123,7 +123,7 @@
 
                 }
             })
-        })
+        });
 
         function updateCategory() {
             var url = API_CATEGORY_URL + "/{{$cid}}/update";
@@ -137,7 +137,7 @@
             data.purchasing_price = $('#purchasing_price').val();
             data.vip_price = $('#vip_price').val();
             data.option_name = $('#option_name').val();
-            var method = "post";
+            var method = "put";
             $.ajax({
                 headers:{
                     token:token
@@ -153,9 +153,8 @@
                     });
                 },
                 error: function (data) {
-                },
+                }
             })
-
         }
     </script>
 @stop

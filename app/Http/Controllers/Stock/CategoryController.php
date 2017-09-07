@@ -31,7 +31,6 @@ class CategoryController extends Controller
     public function getForm()
     {
         $form = new StCategory();
-        \Log::debug("getForm");
         $form->sellers = StCategory::getSellers();
         $form->depots = StCategory::getDepots();
         return $this->respData($form);
@@ -46,7 +45,7 @@ class CategoryController extends Controller
         return $this->respData($detail);
     }
 
-    public function add()
+    public function create()
     {
         $this->requestValidate(
             [
@@ -57,17 +56,17 @@ class CategoryController extends Controller
             ]
         );
         $categoryInfo = new StCategory();
-        $categoryInfo->name = Input::get('name', $categoryInfo->name);
-        $categoryInfo->seller_id = Input::get('seller_id', $categoryInfo->seller_id);
-        $categoryInfo->depot_id = Input::get('depot_id', $categoryInfo->depot_id);
-        $categoryInfo->wholesale_price = Input::get('wholesale_price', $categoryInfo->wholesale_price);
-        $categoryInfo->retail_price = Input::get('retail_price', $categoryInfo->retail_price);
-        $categoryInfo->purchasing_price = Input::get('purchasing_price', $categoryInfo->purchasing_price);
-        $categoryInfo->vip_price = Input::get('vip_price', $categoryInfo->vip_price);
-        $categoryInfo->option_name = Input::get('option_name', $categoryInfo->option_name);
+        $categoryInfo->name = Input::get('name');
+        $categoryInfo->seller_id = Input::get('seller_id');
+        $categoryInfo->depot_id = Input::get('depot_id');
+        $categoryInfo->wholesale_price = Input::get('wholesale_price');
+        $categoryInfo->retail_price = Input::get('retail_price');
+        $categoryInfo->purchasing_price = Input::get('purchasing_price');
+        $categoryInfo->vip_price = Input::get('vip_price');
+        $categoryInfo->option_name = Input::get('option_name');
         $categoryInfo->save();
-        $message = "success";
-        return $this->respData($categoryInfo, $message);
+        $message = "添加成功";
+        return $this->respData($message);
     }
 
     public function update($categoryId)
@@ -93,11 +92,23 @@ class CategoryController extends Controller
             $categoryInfo->option_name = Input::get('option_name', $categoryInfo->option_name);
             $categoryInfo->save();
 
-            $message = "success";
+            $message = "修改成功";
             return $this->respData($categoryInfo, $message);
 
         } else {
             return $this->respFail('找不到分类');
+        }
+    }
+
+    public function delete($cid)
+    {
+        $category = StCategory::find($cid);
+        if (!empty($category)) {//判断是否存在数据
+            $category->delete();
+            $message = "删除成功";
+            return $this->respData('',$message);
+        }else {
+            return $this->respFail('','找不到分类');
         }
     }
 }

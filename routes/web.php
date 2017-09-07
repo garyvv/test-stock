@@ -44,6 +44,9 @@ Route::group([
     Route::get('/depots',function(){
         return view('Stock.depotList');
     });
+    Route::get('/depots/create',function(){
+        return view('Stock.depotCreate');
+    });
     Route::get('/depots/{depotId}',function($did){
         return view('Stock.depotDetail', compact('did'));
     });

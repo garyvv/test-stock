@@ -1,7 +1,11 @@
 @extends('Stock.base')
 @section('content')
-
-    <div></div>
+<style>
+    .fr{
+        margin-right: 10px;
+        float: right;
+    }
+</style>
     <div id="cateDetail">
 
     </div>
@@ -24,14 +28,16 @@
                     var data = data.data;
                     var cateDetail = "";
                     cateDetail +=
-                            " <a href='/categories/" + data.category_id + "/edit'>" +
+                            "<div class = 'fr'>"+
+                            " <a href='javascript:;' class='weui-btn weui-btn_mini weui-btn_primary' onclick='javascript:return deleteCategory()'>DELETE</a>" +
+                            " <a href='/categories/" + data.category_id + "/edit' class='weui-btn weui-btn_mini weui-btn_primary'>EDIT</a>" +
+                            "</div>"+
                             "<div class='weui-msg'>" +
                             "<div class='weui-msg__icon-area'></div>" +
                             "<div class='weui-msg__text-area'>" +
                             "<h2 class='weui-msg__title'><img src='../images/avatar.JPG'></h2>" +
                             "</div>" +
                             "</div>" +
-                            "</a>" +
                             "<div class='weui-cells'>" +
                             "<div class='weui-cell'>" +
                             "<div class='weui-cell__bd'>" +
@@ -84,7 +90,49 @@
                 },
 
             });
-        })
+        });
+
+        function test() {
+            var msg = "您真的确定要删除吗？\n\n请确认！";
+            if (confirm(msg)==true){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        function deleteCategory(){
+            var msg = "您真的确定要删除吗？";
+            if (confirm(msg)==true){
+                var data = {};
+                data.cid = "{{$cid}}";
+                var url = API_CATEGORY_URL + "/{{$cid}}/delete";
+                var method = "delete";
+                $.ajax({
+                    headers:{
+                        token:token
+                    },
+                    url: url,
+                    data: data,
+                    method: method,
+                    dataType: 'json',
+                    success:function(data)
+                    {
+                        $.toast(data.msg, function () {
+                            window.location.href = "/categories";
+//                    console.log(data.data.category_id);
+                        });
+                    },
+                    error: function (data)
+                    {
+
+                    }
+                })
+            }else{
+                return false;
+            }
+        }
+
     </script>
 
 @stop
