@@ -35,6 +35,9 @@ Route::group([
     Route::get('/sellers',function(){
         return view('Stock.sellerList');
     });
+    Route::get('/sellers/create',function(){
+        return view('Stock.sellerCreate');
+    });
     Route::get('/sellers/{sellerId}',function($sid){
         return view('Stock.sellerDetail', compact('sid'));
     });
@@ -56,8 +59,14 @@ Route::group([
     Route::get('/purchase_records',function(){
         return view('Stock.purchaseRecordList');
     });
+    Route::get('/purchase_records/create',function(){
+        return view('Stock.purchaseRecordCreate');
+    });
     Route::get('/purchase_records/{purchaseRecordId}',function($pid){
         return view('Stock.purchaseRecordDetail',compact('pid'));
+    });
+    Route::get('/purchase_records/{purchaseRecordId}/edit',function($pid){
+        return view('Stock.purchaseRecordEdit',compact('pid'));
     });
 });
 

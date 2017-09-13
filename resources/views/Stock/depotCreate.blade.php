@@ -11,21 +11,21 @@
         $(document).ready(function () {
             var depotDetail = "";
             depotDetail +=
-                    "<form>" +
-                    "<div class='weui-cells weui-cells_form'>" +
-                        "<div class='weui-cell'>"+
-                            "<div class='weui-cell__hd'>" +
-                                "<label class='weui-label'>" +
-                                        "仓库名称:" +
-                                "</label>" +
-                            "</div>"+
-                            "<div class='weui-cell__bd'>" +
-                                "<input class='weui-input' type='text' id='name' name='name' placeholder='请输入仓库名称' value=''>" +
-                            "</div>" +
+                "<form>" +
+                "<div class='weui-cells weui-cells_form'>" +
+                    "<div class='weui-cell'>"+
+                        "<div class='weui-cell__hd'>" +
+                            "<label class='weui-label'>" +
+                                    "仓库名称:" +
+                            "</label>" +
                         "</div>"+
-                    "</div>" +
-                    "<input type='button' class='weui-btn weui-btn_primary' id='submit' onclick='createDepot()' value='提交'>" +
-                    "</form>";
+                        "<div class='weui-cell__bd'>" +
+                            "<input class='weui-input' type='text' id='name' name='name' placeholder='请输入仓库名称' value=''>" +
+                        "</div>" +
+                    "</div>"+
+                "</div>" +
+                "<input type='button' class='weui-btn weui-btn_primary' id='submit' onclick='createDepot()' value='提交'>" +
+                "</form>";
             $("#depotDetail").html(depotDetail);
         });
 
@@ -51,7 +51,6 @@
                 error: function (data) {
                 },
             })
-
         }
     </script>
 @stop

@@ -82,24 +82,12 @@
                             "</div>" +
                             "</div>";
                     $("#cateDetail").html(cateDetail);
-//                console.log(data);
-//                alert(data);
-
                 },
                 error: function (data) {
                 },
 
             });
         });
-
-        function test() {
-            var msg = "您真的确定要删除吗？\n\n请确认！";
-            if (confirm(msg)==true){
-                return true;
-            }else{
-                return false;
-            }
-        }
 
         function deleteCategory(){
             var msg = "您真的确定要删除吗？";

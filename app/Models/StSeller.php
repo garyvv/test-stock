@@ -19,6 +19,7 @@ class StSeller extends Model
                 'phone',
                 'address'
             )
+            ->orderby('seller_id','desc')
             ->paginate($per_page);
     }
 

@@ -65,7 +65,6 @@ class PurchaseRecordController extends BaseController
         $edit->add('purchase_time', '进货时间', 'date')->format('Y-m-d', 'zh-CN');
         $edit->add('total', '总价', 'text');
         $edit->add('comment', '备注', 'textarea')->attributes(array('rows' => 3));
-
         $edit->saved(function () use ($edit) {
             $categoryId = $edit->model->category_id;
             $quantity = $edit->model->quantity;
@@ -74,8 +73,10 @@ class PurchaseRecordController extends BaseController
             $category->total_in += $quantity;
             $category->save();
         });
-
         return $edit->view('rapyd.edit', compact('edit'));
+    }
+
+    public function create(){
 
     }
 }

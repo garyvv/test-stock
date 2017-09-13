@@ -26,6 +26,15 @@ class StPurchaseRecord extends Model
 
     }
 
+    public static function getCategorise(){
+        return DB::table('st_categories')
+            ->select(
+                'category_id',
+                'name'
+            )
+            ->get();
+    }
+
     public static function getLists($per_page)
     {
         return DB::table('st_purchase_records AS p')
@@ -34,6 +43,7 @@ class StPurchaseRecord extends Model
                 'p.*',
                 'c.name'
             )
+            ->orderby('purchase_record_id','desc')
             ->paginate($per_page);
     }
 

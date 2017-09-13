@@ -44,9 +44,11 @@ Route::group([
     Route::delete('/categories/{categoryId}/delete','CategoryController@delete');
     Route::post('/categories/getForm','CategoryController@getForm');
     Route::get('/sellers','SellerController@getLists');
+    Route::post('/sellers/create','SellerController@create');
     Route::get('/sellers/{sellerId}/detail','SellerController@getDetail');
     Route::post('/sellers/{sellerId}/edit','SellerController@edit');
     Route::post('/sellers/{sellerId}/update','SellerController@update');
+    Route::delete('/sellers/{sellerId}/delete','SellerController@delete');
     Route::get('/depots','DepotController@getLists');
     Route::post('/depots/create','DepotController@create');
     Route::get('/depots/{depotId}/detail','DepotController@getDetail');
@@ -54,5 +56,9 @@ Route::group([
     Route::put('/depots/{depotId}/update','DepotController@update');
     Route::delete('/depots/{depotId}/delete','DepotController@delete');
     Route::get('/purchase_records','PurchaseRecordController@getLists');
+    Route::post('/purchase_records/create','PurchaseRecordController@create');
+    Route::get('/purchase_records/getForm','PurchaseRecordController@getForm');
     Route::get('/purchase_records/{purchaseRecordId}/detail','PurchaseRecordController@getDetail');
+    Route::put('/purchase_records/{purchaseRecordId}/update','PurchaseRecordController@update');
+    Route::delete('/purchase_records/{purchaseRecordId}/delete','PurchaseRecordController@delete');
 });

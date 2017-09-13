@@ -28,6 +28,27 @@ class SellerController extends Controller
         return $this->respData($sellerDetail);
     }
 
+    public function create(){
+        $this->requestValidate(
+            [
+                'name' => 'min:2',
+            ],
+            [
+                'name.min' => 'name 字段最少2个字符',
+            ]
+        );
+        $seller = new StSeller();
+        $seller->name = Input::get('name');
+        $seller->contact = Input::get('contact');
+        $seller->address = Input::get('address');
+        $seller->phone = Input::get('phone');
+        $seller->bank = Input::get('bank');
+        $seller->account = Input::get('account');
+        $seller->save();
+        $message = "添加成功";
+        return $this->respData($message);
+    }
+
     public function edit($sid)
     {
         $detail = new StSeller();
@@ -63,4 +84,6 @@ class SellerController extends Controller
             return $this->respFail('找不到分类');
         }
     }
+
+
 }
