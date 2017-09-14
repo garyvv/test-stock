@@ -8,7 +8,7 @@
     var token = getCookie('token');
 
     $(document).ready(function () {
-        var url = API_PURCHASE_RECORD_URL +  "/" + "{{$pid}}" + "/detail";
+        var url = API_PURCHASE_RECORD_URL +  "/" + "{{$pid}}" + "/form";
         var method = "get";
         var data = {};
         $.ajax({

@@ -101,7 +101,7 @@
         data.bank = $('#bank').val();
         data.account = $('#account').val();
         console.log(data);
-        var url = API_SELLER_URL + "/create";
+        var url = API_SELLER_URL;
         var method = "post";
         $.ajax({
             header:{

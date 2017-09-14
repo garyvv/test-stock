@@ -9,7 +9,7 @@
         var token = getCookie('token');
 
         $(document).ready(function () {
-            var url = API_DEPOT_URL + "/" + "{{$did}}" + "/getForm";
+            var url = API_DEPOT_URL + "/" + "{{$did}}" + "/form";
             var method = "get";
             var data = {};
             $.ajax({
@@ -38,7 +38,7 @@
                                     "</div>" +
                                 "</div>"+
                             "</div>" +
-                            "<input type='button' class='weui-btn weui-btn_primary' id='submit' onclick='updateDepot()' value='提交'>" +
+                            "<input type='button' class='weui-btn weui-btn_primary' id='submit' onclick='edit()' value='提交'>" +
                             "</form>";
                     $("#depotDetail").html(depotDetail);
                 },
@@ -48,8 +48,8 @@
             })
         })
 
-        function updateDepot() {
-            var url = API_DEPOT_URL + "/{{$did}}/update";
+        function edit() {
+            var url = API_DEPOT_URL + "/{{$did}}";
             var data = {};
             data.depot_id = $('#depot_id').val();
             data.name = $('#name').val();

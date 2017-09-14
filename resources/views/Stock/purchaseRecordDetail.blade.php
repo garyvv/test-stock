@@ -26,7 +26,7 @@
     var token = getCookie('token');
 
     $(document).ready(function () {
-        var url = API_PURCHASE_RECORD_URL + "/{{$pid}}" + "/detail";
+        var url = API_PURCHASE_RECORD_URL + "/{{$pid}}";
         {{--var url = "/api/v1/sellers" + "/{{$sid}}" + "/detail";--}}
         var method = "get";
         var data = {};
@@ -96,7 +96,7 @@
         var msg = "您真的确定要删除吗?";
         if (confirm(msg)==true)
         {
-            var url = API_PURCHASE_RECORD_URL + "/{{$pid}}/delete";
+            var url = API_PURCHASE_RECORD_URL + "/{{$pid}}";
             var data = {};
             var method = "delete";
             data.seller_id = "{{$pid}}";

@@ -36,29 +36,35 @@ Route::group([
     'namespace' => 'Stock',
 ], function() {
     Route::get('/users','UserController@getUserInfo');
-    Route::get('/categories','CategoryController@getLists');
-    Route::post('/categories/create','CategoryController@create');
-    Route::get('/categories/{categoryId}/detail','CategoryController@getDetail');
-    Route::get('/categories/{categoryId}/edit','CategoryController@cateEdit');
-    Route::put('/categories/{categoryId}/update','CategoryController@update');
+    Route::get('/categories','CategoryController@lists');
+    Route::post('/categories','CategoryController@create');
+    Route::get('/categories/form','CategoryController@form');
+    Route::get('/categories/{categoryId}','CategoryController@detail');
+    Route::get('/categories/{categoryId}/form','CategoryController@form');
+    Route::put('/categories/{categoryId}/edit','CategoryController@edit');
     Route::delete('/categories/{categoryId}/delete','CategoryController@delete');
-    Route::post('/categories/getForm','CategoryController@getForm');
-    Route::get('/sellers','SellerController@getLists');
-    Route::post('/sellers/create','SellerController@create');
-    Route::get('/sellers/{sellerId}/detail','SellerController@getDetail');
-    Route::post('/sellers/{sellerId}/edit','SellerController@edit');
-    Route::post('/sellers/{sellerId}/update','SellerController@update');
-    Route::delete('/sellers/{sellerId}/delete','SellerController@delete');
-    Route::get('/depots','DepotController@getLists');
-    Route::post('/depots/create','DepotController@create');
-    Route::get('/depots/{depotId}/detail','DepotController@getDetail');
-    Route::get('/depots/{depotId}/getForm','DepotController@getForm');
-    Route::put('/depots/{depotId}/update','DepotController@update');
-    Route::delete('/depots/{depotId}/delete','DepotController@delete');
-    Route::get('/purchase_records','PurchaseRecordController@getLists');
+
+    Route::get('/sellers','SellerController@lists');
+    Route::post('/sellers','SellerController@create');
+    Route::get('/sellers/form','SellerController@form');
+    Route::get('/sellers/{sellerId}','SellerController@detail');
+    Route::get('/sellers/{sellerId}/form','SellerController@form');
+    Route::put('/sellers/{sellerId}','SellerController@edit');
+    Route::delete('/sellers/{sellerId}','SellerController@delete');
+
+    Route::get('/depots','DepotController@lists');
+    Route::post('/depots','DepotController@create');
+    Route::get('/depots/form','DepotController@form');
+    Route::get('/depots/{depotId}','DepotController@detail');
+    Route::get('/depots/{depotId}/form','DepotController@form');
+    Route::put('/depots/{depotId}','DepotController@edit');
+    Route::delete('/depots/{depotId}','DepotController@delete');
+
+    Route::get('/purchase_records','PurchaseRecordController@lists');
     Route::post('/purchase_records/create','PurchaseRecordController@create');
-    Route::get('/purchase_records/getForm','PurchaseRecordController@getForm');
-    Route::get('/purchase_records/{purchaseRecordId}/detail','PurchaseRecordController@getDetail');
-    Route::put('/purchase_records/{purchaseRecordId}/update','PurchaseRecordController@update');
-    Route::delete('/purchase_records/{purchaseRecordId}/delete','PurchaseRecordController@delete');
+    Route::get('/purchase_records/form','PurchaseRecordController@form');
+    Route::get('/purchase_records/{purchaseRecordId}','PurchaseRecordController@detail');
+    Route::get('/purchase_records/{purchaseRecordId}/form','PurchaseRecordController@form');
+    Route::put('/purchase_records/{purchaseRecordId}','PurchaseRecordController@edit');
+    Route::delete('/purchase_records/{purchaseRecordId}','PurchaseRecordController@delete');
 });

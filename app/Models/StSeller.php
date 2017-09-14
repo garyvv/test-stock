@@ -10,7 +10,7 @@ class StSeller extends Model
     protected $table = 'st_sellers';
     protected $primaryKey = "seller_id";
 
-    public static function getSellerLists($per_page){
+    public static function lists($per_page){
         return DB::table('st_sellers')
             ->select(
                 'seller_id',
@@ -23,7 +23,7 @@ class StSeller extends Model
             ->paginate($per_page);
     }
 
-    public function getSellerDetail($sid)
+    public function detail($sid)
     {
         return DB::table('st_sellers')
             ->select('*')

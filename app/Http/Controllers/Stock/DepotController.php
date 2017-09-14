@@ -14,14 +14,14 @@ use App\Http\Controllers\Controller;
 
 class DepotController extends Controller
 {
-    public function getLists()
+    public function lists()
     {
         $per_page = Input::get('per_page', 20);
         $DepotLists = StDepot::getDepotLists($per_page)->toArray();
         return $this->respData($DepotLists);
     }
 
-    public function getDetail($did)
+    public function detail($did)
     {
         $depotDetail = new StDepot();
         $depotDetail = $depotDetail->getDepotDetail($did);
@@ -37,28 +37,14 @@ class DepotController extends Controller
         return $this->respData('',$message);
     }
 
-    public function getForm($did)
+    public function form($did)
     {
         $detail = new StDepot();
         $detail = $detail->getDepotDetail($did);
         return $this->respData($detail);
     }
 
-    public function delete($did)
-    {
-        $depot =  StDepot::find($did);
-        \Log::debug("did:".$did);
-        if(!empty($depot)){
-            $depot->delete();
-            $message = "删除成功";
-            return $this->respData('',$message);
-        }else{
-            $message = "找不到该条信息，请刷新后重试";
-            return $this->respFail('',$message);
-        }
-    }
-
-    public function update($did)
+    public function edit($did)
     {
         $this->requestValidate(
             [
@@ -79,6 +65,19 @@ class DepotController extends Controller
 
         } else {
             return $this->respFail('找不到分类');
+        }
+    }
+
+    public function delete($did)
+    {
+        $depot =  StDepot::find($did);
+        if(!empty($depot)){
+            $depot->delete();
+            $message = "删除成功";
+            return $this->respData('',$message);
+        }else{
+            $message = "找不到该条信息，请刷新后重试";
+            return $this->respFail('',$message);
         }
     }
 }

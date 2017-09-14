@@ -14,17 +14,24 @@ use App\Http\Controllers\Controller;
 
 class SellerController extends Controller
 {
-    public function getLists()
+    public function lists()
     {
         $per_page = Input::get('per_page', 20);
-        $sellerLists = StSeller::getSellerLists($per_page)->toArray();
+        $sellerLists = StSeller::lists($per_page)->toArray();
         return $this->respData($sellerLists);
     }
 
-    public function getDetail($sid)
+    public function form($sid)
+    {
+        $detail = new StSeller();
+        $detail = $detail->detail($sid);
+        return $this->respData($detail);
+    }
+
+    public function detail($sid)
     {
         $sellerDetail = new StSeller();
-        $sellerDetail = $sellerDetail->getSellerDetail($sid);
+        $sellerDetail = $sellerDetail->detail($sid);
         return $this->respData($sellerDetail);
     }
 
@@ -50,13 +57,6 @@ class SellerController extends Controller
     }
 
     public function edit($sid)
-    {
-        $detail = new StSeller();
-        $detail = $detail->getSellerDetail($sid);
-        return $this->respData($detail);
-    }
-
-    public function update($sid)
     {
         $this->requestValidate(
             [
@@ -84,6 +84,16 @@ class SellerController extends Controller
             return $this->respFail('找不到分类');
         }
     }
-
+    public function delete($sid)
+    {
+        $seller = StSeller::find($sid);
+        if (!empty($seller)) {//判断是否存在数据
+            $seller->delete();
+            $message = "删除成功";
+            return $this->respData('',$message);
+        }else {
+            return $this->respFail('','找不到分类');
+        }
+    }
 
 }

@@ -14,26 +14,26 @@ use App\Http\Controllers\Controller;
 
 class PurchaseRecordController extends Controller
 {
-    public function getLists()
+    public function lists()
     {
         $per_page = Input::get('per_page', 20);
         $PurchaseRecordLists = StPurchaseRecord::getLists($per_page)->toArray();
         return $this->respData($PurchaseRecordLists);
     }
 
-    public function getDetail($pid)
+    public function detail($pid)
     {
         $purchaseRecordDetail = new StPurchaseRecord();
         $purchaseRecordDetail = $purchaseRecordDetail->getDetail($pid);
-        $purchaseRecordDetail->categorise = json_encode(StPurchaseRecord::getCategorise());
-//        \Log::debug(json_encode($purchaseRecordDetail->categorise));
         return $this->respData($purchaseRecordDetail);
     }
 
-    public function getForm()
+    public function form()
     {
-        $categorise = StPurchaseRecord::getCategorise();
-        return $this->respData($categorise);
+        $purchaseRecordDetail = new StPurchaseRecord();
+//        $categorise = StPurchaseRecord::getCategorise();
+        $purchaseRecordDetail->categorise = json_encode(StPurchaseRecord::getCategorise());
+        return $this->respData($purchaseRecordDetail);
     }
 
     public function create(){

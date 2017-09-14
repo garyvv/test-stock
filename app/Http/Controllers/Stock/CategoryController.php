@@ -12,37 +12,31 @@ use Illuminate\Support\Facades\Input;
 class CategoryController extends Controller
 {
 
-    public function getLists()
+    public function lists()
     {
         $per_page = Input::get('per_page', 20);
-        $cateLists = StCategory::getCateLists($per_page)->toArray();
+        $cateLists = StCategory::lists($per_page)->toArray();
         return $this->respData($cateLists);
     }
 
-    public function getDetail($cid)
+    public function detail($cid)
     {
         $cateDetail = new StCategory();
-        $cateDetail = $cateDetail->getCateDetail($cid);
+        $cateDetail = $cateDetail->detail($cid);
         $cateDetail->inventory = $cateDetail->purchase_amount - $cateDetail->selling_amount;//获取库存
 //        $cateDetail = StCategory::getCateDetail($cid);
         return $this->respData($cateDetail);
     }
 
-    public function getForm()
+    public function form($cid = '')
     {
         $form = new StCategory();
-        $form->sellers = StCategory::getSellers();
-        $form->depots = StCategory::getDepots();
+        if(!empty($cid)){
+            $form = $form->detail($cid);
+        }
+        $form->sellers = StCategory::sellers();
+        $form->depots = StCategory::depots();
         return $this->respData($form);
-    }
-
-    public function cateEdit($cid)
-    {
-        $detail = new StCategory();
-        $detail = $detail->getCateDetail($cid);
-        $detail->sellers = StCategory::getSellers();
-        $detail->depots = StCategory::getDepots();
-        return $this->respData($detail);
     }
 
     public function create()
@@ -69,7 +63,7 @@ class CategoryController extends Controller
         return $this->respData($message);
     }
 
-    public function update($categoryId)
+    public function edit($categoryId)
     {
         $this->requestValidate(
             [

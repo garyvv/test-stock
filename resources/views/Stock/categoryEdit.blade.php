@@ -9,7 +9,7 @@
         var token = getCookie('token');
 
         $(document).ready(function () {
-            var url = API_CATEGORY_URL + "/" + "{{$cid}}" + "/edit";
+            var url = API_CATEGORY_URL + "/" + "{{$cid}}" + "/form";
             var method = "get";
             var data = {};
             $.ajax({
@@ -114,7 +114,7 @@
                             "</div>" +
                             "</div>" +
                             "</div>" +
-                            "<input type='button' class='weui-btn weui-btn_primary' id='submit' onclick='updateCategory()' value='提交'>" +
+                            "<input type='button' class='weui-btn weui-btn_primary' id='submit' onclick='edit()' value='提交'>" +
                             "</div>" +
                             "</form>";
                     $("#cateDetail").html(cateDetail);
@@ -125,8 +125,8 @@
             })
         });
 
-        function updateCategory() {
-            var url = API_CATEGORY_URL + "/{{$cid}}/update";
+        function edit() {
+            var url = API_CATEGORY_URL + "/{{$cid}}/edit";
             var data = {};
             data.name = $('#name').val();
             data.category_id = $('#category_id').val();

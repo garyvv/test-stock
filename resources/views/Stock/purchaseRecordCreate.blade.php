@@ -22,7 +22,7 @@
     var token = getCookie('token');
 
     $(document).ready(function () {
-        var url = API_PURCHASE_RECORD_URL + "/getForm";
+        var url = API_PURCHASE_RECORD_URL + "/form";
         var method = "get";
         var data = {};
         $.ajax({
@@ -35,6 +35,7 @@
             dataType: "json",
             success: function (data) {
                 var data = data.data;
+                var categories = JSON.parse(data.categorise);
                 var purchaseRecordDetail = "";
                 purchaseRecordDetail +=
                         "<form>" +
@@ -44,7 +45,7 @@
                         "商品分类名称：" +
                         "<select id = 'category_id' name='category_id'>";
 
-                $.each(data, function (key, category) {
+                $.each(categories, function (key, category) {
                     purchaseRecordDetail += "<option value='" + category.category_id + "'";
                     if (data.category_id == category.category_id) {
                         purchaseRecordDetail += "selected = 'selected'>" + category.name + "</option>";
@@ -98,7 +99,7 @@
                         "</div>" +
                         "</div>" +
                         "</div>" +
-                        "<input type='button' class='weui-btn weui-btn_primary' id='submit' onclick='createPurchaseRecord()' value='提交'>" +
+                        "<input type='button' class='weui-btn weui-btn_primary' id='submit' onclick='create()' value='提交'>" +
                         "</form>";
                 $("#purchaseRecordDetail").html(purchaseRecordDetail);
             },
@@ -108,7 +109,7 @@
         })
     });
 
-    function createPurchaseRecord(){
+    function create(){
         var data = {};
         data.category_id = $('#category_id').val();
         data.quantity = $('#quantity').val();

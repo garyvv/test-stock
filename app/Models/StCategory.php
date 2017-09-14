@@ -49,7 +49,7 @@ class StCategory extends Model
             ->groupBy('c.category_id');
     }
 
-    public static function getCateLists($per_page){
+    public static function lists($per_page){
         return DB::table('st_categories AS c')
             ->leftJoin('st_depots AS d', 'c.depot_id', 'd.depot_id')
             ->select(
@@ -63,7 +63,7 @@ class StCategory extends Model
             ->paginate($per_page);
     }
 
-    public function getCateDetail($cid){
+    public function detail($cid){
         return DB::table('st_categories AS c')
             ->leftJoin('st_purchase_records AS pr', 'c.category_id', 'pr.category_id')
             ->leftJoin('st_depots AS d', 'c.depot_id', 'd.depot_id')
@@ -102,7 +102,7 @@ class StCategory extends Model
             ->where('category_id',$cid)
             ->first();
     }
-    public static function getSellers(){
+    public static function sellers(){
         return DB::table('st_sellers')
             ->select(
                 'seller_id',
@@ -110,7 +110,7 @@ class StCategory extends Model
             )
             ->get();
     }
-    public static function getDepots(){
+    public static function depots(){
         return DB::table('st_depots')
             ->select(
                 'depot_id',

@@ -26,8 +26,7 @@
     var token = getCookie('token');
 
     $(document).ready(function () {
-        var url = API_SELLER_URL + "/{{$sid}}" + "/detail";
-        {{--var url = "/api/v1/sellers" + "/{{$sid}}" + "/detail";--}}
+        var url = API_SELLER_URL + "/{{$sid}}";
         var method = "get";
         var data = {};
         $.ajax({
@@ -92,7 +91,7 @@
         var msg = "您真的确定要删除吗?";
         if (confirm(msg)==true)
         {
-            var url = API_SELLER_URL + "/{{$sid}}/delete";
+            var url = API_SELLER_URL + "/{{$sid}}";
             var data = {};
             var method = "delete";
             data.seller_id = "{{$sid}}";
@@ -111,9 +110,6 @@
                     });
                 },
                 error:function(data){
-                    $.toast(data.msg, function () {
-                        window.location.href = "/depots";
-                    });
                 }
             });
         }
