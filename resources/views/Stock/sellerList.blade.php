@@ -5,6 +5,7 @@
             width: 80px;
         }
     </style>
+    <a href="/sellers/create" class='weui-btn weui-btn_primary ' >CREATE</a>
     <div id="sellerLists">
         {{--//数据加载在此--}}
     </div>

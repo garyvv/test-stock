@@ -2,13 +2,9 @@
 @section('content')
 
 <style>
-    .editButton
-    {
-        display: inline-block;
-        border-radius: 14px;
-        margin-top: 10px;
-        margin-right: 20px;
+    .fr{
         float: right;
+        margin-right: 10px;
     }
     .sellerTitle
     {
@@ -22,7 +18,7 @@
     var token = getCookie('token');
 
     $(document).ready(function () {
-        var url = API_DEPOT_URL + "/{{$did}}" + "/detail";
+        var url = API_DEPOT_URL + "/{{$did}}";
         {{--var url = "/api/v1/sellers" + "/{{$sid}}" + "/detail";--}}
         var method = "get";
         var data = {};
@@ -51,8 +47,11 @@
                             "</div>" +
                         "</div>"+
                     "</div>" +
-                    " <a href='/depots/" + data.depot_id + "/edit' class='weui-btn weui-btn_primary editButton'>EDIT" +
-                    "</a>"
+                    "<div class='fr'>"+
+                    " <a href='javascript:;' class='weui-btn weui-btn_mini weui-btn_primary ' onclick='javacript:return deleteDepot()'>DELETE" +
+                    "</a>"+
+                    " <a href='/depots/" + data.depot_id + "/edit' class='weui-btn weui-btn_mini weui-btn_primary '>EDIT" +
+                    "</a></div>";
                 $("#depotDetail").html(depotDetail);
             },
             error: function (data) {
@@ -60,6 +59,42 @@
 
         });
     })
+
+    function deleteDepot()
+    {
+        var msg = "您真的确定要删除吗?";
+        if (confirm(msg)==true)
+        {
+            var url = API_DEPOT_URL + "/{{$did}}";
+            var data = {};
+            var method = "delete";
+            data.depot_id = "{{$did}}";
+            $.ajax({
+                header:{
+                    token : token
+                },
+                url:url,
+                data:data,
+                method:method,
+                dataType:'json',
+                success:function(data){
+                    $.toast(data.msg, function () {
+                        window.location.href = "/depots";
+//                    console.log(data.data.category_id);
+                    });
+                },
+                error:function(data){
+                    $.toast(data.msg, function () {
+                        window.location.href = "/depots";
+                    });
+                }
+            });
+        }
+        else
+        {
+            return false;
+        }
+    }
 </script>
 
 @stop

@@ -2,6 +2,10 @@
 @section('content')
 
 <style>
+    .fr{
+        float: right;
+        margin-right: 10px;
+    }
     .editButton
     {
         display: inline-block;
@@ -22,8 +26,7 @@
     var token = getCookie('token');
 
     $(document).ready(function () {
-        var url = API_SELLER_URL + "/{{$sid}}" + "/detail";
-        {{--var url = "/api/v1/sellers" + "/{{$sid}}" + "/detail";--}}
+        var url = API_SELLER_URL + "/{{$sid}}";
         var method = "get";
         var data = {};
         $.ajax({
@@ -71,8 +74,11 @@
                             "</div>" +
                         "</div>" +
                     "</div>"+
-                    " <a href='/sellers/" + data.seller_id + "/edit' class='weui-btn weui-btn_primary editButton'>EDIT" +
-                    "</a>"
+                    "<div class='fr'>"+
+                    " <a href='javascript:;' class='weui-btn weui-btn_mini weui-btn_primary ' onclick='javacript:return deleteSeller()'>DELETE" +
+                    "</a>"+
+                    " <a href='/sellers/" + data.seller_id + "/edit' class='weui-btn weui-btn_mini weui-btn_primary '>EDIT" +
+                    "</a></div>";
                 $("#sellerDetail").html(sellerDetail);
             },
             error: function (data) {
@@ -80,6 +86,39 @@
 
         });
     })
+
+    function deleteSeller(){
+        var msg = "您真的确定要删除吗?";
+        if (confirm(msg)==true)
+        {
+            var url = API_SELLER_URL + "/{{$sid}}";
+            var data = {};
+            var method = "delete";
+            data.seller_id = "{{$sid}}";
+            $.ajax({
+                header:{
+                    token : token
+                },
+                url:url,
+                data:data,
+                method:method,
+                dataType:'json',
+                success:function(data){
+                    $.toast(data.msg, function () {
+                        window.location.href = "/sellers";
+//                    console.log(data.data.category_id);
+                    });
+                },
+                error:function(data){
+                }
+            });
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 </script>
 
 @stop

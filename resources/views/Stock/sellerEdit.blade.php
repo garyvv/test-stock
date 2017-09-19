@@ -9,8 +9,8 @@
         var token = getCookie('token');
 
         $(document).ready(function () {
-            var url = API_SELLER_URL + "/" + "{{$sid}}" + "/edit";
-            var method = "post";
+            var url = API_SELLER_URL + "/" + "{{$sid}}" + "/form";
+            var method = "get";
             var data = {};
             $.ajax({
                 headers:{
@@ -88,7 +88,7 @@
                                     "</div>" +
                                 "</div>"+
                             "</div>" +
-                            "<input type='button' class='weui-btn weui-btn_primary' id='submit' onclick='updateSeller()' value='提交'>" +
+                            "<input type='button' class='weui-btn weui-btn_primary' id='submit' onclick='edit()' value='提交'>" +
                             "</form>";
                     $("#sellerDetail").html(sellerDetail);
                 },
@@ -98,8 +98,8 @@
             })
         })
 
-        function updateSeller() {
-            var url = API_SELLER_URL + "/{{$sid}}/update";
+        function edit() {
+            var url = API_SELLER_URL + "/{{$sid}}";
             var data = {};
             data.seller_id = $('#seller_id').val();
             data.name = $('#name').val();
@@ -108,7 +108,7 @@
             data.phone = $('#phone').val();
             data.bank = $('#bank').val();
             data.account = $('#account').val();
-            var method = "post";
+            var method = "put";
             $.ajax({
                 headers:{
                     token:token

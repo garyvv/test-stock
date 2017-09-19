@@ -10,6 +10,10 @@
         margin-right: 20px;
         float: right;
     }
+    .fr{
+        float: right;
+        margin-right: 10px;
+    }
     .sellerTitle
     {
         text-align: center;;
@@ -22,7 +26,7 @@
     var token = getCookie('token');
 
     $(document).ready(function () {
-        var url = API_PURCHASE_RECORD_URL + "/{{$pid}}" + "/detail";
+        var url = API_PURCHASE_RECORD_URL + "/{{$pid}}";
         {{--var url = "/api/v1/sellers" + "/{{$sid}}" + "/detail";--}}
         var method = "get";
         var data = {};
@@ -75,14 +79,53 @@
                                 "<p>注释: " + data.comment + "</p>" +
                             "</div>" +
                         "</div>"+
+                        "<div class='fr'>"+
+                        " <a href='javascript:;' class='weui-btn weui-btn_mini weui-btn_primary ' onclick='javacript:return deletePurchaseRecord()'>DELETE" +
+                        "</a>"+
+                        " <a href='/purchase_records/" + data.purchase_record_id + "/edit' class='weui-btn weui-btn_mini weui-btn_primary '>EDIT" +
+                        "</a></div>";
                     "</div>";
                 $("#purchaseRecordDetail").html(purchaseRecordDetail);
             },
             error: function (data) {
             },
-
         });
-    })
+    });
+
+    function deletePurchaseRecord(){
+        var msg = "您真的确定要删除吗?";
+        if (confirm(msg)==true)
+        {
+            var url = API_PURCHASE_RECORD_URL + "/{{$pid}}";
+            var data = {};
+            var method = "delete";
+            data.seller_id = "{{$pid}}";
+            $.ajax({
+                header:{
+                    token : token
+                },
+                url:url,
+                data:data,
+                method:method,
+                dataType:'json',
+                success:function(data){
+                    $.toast(data.msg, function () {
+                        window.location.href = "/purchase_records";
+//                    console.log(data.data.category_id);
+                    });
+                },
+                error:function(data){
+                    $.toast(data.msg, function () {
+                        window.location.href = "/depots";
+                    });
+                }
+            });
+        }
+        else
+        {
+            return false;
+        }
+    }
 </script>
 
 @stop
