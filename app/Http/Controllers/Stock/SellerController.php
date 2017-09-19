@@ -10,9 +10,9 @@ namespace App\Http\Controllers\Stock;
 
 use Illuminate\Support\Facades\Input;
 use App\Models\StSeller;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 
-class SellerController extends Controller
+class SellerController extends BaseController
 {
     public function lists()
     {

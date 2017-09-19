@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Stock;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Models\StCategory;
 use DB;
 use Illuminate\Support\Facades\Input;
 
 
-//class CategoryController extends BaseController
-class CategoryController extends Controller
+class CategoryController extends BaseController
 {
 
     public function lists()
