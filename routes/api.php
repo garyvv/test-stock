@@ -36,6 +36,7 @@ Route::group([
     'namespace' => 'Stock',
 ], function() {
     Route::get('/users','UserController@getUserInfo');
+
     Route::get('/categories','CategoryController@lists');
     Route::post('/categories','CategoryController@create');
     Route::get('/categories/form','CategoryController@form');

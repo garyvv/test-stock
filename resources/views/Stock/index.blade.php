@@ -95,7 +95,7 @@
                             "<div class='weui-cell__ft'>" +
                             "</div>" +
                             "</a>" +
-                            "<a class='weui-cell weui-cell_access' href='/purchases'>" +
+                            "<a class='weui-cell weui-cell_access' href='/purchase_records'>" +
                             "<div class='weui-cell__hd'><img src='images/purchase_record.png'></div>" +
                             "<div class='weui-cell__bd'>" +
                             "<p>进货记录</p>" +

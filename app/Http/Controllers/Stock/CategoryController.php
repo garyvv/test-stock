@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Stock;
 
-use App\Http\Controllers\BaseController;
 use App\Models\StCategory;
 use DB;
 use Illuminate\Support\Facades\Input;

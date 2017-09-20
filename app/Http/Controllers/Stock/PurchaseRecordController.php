@@ -10,7 +10,6 @@ namespace App\Http\Controllers\Stock;
 
 use Illuminate\Support\Facades\Input;
 use App\Models\StPurchaseRecord;
-use App\Http\Controllers\BaseController;
 
 class PurchaseRecordController extends BaseController
 {
