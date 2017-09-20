@@ -10,7 +10,6 @@ namespace App\Http\Controllers\Stock;
 
 use Illuminate\Support\Facades\Input;
 use App\Models\StDepot;
-use App\Http\Controllers\BaseController;
 
 class DepotController extends BaseController
 {
