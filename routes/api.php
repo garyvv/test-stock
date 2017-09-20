@@ -62,7 +62,7 @@ Route::group([
     Route::delete('/depots/{depotId}','DepotController@delete');
 
     Route::get('/purchase_records','PurchaseRecordController@lists');
-    Route::post('/purchase_records/create','PurchaseRecordController@create');
+    Route::post('/purchase_records','PurchaseRecordController@create');
     Route::get('/purchase_records/form','PurchaseRecordController@form');
     Route::get('/purchase_records/{purchaseRecordId}','PurchaseRecordController@detail');
     Route::get('/purchase_records/{purchaseRecordId}/form','PurchaseRecordController@form');

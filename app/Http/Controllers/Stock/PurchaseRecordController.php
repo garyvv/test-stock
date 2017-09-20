@@ -27,10 +27,13 @@ class PurchaseRecordController extends BaseController
         return $this->respData($purchaseRecordDetail);
     }
 
-    public function form()
+    public function form($pid = "")
     {
         $purchaseRecordDetail = new StPurchaseRecord();
 //        $categorise = StPurchaseRecord::getCategorise();
+        if(!empty($pid)){
+            $purchaseRecordDetail = $purchaseRecordDetail->getDetail($pid);
+        }
         $purchaseRecordDetail->categorise = json_encode(StPurchaseRecord::getCategorise());
         return $this->respData($purchaseRecordDetail);
     }
@@ -57,9 +60,9 @@ class PurchaseRecordController extends BaseController
     }
 
     public function delete($pid){
-        $purchaseRecord = St::find($pid);
-        if (!empty($category)) {//判断是否存在数据
-            $category->delete();
+        $purchaseRecord = StPurchaseRecord::find($pid);
+        if (!empty($purchaseRecord)) {//判断是否存在数据
+            $purchaseRecord->delete();
             $message = "删除成功";
             return $this->respData('',$message);
         }else {

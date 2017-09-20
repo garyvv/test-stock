@@ -96,12 +96,12 @@
             var method = "delete";
             data.seller_id = "{{$sid}}";
             $.ajax({
-                header:{
+                headers:{
                     token : token
                 },
                 url:url,
                 data:data,
-                method:method,
+                type:method,
                 dataType:'json',
                 success:function(data){
                     $.toast(data.msg, function () {

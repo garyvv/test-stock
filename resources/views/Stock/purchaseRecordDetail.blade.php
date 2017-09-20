@@ -101,12 +101,12 @@
             var method = "delete";
             data.seller_id = "{{$pid}}";
             $.ajax({
-                header:{
+                headers:{
                     token : token
                 },
                 url:url,
                 data:data,
-                method:method,
+                type:method,
                 dataType:'json',
                 success:function(data){
                     $.toast(data.msg, function () {
@@ -115,9 +115,6 @@
                     });
                 },
                 error:function(data){
-                    $.toast(data.msg, function () {
-                        window.location.href = "/depots";
-                    });
                 }
             });
         }

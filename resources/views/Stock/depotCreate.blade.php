@@ -32,7 +32,7 @@
         function createDepot() {
             var data = {};
             data.name = $('#name').val();
-            var url = API_DEPOT_URL + "/create";
+            var url = API_DEPOT_URL;
             var method = "post";
             $.ajax({
                 headers:{
