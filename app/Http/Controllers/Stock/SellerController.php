@@ -23,7 +23,9 @@ class SellerController extends BaseController
     public function form($sid)
     {
         $detail = new StSeller();
-        $detail = $detail->detail($sid);
+        if(!empty($sid)){
+            $detail = $detail->detail($sid);
+        }
         return $this->respData($detail);
     }
 

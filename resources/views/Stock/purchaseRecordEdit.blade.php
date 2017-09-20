@@ -21,6 +21,7 @@
             dataType: "json",
             success: function (data) {
                 var data = data.data;
+                console.log(data);
                 var categories = JSON.parse(data.categorise);
 //                console.log(JSON.parse(data.categorise));
                 var purchaseRecordDetail = "";
@@ -50,7 +51,7 @@
                         "<label class='weui-label'>购买数量:</label>" +
                         "</div>" +
                         "<div class='weui-cell__bd'>" +
-                        "<input class='weui-input' type='number' id='quantity' name='quantity' pattern='[0-9]*' placeholder='请输入购买数量'>" +
+                        "<input class='weui-input' type='number' id='quantity' name='quantity' pattern='[0-9]*' placeholder='请输入购买数量' value='" + data.quantity + "'>" +
                         "</div>" +
                         "</div>" +
                         "<div class='weui-cell'>" +
@@ -58,7 +59,7 @@
                         "<label class='weui-label'>价格:</label>" +
                         "</div>" +
                         "<div class='weui-cell__bd'>" +
-                        "<input class='weui-input' type='number' id='total' name='total' pattern='[0-9]*' placeholder='请输入商品价格'>" +
+                        "<input class='weui-input' type='number' id='total' name='total' pattern='[0-9]*' placeholder='请输入商品价格' value='" + data.total + "'>" +
                         "</div>" +
                         "</div>" +
                         "<div class='weui-cell'>" +
@@ -66,7 +67,7 @@
                         "<label class='weui-label'>运费:</label>" +
                         "</div>" +
                         "<div class='weui-cell__bd'>" +
-                        "<input class='weui-input' type='number' id='freight' name='freight' pattern='[0-9]*' placeholder='请输入运费'>" +
+                        "<input class='weui-input' type='number' id='freight' name='freight' pattern='[0-9]*' placeholder='请输入运费' value='" + data.freight + "'>" +
                         "</div>" +
                         "</div>" +
                         "<div class='weui-cell'>" +
@@ -74,7 +75,7 @@
                         "<label class='weui-label'>购买时间:</label>" +
                         "</div>" +
                         "<div class='weui-cell__bd'>" +
-                        "<input class='weui-input' type='date' id='purchase_time' name='purchase_time'>" +
+                        "<input class='weui-input' type='date' id='purchase_time' name='purchase_time' value='" + data.purchase_time + "'>" +
                         "</div>" +
                         "</div>" +
                         "<div class='weui-cell'>" +
@@ -82,7 +83,7 @@
                         "<label class='weui-label'>注释:</label>" +
                         "</div>" +
                         "<div class='weui-cell__bd'>" +
-                        "<textarea class='weui-textarea' placeholder='请输入注释' id='comment' name='comment' rows='3'></textarea>" +
+                        "<textarea class='weui-textarea' placeholder='请输入注释' id='comment' name='comment' rows='3'>" + data.comment + "</textarea>" +
                         "</div>" +
                         "</div>" +
                         "</div>" +
@@ -104,7 +105,7 @@
         data.freight = $('#freight').val();
         data.purchase_time = $('#purchase_time').val();
         data.comment = $('#comment').val();
-        var url = API_PURCHASE_RECORD_URL + "/create";
+        var url = API_PURCHASE_RECORD_URL;
         var method = "post";
         $.ajax({
             headers:{

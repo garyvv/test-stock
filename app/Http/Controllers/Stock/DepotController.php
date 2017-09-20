@@ -39,7 +39,9 @@ class DepotController extends BaseController
     public function form($did)
     {
         $detail = new StDepot();
-        $detail = $detail->getDepotDetail($did);
+        if(!empty($did)){
+            $detail = $detail->getDepotDetail($did);
+        }
         return $this->respData($detail);
     }
 

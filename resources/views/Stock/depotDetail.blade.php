@@ -70,12 +70,12 @@
             var method = "delete";
             data.depot_id = "{{$did}}";
             $.ajax({
-                header:{
+                headers:{
                     token : token
                 },
                 url:url,
                 data:data,
-                method:method,
+                type:method,
                 dataType:'json',
                 success:function(data){
                     $.toast(data.msg, function () {

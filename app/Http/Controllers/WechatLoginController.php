@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Input;
 use App\Models\StUser;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Request;
 
 class WechatLoginController extends Controller
 {
@@ -39,9 +40,8 @@ class WechatLoginController extends Controller
 //        ]);
         $url = Input::get('url');
         if(empty($url)){
-            $url = "http://inventory.local.com";
+            $url = env('HTTP_SERVER');
         }
-
         $userInfo = StUser::find($userId);//检查数据库是否存在数据
         if(empty($userInfo)){
             return $this->respFail('not found user');

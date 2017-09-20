@@ -104,21 +104,22 @@
         var url = API_SELLER_URL;
         var method = "post";
         $.ajax({
-            header:{
-                token:token
+            headers: {
+                token: token
             },
             url:url,
+            type:method,
             data:data,
-            method:method,
             dataType:"json",
-            success:function(data){
+            success:function(data)
+            {
                 $.toast(data.msg, function () {
                     window.location.href = "/sellers";
 //                    console.log(data.data.category_id);
                 });
             },
             error:function(data){
-
+                alert("fail");
             }
         })
     }

@@ -117,7 +117,7 @@
         data.freight = $('#freight').val();
         data.purchase_time = $('#purchase_time').val();
         data.comment = $('#comment').val();
-        var url = API_PURCHASE_RECORD_URL + "/create";
+        var url = API_PURCHASE_RECORD_URL;
         var method = "post";
         $.ajax({
             headers:{
