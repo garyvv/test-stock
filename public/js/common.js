@@ -13,3 +13,8 @@ function getCookie(c_name)
     }
     return ""
 }
+
+function genEndFooter()
+{
+    return "<p class='p-end'>---------  已加载全部  ---------</p>";
+}

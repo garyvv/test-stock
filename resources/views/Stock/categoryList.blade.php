@@ -24,7 +24,7 @@
             var url = API_CATEGORY_URL + "?page=" + page;
             var method = "get";
             var data = {};
-            data.per_page = 5;
+            data.per_page = 20;
             $.ajax({
                 headers:{
                     token:token
@@ -47,7 +47,11 @@
                                 "<p>零售价：￥" + value.retail_price + "</p>" +
                                 "<p class='p-tag'>规格：" + value.option_name + "</p></div><div class='weui-cell__ft'><img class='images' src='../images/avatar.JPG'></div>" +
                                 "</div></a>";
-                    })
+                    });
+                    if (data.data.last_page == page) {
+                        lists += genEndFooter();
+                        $(".weui-loadmore").hide();
+                    }
                     $("#cateLists").html(lists);
                 },
                 error: function (data) {
@@ -63,7 +67,7 @@
             var url = API_CATEGORY_URL + "?page=" + page;
             var method = "get";
             var data = {};
-            data.per_page = 5;
+            data.per_page = 20;
             $.ajax({
                 headers:{
                     token:token
@@ -86,7 +90,11 @@
                                     "<p>零售价：￥" + value.retail_price + "</p>" +
                                     "<p class='p-tag'>规格：" + value.option_name + "</p></div><div class='weui-cell__ft'><img class='images' src='../images/avatar.JPG'></div>" +
                                     "</div></a>";
-                        })
+                        });
+                        if (data.data.last_page == page) {
+                            lists += genEndFooter();
+                            $(".weui-loadmore").hide();
+                        }
                         $("#cateLists").append(lists);
                         loading = false;
                     }, 1500)
