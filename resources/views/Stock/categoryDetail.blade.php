@@ -74,7 +74,7 @@
                             "</div>" +
                             "</div>" +
                             "</div>" +
-                            "<div>" +
+                            "<div style='padding: 10px'>" +
                             "<p>供应商：" + data.seller_name + "</p>" +
                             "<p>地址：" + data.address + "</p>" +
                             "<p>联系人：" + data.contact + "</p>" +

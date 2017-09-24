@@ -5,7 +5,8 @@
             width: 80px;
         }
     </style>
-    <a href="/purchase_records/create" class='weui-btn weui-btn_primary ' >CREATE</a>
+    <a href="/purchase_records/create" class='nav-btn' >CREATE</a>
+    <p class="p-title" onclick="javascript:window.location.href='/'"><i class="weui-icon-circle"></i>首页</p>
     <div id="purchaseRecordLists">
         {{--//数据加载在此--}}
     </div>
@@ -38,14 +39,14 @@
                     var lists = "";
                     jQuery.each(purchaseRecordLists, function (key, value) {
                         lists +=
-                                "<a href='/purchase_records/" + value.purchase_record_id + "'><div class='weui-cells'><div class='weui-cell__bd'>" +
+                                "<a href='/purchase_records/" + value.purchase_record_id + "'><div class='weui-cells list-item'><div class='weui-cell__bd'>" +
                                 "<p>ID：" + value.purchase_record_id + "</p>" +
-                                "<p>商品分类名称：" + value.name + "</p>" +
+                                "<p class='p-name'>商品分类名称：" + value.name + "</p>" +
                                 "<p>购买数量：" + value.quantity + "</p>" +
                                 "<p>购买时间：" + value.purchase_time + "</p>" +
                                 "<p>价格：" + value.total + "</p>" +
                                 "<p>运费：" + value.freight + "</p>" +
-                                "<p>注释：" + value.comment + "</p>" +
+                                "<p class='p-tag'>注释：" + value.comment + "</p>" +
                                 "</div></div></a>";
                     })
                     $("#purchaseRecordLists").html(lists);
@@ -80,14 +81,14 @@
                         jQuery.each(purchaseRecordLists, function (key, value) {
 //                            console.log(cateLists);
                             lists +=
-                                    "<a href='/purchase_records/" + value.purchase_record_id + "'><div class='weui-cells'><div class='weui-cell__bd'>" +
+                                    "<a href='/purchase_records/" + value.purchase_record_id + "'><div class='weui-cells list-item'><div class='weui-cell__bd'>" +
                                     "<p>ID：" + value.purchase_record_id + "</p>" +
-                                    "<p>商品分类名称：" + value.name + "</p>" +
+                                    "<p class='p-name'>商品分类名称：" + value.name + "</p>" +
                                     "<p>购买数量：" + value.quantity + "</p>" +
                                     "<p>购买时间：" + value.purchase_time + "</p>" +
                                     "<p>价格：" + value.total + "</p>" +
                                     "<p>运费：" + value.freight + "</p>" +
-                                    "<p>注释：" + value.comment + "</p>" +
+                                    "<p class='p-tag'>注释：" + value.comment + "</p>" +
                                     "</div></div></a>";
                         })
                         $("#purchaseRecordLists").append(lists);

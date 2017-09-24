@@ -5,7 +5,8 @@
             width: 80px;
         }
     </style>
-    <a href="/sellers/create" class='weui-btn weui-btn_primary ' >CREATE</a>
+    <a href="/sellers/create" class='nav-btn' >CREATE</a>
+    <p class="p-title" onclick="javascript:window.location.href='/'"><i class="weui-icon-circle"></i>首页</p>
     <div id="sellerLists">
         {{--//数据加载在此--}}
     </div>
@@ -39,9 +40,9 @@
                     var lists = "";
                     jQuery.each(sellerLists, function (key, value) {
                         lists +=
-                                "<a href='/sellers/" + value.seller_id + "'><div class='weui-cells'><div class='weui-cell__bd'>" +
+                                "<a href='/sellers/" + value.seller_id + "'><div class='weui-cells list-item'><div class='weui-cell__bd'>" +
                                 "<p>ID：" + value.seller_id + "</p>" +
-                                "<p>名称：" + value.name + "</p>" +
+                                "<p class='p-name'>名称：" + value.name + "</p>" +
                                 "<p>联系人：" + value.contact + "</p>" +
                                 "<p>联系电话：" + value.phone + "</p>" +
                                 "<p>地址：" + value.address + "</p></div>" +
@@ -80,9 +81,9 @@
                         jQuery.each(sellerLists, function (key, value) {
 //                            console.log(cateLists);
                             lists +=
-                                    "<a href='/sellers/" + value.seller_id + "'><div class='weui-cells'><div class='weui-cell__bd'>" +
+                                    "<a href='/sellers/" + value.seller_id + "'><div class='weui-cells list-item'><div class='weui-cell__bd'>" +
                                     "<p>ID：" + value.seller_id + "</p>" +
-                                    "<p>名称：" + value.name + "</p>" +
+                                    "<p class='p-name'>名称：" + value.name + "</p>" +
                                     "<p>联系人：" + value.contact + "</p>" +
                                     "<p>联系电话：" + value.phone + "</p>" +
                                     "<p>地址：" + value.address + "</p></div>" +
