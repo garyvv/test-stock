@@ -5,7 +5,9 @@
             width: 80px;
         }
     </style>
-    <a href="/depots/create" class='weui-btn weui-btn_primary ' >CREATE</a>
+    <a href="/depots/create" class='nav-btn' >CREATE</a>
+    <p class="p-title" onclick="javascript:window.location.href='/'"><i class="weui-icon-circle"></i>首页</p>
+
     <div id="depotLists">
         {{--//数据加载在此--}}
     </div>
@@ -38,9 +40,9 @@
                     var lists = "";
                     jQuery.each(depotLists, function (key, value) {
                         lists +=
-                                "<a href='/depots/" + value.depot_id + "'><div class='weui-cells'><div class='weui-cell__bd'>" +
+                                "<a href='/depots/" + value.depot_id + "'><div class='weui-cells list-item'><div class='weui-cell__bd'>" +
                                 "<p>ID：" + value.depot_id + "</p>" +
-                                "<p>名称：" + value.name + "</p>" +
+                                "<p class='p-name'>名称：" + value.name + "</p>" +
                                 "</div></div></a>";
                     })
                     $("#depotLists").html(lists);
@@ -75,9 +77,9 @@
                         jQuery.each(depotLists, function (key, value) {
 //                            console.log(cateLists);
                             lists +=
-                                    "<a href='/depots/" + value.depot_id + "'><div class='weui-cells'><div class='weui-cell__bd'>" +
+                                    "<a href='/depots/" + value.depot_id + "'><div class='weui-cells list-item'><div class='weui-cell__bd'>" +
                                     "<p>ID：" + value.depot_id + "</p>" +
-                                    "<p>名称：" + value.name + "</p>" +
+                                    "<p class='p-name'>名称：" + value.name + "</p>" +
                                     "</div></div></a>";
                         })
                         $("#depotLists").append(lists);
