@@ -24,7 +24,7 @@
             var url = API_DEPOT_URL + "?page=" + page;
             var method = "get";
             var data = {};
-            data.per_page = 5;
+            data.per_page = 20;
             $.ajax({
                 headers:{
                     token:token
@@ -44,7 +44,11 @@
                                 "<p>ID：" + value.depot_id + "</p>" +
                                 "<p class='p-name'>名称：" + value.name + "</p>" +
                                 "</div></div></a>";
-                    })
+                    });
+                    if (data.data.last_page == page) {
+                        lists += genEndFooter();
+                        $(".weui-loadmore").hide();
+                    }
                     $("#depotLists").html(lists);
                 },
                 error: function (data) {
@@ -61,7 +65,7 @@
             var url = API_DEPOT_URL + "?page=" + page;
             var method = "get";
             var data = {};
-            data.per_page = 5;
+            data.per_page = 20;
             $.ajax({
                 headers:{
                     token:token
@@ -81,14 +85,18 @@
                                     "<p>ID：" + value.depot_id + "</p>" +
                                     "<p class='p-name'>名称：" + value.name + "</p>" +
                                     "</div></div></a>";
-                        })
+                        });
+                        if (data.data.last_page == page) {
+                            lists += genEndFooter();
+                            $(".weui-loadmore").hide();
+                        }
                         $("#depotLists").append(lists);
                         loading = false;
                     }, 1500)
                 },
                 error: function (data) {
                     alert(1)
-                },
+                }
             })
         });
 

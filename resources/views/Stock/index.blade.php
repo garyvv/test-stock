@@ -24,8 +24,17 @@
             display: inline-block;
         }
 
+        html {
+            background-color: #cfcfcf;
+        }
         body {
-            background-color: #999;
+            background-color: #cfcfcf;
+        }
+        p {
+            font-size: 16px;
+        }
+        .box-info {
+            line-height: 50px;
         }
     </style>
     <div id="userInfo">
@@ -57,16 +66,16 @@
                     var data = data.data;
                     var userInfo = "";
                     userInfo +=
-                            "<div class='weui-cells'>" +
+                            "<div class='weui-cells' style='margin-top: 0'>" +
                             "<div class='top'>" +
                             "<div class='weui-media-box__hd avatar' style='padding: 10px'>" +
                             "<a href='/stock/userCenter'>" +
-                            "<img class='weui-media-box__thumb' src=" + data.headimgurl + ">" +
+                            "<img class='weui-media-box__thumb' style='height: 100px;width: 100px' src=" + data.headimgurl + ">" +
                             "</a>" +
                             "</div>" +
-                            "<div class='weui-media-box__bd name'>" +
-                            "<h4 class='weui-media-box__title'>名字：" + data.nickname + "</h4>" +
-                            "<h4 class='weui-media-box__title'>用户组别名称：" + "cateName" + "</h4>" +
+                            "<div class='weui-media-box__bd name box-info'>" +
+                            "<h4 class='weui-media-box__title'>" + data.nickname + "</h4>" +
+                            "<h4 class='weui-media-box__title'>用户组：" + "cateName" + "</h4>" +
                             "</div>" +
                             "</div>" +
                             "</div>" +

@@ -24,7 +24,7 @@
             var url = "/api/v1/sellers" + "?page=" + page;
             var method = "get";
             var data = {};
-            data.per_page = 5;
+            data.per_page = 20;
             $.ajax({
                 headers:{
                     token:token
@@ -47,7 +47,10 @@
                                 "<p>联系电话：" + value.phone + "</p>" +
                                 "<p>地址：" + value.address + "</p></div>" +
                                 "</div></a>";
-                    })
+                    });
+                    if (data.data.last_page == page) {
+                        lists += genEndFooter();
+                    }
                     $("#sellerLists").html(lists);
                 },
                 error: function (data) {
@@ -65,7 +68,7 @@
             var url = "/api/v1/sellers" + "?page=" + page;
             var method = "get";
             var data = {};
-            data.per_page = 5;
+            data.per_page = 20;
             $.ajax({
                 headers:{
                     token:token
@@ -88,14 +91,18 @@
                                     "<p>联系电话：" + value.phone + "</p>" +
                                     "<p>地址：" + value.address + "</p></div>" +
                                     "</div></a>";
-                        })
+                        });
+                        if (data.data.last_page == page) {
+                            lists += genEndFooter();
+                            $(".weui-loadmore").hide();
+                        }
                         $("#sellerLists").append(lists);
                         loading = false;
                     }, 1500)
                 },
                 error: function (data) {
                     alert(1)
-                },
+                }
             })
         });
 

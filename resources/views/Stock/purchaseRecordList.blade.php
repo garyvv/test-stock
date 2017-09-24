@@ -23,7 +23,7 @@
             var url = API_PURCHASE_RECORD_URL + "?page=" + page;
             var method = "get";
             var data = {};
-            data.per_page = 5;
+            data.per_page = 20;
             $.ajax({
                 headers:{
                     token:token
@@ -48,7 +48,11 @@
                                 "<p>运费：" + value.freight + "</p>" +
                                 "<p class='p-tag'>注释：" + value.comment + "</p>" +
                                 "</div></div></a>";
-                    })
+                    });
+                    if (data.data.last_page == page) {
+                        lists += genEndFooter();
+                        $(".weui-loadmore").hide();
+                    }
                     $("#purchaseRecordLists").html(lists);
                 },
                 error: function (data) {
@@ -65,7 +69,7 @@
             var url = API_PURCHASE_RECORD_URL + "?page=" + page;
             var method = "get";
             var data = {};
-            data.per_page = 5;
+            data.per_page = 20;
             $.ajax({
                 headers:{
                     token:token
@@ -90,7 +94,11 @@
                                     "<p>运费：" + value.freight + "</p>" +
                                     "<p class='p-tag'>注释：" + value.comment + "</p>" +
                                     "</div></div></a>";
-                        })
+                        });
+                        if (data.data.last_page == page) {
+                            lists += genEndFooter();
+                            $(".weui-loadmore").hide();
+                        }
                         $("#purchaseRecordLists").append(lists);
                         loading = false;
                     }, 1500)

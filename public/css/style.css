@@ -58,3 +58,8 @@ p {
     height: 40px;
     line-height: 40px;
 }
+
+.p-end {
+    text-align: center;
+    color: #cecece;
+}
