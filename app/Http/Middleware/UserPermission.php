@@ -2,7 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\StUser;
 use Closure;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Redis;
 
 class UserPermission
 {
@@ -15,11 +18,14 @@ class UserPermission
      */
     public function handle($request, Closure $next)
     {
-//        echo '<pre>';
-//        var_dump($request);
-//        exit;
-        if ($request->input('user_group_id') != 1) {
-            return redirect('http://www.baidu.com');
+        $token = $_COOKIE['token'];
+//        \Log::debug("token:".$token);
+        $user = json_decode(Redis::get($token), true);
+        $user = StUser::find($user['uid']);
+//        \Log::debug("user:".json_encode($user_group_id));
+        $redirectUrl = env('HTTP_SERVER','inventory.local.com');
+        if ($user['user_group_id'] != "1") {
+            return redirect($redirectUrl);
         }
         return $next($request);
     }

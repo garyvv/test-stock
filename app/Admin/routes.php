@@ -15,8 +15,7 @@ Route::group([
     $router->get('/sellers', 'SellerController@index');
     $router->any('/sellers/edit', 'SellerController@edit');
 
-    $router->get('/users', 'UserController@index');
-    $router->any('/users/{uid}/edit', 'UserController@edit');
+    $router->resource('users', UserController::class);
 
     $router->get('/customers', 'CustomerController@index');
     $router->any('/customers/edit', 'CustomerController@edit');

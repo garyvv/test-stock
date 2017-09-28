@@ -4,10 +4,12 @@ namespace App\Admin\Controllers;
 
 use App\Models\StUser;
 
+use App\Models\StUserGroup;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
+use Encore\Admin\Grid\Column;
 //use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
 
@@ -78,6 +80,10 @@ class UserController extends BaseController
             $grid->nickname('昵称');
             $grid->sex('性别');
             $grid->user_group_id('用户组');
+            $grid->column('用户组')->display(function () {
+                $user_group = StUserGroup::find($this->user_group_id);
+                return $user_group['name'];
+            });
         });
     }
 
@@ -94,7 +100,14 @@ class UserController extends BaseController
             $form->image('headimgurl','头像');
             $form->text('nickname','昵称');
             $form->display('sex','性别');
-            $form->text('user_group_id','用户组');
+            $form->select('user_group_id','用户组')->options(function () {
+                $userGroups = StUser::userGroups();
+                $data = array();
+                foreach($userGroups as $userGroup){
+                    $data += [$userGroup->user_group_id => $userGroup->name];
+                }
+                return $data;
+            });
         });
     }
 }

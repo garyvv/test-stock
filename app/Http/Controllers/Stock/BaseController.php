@@ -19,6 +19,7 @@ class BaseController extends Controller
     {
 
         $token = $request->header('token', null);
+//        \Log::debug("baseController:".$token);
         if (empty($token)) {
             return $this->respFail('token missing', self::API_CODE_TOKEN_ERROR);
         }
