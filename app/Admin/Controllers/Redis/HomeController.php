@@ -24,7 +24,7 @@ class HomeController extends Controller
 
         $paginator = new LengthAwarePaginator($list, $total, $perPage, $page, ['path' => '/admin/redis/home/' . $config . '?keyword=' . $keyword]);
 
-        return view('redis.home', compact('config', 'paginator'));
+        return view('redis.home', compact('config', 'paginator', 'keyword'));
     }
 
     public function detail($key, $config)

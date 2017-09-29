@@ -4,7 +4,7 @@
     <h3 style="margin-top: 0;margin-left:20px; padding-top: 20px">Redis列表</h3>
     <div class="searchbar" style="margin: 20px">
         <div class="input-group">
-            <input type="text" id="keyword" class="form-control" placeholder="请输入搜索内容" onkeydown="onKeyDown(event)"/>
+            <input type="text" id="keyword" value="{{ $keyword }}" class="form-control" placeholder="请输入搜索内容" onkeydown="onKeyDown(event)"/>
             <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
         </div>
     </div>
