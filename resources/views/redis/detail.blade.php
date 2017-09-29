@@ -5,7 +5,9 @@
     <h3 style="margin-top: 0;margin-left:20px; padding-top: 20px">Redis详情</h3>
     <div class="body-content">
         <p>过期时间： {{ $detail['expire'] }}&emsp;&emsp;Type： {{ $detail['type'] }}</p>
-        <p>Value： {{ json_decode(json_encode($detail['value']), true) }}</p>
+        @if(json_decode($detail['value'], true))<pre>Value： {{ var_export(json_decode($detail['value'], true)) }}</pre>
+        @else <pre>Value： {{ $detail['value'] }}</pre>
+        @endif
     </div>
 
     <script>
