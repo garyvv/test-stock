@@ -16,7 +16,7 @@ class HomeController extends Controller
         $keyword = Input::get('keyword', '');
 
         $page = Input::get('page', 1);
-        $perPage = 5;
+        $perPage = 50;
         $redis = Redis::connection($config);
         $list = $redis->keys($keyword . '*');
         $total = count($list);
