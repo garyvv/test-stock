@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Stock;
 
+use App\Libraries\CacheKey;
 use App\Models\StCategory;
 use DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redis;
 
 
 class CategoryController extends BaseController
@@ -12,8 +14,16 @@ class CategoryController extends BaseController
 
     public function lists()
     {
-        $per_page = Input::get('per_page', 20);
-        $cateLists = StCategory::lists($per_page)->toArray();
+        $cacheKey = CacheKey::STOCK_CATEGORY_LIST . Input::get('page', 1);
+        if (!$cateLists = Redis::get($cacheKey)) {
+
+            $per_page = Input::get('per_page', 20);
+            $cateLists = StCategory::lists($per_page)->toArray();
+
+            Redis::set($cacheKey, json_encode($cateLists));
+            Redis::expire($cacheKey, 3600);
+        }
+
         return $this->respData($cateLists);
     }
 
