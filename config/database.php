@@ -124,6 +124,14 @@ return [
             'database' => 1,
         ],
 
+        'maka' => [
+            'host' => env('MK_REDIS_HOST', '127.0.0.1'),
+            'password' => env('MK_REDIS_PASSWORD', null),
+            'user' => env('MK_REDIS_USER', null),
+            'port' => env('REDIS_PORT', 6379),
+            'database' => 0,
+        ],
+
     ],
 
 ];
