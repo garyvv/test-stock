@@ -15,14 +15,16 @@ class CategoryController extends BaseController
     public function lists()
     {
         $cacheKey = CacheKey::STOCK_CATEGORY_LIST . Input::get('page', 1);
-        if (!$cateLists = Redis::get($cacheKey)) {
-
-            $per_page = Input::get('per_page', 20);
-            $cateLists = StCategory::lists($per_page)->toArray();
-
-            Redis::set($cacheKey, json_encode($cateLists));
-            Redis::expire($cacheKey, 3600);
+        $cateLists = Redis::get($cacheKey);
+        if (!empty($cateLists)) {
+            return $this->respData(json_decode($cateLists), true);
         }
+
+        $per_page = Input::get('per_page', 20);
+        $cateLists = StCategory::lists($per_page)->toArray();
+
+        Redis::set($cacheKey, json_encode($cateLists));
+        Redis::expire($cacheKey, 3600);
 
         return $this->respData($cateLists);
     }
