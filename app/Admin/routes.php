@@ -28,3 +28,15 @@ Route::group([
     $router->any('/purchase-records/edit', 'PurchaseRecordController@edit');
 
 });
+
+Route::group([
+    'prefix'        => config('admin.prefix') . '/redis',
+    'namespace'     => Admin::controllerNamespace() . '\\Redis',
+    'middleware'    => ['web', 'admin'],
+], function (Router $router) {
+
+    $router->get('/home/{config}', 'HomeController@index');
+    $router->get('/detail/{key}/config/{config}', 'HomeController@detail');
+    $router->delete('/detail/{key}/config/{config}', 'HomeController@delete');
+
+});
