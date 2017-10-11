@@ -45,8 +45,6 @@
 
         $(document).ready(function () {
             var token = getCookie('token');
-//            alert(token);
-//            token = "";
             var url = API_USRS;
             var method = "get";
             var data = {};

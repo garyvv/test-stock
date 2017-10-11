@@ -33,11 +33,6 @@ class WechatLoginController extends Controller
 
     public function testLogin($userId)
     {
-//        $this->requestValidate([
-//            'url' => 'required',
-//        ], [
-//            'url.required' => '登录成功跳转链接不能为空',
-//        ]);
         $url = Input::get('url');
         if(empty($url)){
             $url = env('HTTP_SERVER');

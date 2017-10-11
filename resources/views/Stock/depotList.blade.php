@@ -19,7 +19,6 @@
         var loading = false;  //状态标记
         var page = 1;//声明页码的全局变量
         var token = getCookie('token');
-
         $(document).ready(function () {//页面加载完毕后执行
             var url = API_DEPOT_URL + "?page=" + page;
             var method = "get";

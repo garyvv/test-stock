@@ -44,9 +44,9 @@ Route::group([
     Route::get('/sellers/{sellerId}/edit',function($sid){
         return view('Stock.sellerEdit', compact('sid'));
     });
-    Route::get('/depots',function(){
+    Route::get('/depots',['middleware' => 'user.permission',function(){
         return view('Stock.depotList');
-    });
+    }]);
     Route::get('/depots/create',function(){
         return view('Stock.depotCreate');
     });
