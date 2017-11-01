@@ -50,9 +50,10 @@ class VickyController extends BaseController
         $edit->link("/admin/vicky/story", "列表", "TR")->back();
         $edit->add('content', '内容', 'textarea')->attributes(array('rows' => 2))->rule('required|min:5');
         $edit->add('datetime', '时间', 'date')->format('Y-m-d', 'zh-CN');
-        $edit->add('image', '图片', 'text')->rule('required');
+        $edit->add('image', '图片', 'text')
+            ->attributes(['readOnly' => true]);
 
-        return $edit->view('rapyd.edit', compact('edit'));
+        return $edit->view('Vicky.admin.edit', compact('edit'));
 
     }
 }
