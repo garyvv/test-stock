@@ -16,7 +16,7 @@
                     {{--<a href="/">Home</a>--}}
                 {{--</li>--}}
             {{--</ul>--}}
-            <div style="position: absolute;right: 20px;color: #fa9898">
+            <div style="position: absolute;right: 20px;color: #fa9898;margin-top: 3px">
                 Vicky, I have fallen in love with you for
                 <div id="elapseClock"></div>
             </div>
