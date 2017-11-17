@@ -1,0 +1,12 @@
+<!DOCTYPE html><html><head>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+                <meta name="apple-mobile-web-app-capable" content="yes">
+                <meta name="apple-mobile-web-app-status-bar-style" content="black">
+                <meta name="others" content="EDIT-FLAG">
+                <meta name="format-detection" content="telephone=no"><style>
+                    img {
+                        max-width: 100% !important;
+                    }
+                </style></head><p><strong>2.4链路层负载均衡</strong></p><p>在通信协议的数据链路层修改mac地址，进行负载均衡。</p><p>数据分发时，不修改ip地址，指修改目标mac地址，配置真实物理服务器集群所有机器虚拟ip和负载均衡服务器ip地址一致，达到不修改数据包的源地址和目标地址，进行数据分发的目的。</p><p>实际处理服务器ip和数据请求目的ip一致，不需要经过负载均衡服务器进行地址转换，可将响应数据包直接返回给用户浏览器，避免负载均衡服务器网卡带宽成为瓶颈。也称为直接路由模式（DR模式）。如下图：</p><p style="text-align: center;"><img src="http://mmbiz.qpic.cn/mmbiz/8XqIFWDOiakx0POcvYWWneVK1sme1FZD1oDcjRMYZ3WUs1H78ib5GCbEEmbUxaGrjYic98msnrnMSRaaqXVTgh3IQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1"></p><p>优点：性能好；</p><p>缺点：配置复杂；</p><p>实践建议：DR模式是目前使用最广泛的一种负载均衡方式。</p></html>

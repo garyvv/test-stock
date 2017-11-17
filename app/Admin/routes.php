@@ -49,3 +49,16 @@ Route::group([
     $router->delete('/detail/{key}/config/{config}', 'HomeController@delete');
 
 });
+
+Route::group([
+    'prefix'        => config('admin.prefix') . '/toy',
+    'namespace'     => Admin::controllerNamespace() . '\\Toy',
+    'middleware'    => ['web', 'admin'],
+], function (Router $router) {
+
+    $router->any('products', 'ProductController@index');
+    $router->any('products/create', 'ProductController@anyForm');
+    $router->any('products/edit', 'ProductController@anyEdit');
+    $router->get('oss/{prefix}', 'OssController@toyObject');
+
+});

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a25768e2942b1efa6cdfd7c51d15d08b",
+    "content-hash": "51a9a40dabaa3f631240ee83240ad08c",
     "packages": [
         {
             "name": "aliyuncs/oss-sdk-php",
@@ -432,6 +432,53 @@
             "time": "2017-03-14T08:17:31+00:00"
         },
         {
+            "name": "garyvv/web-creator",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/garyvv/web-creator.git",
+                "reference": "73c1b47da9934339bc098b5440b8b0e283ecc686"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/garyvv/web-creator/73c1b47da9934339bc098b5440b8b0e283ecc686.zip",
+                "reference": "73c1b47da9934339bc098b5440b8b0e283ecc686",
+                "shasum": ""
+            },
+            "require": {
+                "aliyuncs/oss-sdk-php": "~2.0",
+                "guzzlehttp/guzzle": "^6.2.3",
+                "imangazaliev/didom": "^1.12",
+                "php": ">=7.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Garyvv\\WebCreator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "garyvv",
+                    "email": "gary.lv90@gmail.com"
+                }
+            ],
+            "description": "富文本框内容快速生成网页，图片本地化",
+            "homepage": "https://github.com/garyvv/web-creator",
+            "keywords": [
+                "backend",
+                "html",
+                "oss",
+                "php",
+                "ueditor"
+            ],
+            "time": "2017-11-17T17:08:54+00:00"
+        },
+        {
             "name": "guzzlehttp/guzzle",
             "version": "6.2.3",
             "source": {
@@ -608,6 +655,52 @@
                 "url"
             ],
             "time": "2017-03-20T17:10:46+00:00"
+        },
+        {
+            "name": "imangazaliev/didom",
+            "version": "1.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Imangazaliev/DiDOM.git",
+                "reference": "03f2daaa0a95ecf04c0cf1d56b22ca309f1f1558"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/Imangazaliev/DiDOM/03f2daaa0a95ecf04c0cf1d56b22ca309f1f1558.zip",
+                "reference": "03f2daaa0a95ecf04c0cf1d56b22ca309f1f1558",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DiDom\\": "src/DiDom/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Imangazaliev Muhammad",
+                    "email": "imangazalievm@gmail.com"
+                }
+            ],
+            "description": "Simple and fast HTML parser",
+            "homepage": "https://github.com/Imangazaliev/DiDOM",
+            "keywords": [
+                "didom",
+                "html",
+                "parser",
+                "xml"
+            ],
+            "time": "2017-08-28T02:25:34+00:00"
         },
         {
             "name": "intervention/image",
