@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\JinLi;
+namespace App\Models\Toy;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;

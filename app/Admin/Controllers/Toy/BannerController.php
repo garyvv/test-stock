@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Admin\Controllers\JinLi;
+namespace App\Admin\Controllers\Toy;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
-use App\Models\JinLi\WxBanner;
+use App\Models\Toy\WxBanner;
 use Zofe\Rapyd\DataEdit\DataEdit;
 use Zofe\Rapyd\DataGrid\DataGrid;
 use Zofe\Rapyd\DataFilter\DataFilter;
