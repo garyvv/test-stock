@@ -39,6 +39,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapVickyRoutes();
+
         //
     }
 
@@ -74,6 +76,16 @@ class RouteServiceProvider extends ServiceProvider
             'prefix' => 'api',
         ], function ($router) {
             require base_path('routes/api.php');
+        });
+    }
+
+    protected function mapVickyRoutes()
+    {
+        Route::group([
+            'namespace' => 'App\Http\Controllers\Vicky',
+            'prefix' => 'vicky/api',
+        ], function ($router) {
+            require base_path('routes/vicky.php');
         });
     }
 }

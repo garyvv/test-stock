@@ -15,13 +15,10 @@
 
 //Stock  页面路由
 Route::group([
-    'namespace' => 'Stock'
+    'namespace' => 'Vicky'
 ], function () {
     Route::get('/',function(){
-        return view('Stock.index');
-    });
-    Route::get('/categories',function(){
-        return view('Stock.categoryList');
+        return view('Vicky.index');
     });
     Route::get('/categories/create',function(){
         return view('Stock.categoryCreate');
@@ -29,6 +26,7 @@ Route::group([
     Route::get('/categories/{categoryId}',function($cid){
         return view('Stock.categoryDetail', compact('cid'));
     });
+
     Route::get('/categories/{categoryId}/edit',function($cid){
         return view('Stock.categoryEdit', compact('cid'));
     });
