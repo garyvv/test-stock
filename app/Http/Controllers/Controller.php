@@ -14,6 +14,7 @@ class Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    const DEFAULT_PER_PAGE = 30;
     const API_CODE_SUCCESS = 1001;
     const API_CODE_FAIL = 2001;
     const API_CODE_TOKEN_ERROR = 2002;// token失效
