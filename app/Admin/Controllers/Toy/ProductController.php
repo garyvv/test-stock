@@ -4,6 +4,7 @@ namespace App\Admin\Controllers\Toy;
 
 use App\Admin\Controllers\BaseController;
 use App\Models\Toy\OcProduct;
+use App\Models\Toy\OcProductDescription;
 use Encore\Admin\Facades\Admin;
 use Garyvv\WebCreator\WeChatCreator;
 use Illuminate\Support\Facades\Input;
@@ -46,10 +47,10 @@ class ProductController extends BaseController
 
         $url = new Url();
         $grid->link($url->append('export', 1)->get(), "导出Excel", "TR", ['class' => 'btn btn-export', 'target' => '_blank']);
-        $grid->link(config('admin.route.prefix') . '/toy/create', '新增', 'TR', ['class' => 'btn btn-default']);
+        $grid->link(config('admin.prefix') . '/toy/products/create', '新增', 'TR', ['class' => 'btn btn-default']);
 
         $grid->row(function ($row) {
-            $row->cell('status')->value = OcProduct::$statusText[$row->data->status];
+            $row->cell('status')->value = isset(OcProduct::$statusText[$row->data->status]) ? OcProduct::$statusText[$row->data->status] : '删除';
 
             ($row->data->status == OcProduct::STATUS_COMMON_NORMAL) && $row->cell('status')->style("color: #333333;");
             ($row->data->status == OcProduct::STATUS_COMMON_OFFLINE) && $row->cell('status')->style("color: #CECECE;");
@@ -61,7 +62,7 @@ class ProductController extends BaseController
 
             $btnEditHtml = "btn: ['编辑'],btn1: function(index, layero){
                                 //按钮【按钮一】的回调
-                                window.location.href = '" . config('admin.route.prefix') . "/html?product_id=" . $row->data->product_id . "&link=" . $link . "';
+                                window.location.href = '/" . config('admin.prefix') . "/html?product_id=" . $row->data->product_id . "&link=" . $link . "';
                                 //return false; //开启该代码可禁止点击该按钮关闭
                              },";
             $link .= '?new=' . date('YmdHis');
@@ -76,8 +77,8 @@ class ProductController extends BaseController
                                                                                 scrollbar: false,
                                                                                 content: '" . $link . "'
                                                                             })\">商品详情</button>";
-            $btnEdit = "<a class='btn btn-default' href='" . config('admin.route.prefix') . "/toy/products/edit?modify=" . $row->data->product_id . "'>编辑</a>";
-            $btnDelete = '<button class="btn btn-danger" onclick="layer.confirm( \'确定删除吗？！\',{ btn: [\'确定\',\'取消\'] }, function(){ window.location.href = \'' . config('admin.route.prefix') . "/toy/products/edit?delete=" . $row->data->id . '\'})">删除</button>';
+            $btnEdit = "<a class='btn btn-default' href='/" . config('admin.prefix') . "/toy/products/edit?modify=" . $row->data->product_id . "'>编辑</a>";
+            $btnDelete = '<button class="btn btn-danger" onclick="layer.confirm( \'确定删除吗？！\',{ btn: [\'确定\',\'取消\'] }, function(){ window.location.href = \'/' . config('admin.prefix') . "/toy/products/edit?delete=" . $row->data->product_id . '\'})">删除</button>';
 
             $row->cell('operation')->value = $btnPreview . $btnEdit . $btnDelete;
 
@@ -104,11 +105,15 @@ class ProductController extends BaseController
         $form = DataForm::source(new OcProduct());
 
         $form->label('商品信息');
-        $form->link(config('admin.route.prefix') . "/toy/products", "列表", "TR")->back();
+        $form->link(config('admin.prefix') . "/toy/products", "列表", "TR")->back();
 
         $form->add('title', '标题', 'text')
             ->rule("required|min:2")
             ->placeholder("请输入 标题");
+
+        $form->add('sort_order', '排序', 'text')->insertValue(99);
+
+        $form->add('viewed', '浏览数', 'text')->insertValue(rand(10,100));
 
         $form->add('textbox','内容','textarea')->rule("required")->attributes(['rows' => 15]);
 
@@ -121,11 +126,13 @@ class ProductController extends BaseController
 
         $form->add('date_added', 'date', 'hidden')->insertValue(date('Y-m-d H:i:s'));
 
-
         $form->saved(function () use ($form) {
+            $productId = $form->model->product_id;
+            $product = OcProduct::find($productId);
+            $product->model = $form->model->title;
             try{
 //                $this->saveHeadlineTag($form->model->id, Input::get('tags'));
-                $productId = $form->model->product_id;
+
                 if (Input::get('textbox', null)) {
                     $web = new WeChatCreator(Input::get('textbox'));
                     $path = 'toy/products/' . $productId . '/';
@@ -135,16 +142,20 @@ class ProductController extends BaseController
                     }
                     $httpServer = env('HTTP_SERVER') . $path;
                     $web->dealImage($dir, $httpServer, 'text');
-                    $product = OcProduct::find($productId);
+
                     $product->content = $web->link;
-                    $product->save();
                 }
 
+                $product->save();
+
+                $this->saveProduct($product);
+
                 $form->message("新建商品成功");
-                $form->link(config('admin.route.prefix') . '/toy/products',"返回");
+                $form->link(config('admin.prefix') . '/toy/products',"返回");
             } catch (\Exception $exception) {
+                $product->save();
                 $form->message('** <h3>【ERROR】</h3>下载外链图片错误 **：' . $exception->getMessage());
-                $form->link(config('admin.route.prefix') . '/html?product_id=' . $form->model->product_id,"重新编辑HTML");
+                $form->link(config('admin.prefix') . '/html?product_id=' . $form->model->product_id,"重新编辑HTML");
             }
         });
 
@@ -159,49 +170,54 @@ class ProductController extends BaseController
     {
         $deleteId = Input::get('delete', null);
         if ($deleteId) {
-            Platv4Headline::where('id', $deleteId)->update(['status' => -1]);
-            return redirect('/headlines');
+            OcProduct::where('product_id', $deleteId)->update(['status' => -1]);
+            return redirect('/admin/toy/products');
         }
 
-        $id = Input::get('modify', 0);
-        if ($id) {
-            $tagList = Platv4HeadlineToTag::where('headline_id', $id)->get()->toArray();
-            $tags = array_column($tagList, 'headline_tag_id');
-            Input::offsetSet('tags', array_values($tags));   // 选中tags
-        }
+//        $id = Input::get('modify', 0);
+//        if ($id) {
+//            $tagList = OcProduct::where('product_id', $id)->get()->toArray();
+//            $tags = array_column($tagList, 'headline_tag_id');
+//            Input::offsetSet('tags', array_values($tags));   // 选中tags
+//        }
 
-        $edit = DataEdit::source(new Platv4Headline());
+        $edit = DataEdit::source(new OcProduct());
 
-        $edit->label('头条信息');
-        $edit->link(config('admin.route.prefix') . "/headlines", "列表", "TR")->back();
+        $edit->label('商品信息');
+        $edit->link(config('admin.prefix') . "/toy/products", "列表", "TR")->back();
 
         $edit->add('title', '标题', 'text')
             ->rule("required|min:2")
             ->placeholder("请输入 标题");
 
-        $edit->add('author', '来源', 'text')
-            ->rule("required|min:1")
-            ->placeholder("请输入 来源");
+        $edit->add('sort_order', '排序', 'text');
 
-        $edit->add('style', '样式', 'radiogroup')->options(Platv4Headline::$styleText);
+        $edit->add('viewed', '浏览数', 'text');
 
-        $edit->add('link','链接','text')->rule("required")->placeholder("请输入 链接");
 
-        $edit->add('thumb', '封面图', 'text')
-            ->attributes(["readOnly" => true]);
+        $edit->add('image', '封面图', 'text')
+            ->attributes(['readOnly' => true]);
 
-        $edit->add('tags', '标签', 'checkboxgroup')->options(Platv4HeadlineTag::where('status', Platv4HeadlineTag::COMMON_STATUS_NORMAL)->orderBy('sort', 'asc')->pluck('name', 'id'));
+//        $form->add('tags', '标签', 'checkboxgroup')->options(Platv4HeadlineTag::where('status', Platv4HeadlineTag::COMMON_STATUS_NORMAL)->orderBy('sort', 'asc')->pluck('name', 'id'));
 
-        $edit->add('status', '状态', 'select')->options(Platv4Headline::$statusText);
+        $edit->add('status', '状态', 'select')->options(OcProduct::$statusText);
+
+        $edit->add('date_modified', 'date', 'hidden')->updateValue(date('Y-m-d H:i:s'));
 
         $edit->saved(function () use ($edit) {
-            $this->saveHeadlineTag($edit->model->id, Input::get('tags'));
+
+            $productId = $edit->model->product_id;
+            $product = OcProduct::find($productId);
+            $product->model = $edit->model->title;
+            $product->save();
+            $this->saveProduct($product);
+//            $this->saveHeadlineTag($edit->model->id, Input::get('tags'));
         });
 
         $edit->build();
 
         $imageDir = date('Ymd') . 'U' . Admin::user()->id;
-        return $edit->view('headline.edit', compact('edit', 'id', 'imageDir'));
+        return $edit->view('rapyd.edit', compact('edit', 'id', 'imageDir'));
     }
 
 
@@ -267,5 +283,21 @@ class ProductController extends BaseController
             }
             return redirect('/headlines');
         }
+    }
+
+    private function saveProduct($product)
+    {
+        $productDesc = OcProductDescription::find($product->product_id);
+        empty($productDesc) && $productDesc = new OcProductDescription();
+
+        $productDesc->product_id = $product->product_id;
+        $productDesc->language_id = OcProductDescription::LANG_ID;
+        $productDesc->name = $product->title;
+        $productDesc->description = $product->content;
+        $productDesc->meta_title = $product->title;
+        $productDesc->meta_description = $product->title;
+        $productDesc->meta_keyword = $product->title;
+
+        $productDesc->save();
     }
 }
