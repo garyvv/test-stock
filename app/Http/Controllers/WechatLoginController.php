@@ -7,12 +7,12 @@
  */
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Stock\BaseController;
 use EasyWeChat\Foundation\Application;
 use Illuminate\Support\Facades\Input;
 use App\Models\StUser;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Request;
 
 class WechatLoginController extends Controller
 {
@@ -33,23 +33,20 @@ class WechatLoginController extends Controller
 
     public function testLogin($userId)
     {
-        $this->requestValidate([
-            'url' => 'required',
-        ], [
-            'url.required' => '登录成功跳转链接不能为空',
-        ]);
-
+        $url = Input::get('url');
+        if(empty($url)){
+            $url = env('HTTP_SERVER');
+        }
         $userInfo = StUser::find($userId);//检查数据库是否存在数据
         if(empty($userInfo)){
             return $this->respFail('not found user');
         }
-
         $token = md5($userInfo->openid . 'wxauth' . time());
         Redis::set($token,json_encode($userInfo));
         Redis::expire($token,60 * 60 * 24);
 //        setCookie  可根据需要， 比如前端用Vue，拼接参数到url返回给前端
         $cookie = Cookie::make('token', $token, $minutes = 60 * 24, $path = null, $domain = null, $secure = false, $httpOnly = false);
-        return redirect(Input::get('url'))->withCookie($cookie);
+        return redirect($url)->withCookie($cookie);
     }
 
 }

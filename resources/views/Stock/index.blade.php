@@ -24,8 +24,17 @@
             display: inline-block;
         }
 
+        html {
+            background-color: #cfcfcf;
+        }
         body {
-            background-color: #999;
+            background-color: #cfcfcf;
+        }
+        p {
+            font-size: 16px;
+        }
+        .box-info {
+            line-height: 50px;
         }
     </style>
     <div id="userInfo">
@@ -36,8 +45,6 @@
 
         $(document).ready(function () {
             var token = getCookie('token');
-//            alert(token);
-//            token = "";
             var url = API_USRS;
             var method = "get";
             var data = {};
@@ -57,16 +64,16 @@
                     var data = data.data;
                     var userInfo = "";
                     userInfo +=
-                            "<div class='weui-cells'>" +
+                            "<div class='weui-cells' style='margin-top: 0'>" +
                             "<div class='top'>" +
                             "<div class='weui-media-box__hd avatar' style='padding: 10px'>" +
                             "<a href='/stock/userCenter'>" +
-                            "<img class='weui-media-box__thumb' src=" + data.headimgurl + ">" +
+                            "<img class='weui-media-box__thumb' style='height: 100px;width: 100px' src=" + data.headimgurl + ">" +
                             "</a>" +
                             "</div>" +
-                            "<div class='weui-media-box__bd name'>" +
-                            "<h4 class='weui-media-box__title'>名字：" + data.nickname + "</h4>" +
-                            "<h4 class='weui-media-box__title'>用户组别名称：" + "cateName" + "</h4>" +
+                            "<div class='weui-media-box__bd name box-info'>" +
+                            "<h4 class='weui-media-box__title'>" + data.nickname + "</h4>" +
+                            "<h4 class='weui-media-box__title'>用户组：" + "cateName" + "</h4>" +
                             "</div>" +
                             "</div>" +
                             "</div>" +
@@ -79,7 +86,7 @@
                             "<div class='weui-cell__ft'>" +
                             "</div>" +
                             "</a>" +
-                            "<a class='weui-cell weui-cell_access' href='javascript:;'>" +
+                            "<a class='weui-cell weui-cell_access' href='/sellers'>" +
                             "<div class='weui-cell__hd'><img src='images/seller.png'></div>" +
                             "<div class='weui-cell__bd'>" +
                             "<p>供应商管理</p>" +
@@ -87,10 +94,18 @@
                             "<div class='weui-cell__ft'>" +
                             "</div>" +
                             "</a>" +
-                            "<a class='weui-cell weui-cell_access' href='javascript:;'>" +
+                            "<a class='weui-cell weui-cell_access' href='/depots'>" +
                             "<div class='weui-cell__hd'><img src='images/order_depot.png'></div>" +
                             "<div class='weui-cell__bd'>" +
                             "<p>仓库管理</p>" +
+                            "</div>" +
+                            "<div class='weui-cell__ft'>" +
+                            "</div>" +
+                            "</a>" +
+                            "<a class='weui-cell weui-cell_access' href='/purchase_records'>" +
+                            "<div class='weui-cell__hd'><img src='images/purchase_record.png'></div>" +
+                            "<div class='weui-cell__bd'>" +
+                            "<p>进货记录</p>" +
                             "</div>" +
                             "<div class='weui-cell__ft'>" +
                             "</div>" +

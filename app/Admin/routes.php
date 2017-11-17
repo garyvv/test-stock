@@ -15,6 +15,8 @@ Route::group([
     $router->get('/sellers', 'SellerController@index');
     $router->any('/sellers/edit', 'SellerController@edit');
 
+    $router->resource('users', UserController::class);
+
     $router->get('/customers', 'CustomerController@index');
     $router->any('/customers/edit', 'CustomerController@edit');
 
@@ -33,5 +35,17 @@ Route::group([
 //    OSS
     $router->get('vicky/oss/{prefix}', 'OssController@vickyObject');
     $router->get('oss/auth', 'OssController@auth');
+
+});
+
+Route::group([
+    'prefix'        => config('admin.prefix') . '/redis',
+    'namespace'     => Admin::controllerNamespace() . '\\Redis',
+    'middleware'    => ['web', 'admin'],
+], function (Router $router) {
+
+    $router->get('/home/{config}', 'HomeController@index');
+    $router->get('/detail/{key}/config/{config}', 'HomeController@detail');
+    $router->delete('/detail/{key}/config/{config}', 'HomeController@delete');
 
 });

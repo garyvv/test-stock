@@ -19,10 +19,10 @@ class BaseController extends Controller
     {
 
         $token = $request->header('token', null);
+//        \Log::debug("baseController:".$token);
         if (empty($token)) {
             return $this->respFail('token missing', self::API_CODE_TOKEN_ERROR);
         }
-
         $this->userInfo = json_decode(Redis::get($token), true); //获取redis中的值
 //        $this->userInfo =Redis::get($token); //获取redis中的值
 

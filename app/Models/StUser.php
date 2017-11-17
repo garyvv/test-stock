@@ -21,4 +21,10 @@ class StUser extends Model
             ->where('openid',$openid)
             ->first();
     }
+
+    public static function userGroups(){
+        return DB::table('st_user_groups')
+            ->select('*')
+            ->get();
+    }
 }

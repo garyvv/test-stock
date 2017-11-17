@@ -14,7 +14,6 @@ class UserController extends BaseController
 
     public function getUserInfo()
     {
-        \Log::debug("User");
         $info = $this->userInfo;
         return $this->respData($info);
     }

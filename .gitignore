@@ -4,3 +4,4 @@ vendor/*
 config/wechat.php
 .idea/
 public/upload/*
+dump.rdb
