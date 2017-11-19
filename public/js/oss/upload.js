@@ -12,7 +12,7 @@ g_object_name = ''
 g_object_name_type = ''
 now = timestamp = Date.parse(new Date()) / 1000; 
 
-function send_request(dir)
+function send_request(dir, bucket)
 {
     var xmlhttp = null;
     if (window.XMLHttpRequest)
@@ -26,7 +26,7 @@ function send_request(dir)
   
     if (xmlhttp!=null)
     {
-        serverUrl = '/admin/oss/auth?dir=' + dir
+        serverUrl = '/admin/oss/auth?dir=' + dir + '&bucket=' + bucket;
         xmlhttp.open( "GET", serverUrl, false );
         xmlhttp.send( null );
         var result = JSON.parse(xmlhttp.responseText);
@@ -50,13 +50,13 @@ function check_object_radio() {
     }
 }
 
-function get_signature(dir)
+function get_signature(dir, bucket)
 {
     //可以判断当前expire是否超过了当前时间,如果超过了当前时间,就重新取一下.3s 做为缓冲
     now = timestamp = Date.parse(new Date()) / 1000; 
     if (expire < now + 3)
     {
-        obj = send_request(dir)
+        obj = send_request(dir, bucket)
         host = obj.host
         policyBase64 = obj.policy
         accessid = obj.accessid
@@ -117,11 +117,11 @@ function get_uploaded_object_name(filename)
     }
 }
 
-function set_upload_param(up, filename, ret, dir)
+function set_upload_param(up, filename, ret, dir, bucket)
 {
     if (ret == false)
     {
-        ret = get_signature(dir)
+        ret = get_signature(dir, bucket)
     }
     g_object_name = key;
     if (filename != '') {
@@ -142,7 +142,6 @@ function set_upload_param(up, filename, ret, dir)
     });
 
     up.start();
-    location.reload(true)
 }
 
 var uploader = new plupload.Uploader({
@@ -198,6 +197,13 @@ var uploader = new plupload.Uploader({
             if (info.status == 200)
             {
                 document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = 'upload to oss success, object name:' + get_uploaded_object_name(file.name);
+                console.log('上传成功，文件名:' + get_uploaded_object_name(file.name));
+                layer.msg('上传成功，文件名:' + get_uploaded_object_name(file.name), {
+                    icon: 1,
+                    time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                }, function () {
+                    location.reload(true);
+                });
             }
             else
             {

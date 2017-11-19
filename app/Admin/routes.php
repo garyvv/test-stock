@@ -33,7 +33,7 @@ Route::group([
     $router->any('/vicky/story/edit', 'VickyController@edit');
 
 //    OSS
-    $router->get('vicky/oss/{prefix}', 'OssController@vickyObject');
+    $router->get('oss/bucket/{bucket}', 'OssController@listObject');
     $router->get('oss/auth', 'OssController@auth');
 
 });
@@ -59,6 +59,5 @@ Route::group([
     $router->any('products', 'ProductController@index');
     $router->any('products/create', 'ProductController@anyForm');
     $router->any('products/edit', 'ProductController@anyEdit');
-    $router->get('oss/{prefix}', 'OssController@toyObject');
 
 });

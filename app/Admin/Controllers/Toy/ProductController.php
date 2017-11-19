@@ -5,8 +5,10 @@ namespace App\Admin\Controllers\Toy;
 use App\Admin\Controllers\BaseController;
 use App\Models\Toy\OcProduct;
 use App\Models\Toy\OcProductDescription;
+use App\Models\Toy\OcProductImage;
 use Encore\Admin\Facades\Admin;
 use Garyvv\WebCreator\WeChatCreator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Zofe\Rapyd\DataEdit\DataEdit;
 use Zofe\Rapyd\DataForm\DataForm;
@@ -120,6 +122,9 @@ class ProductController extends BaseController
         $form->add('image', '封面图', 'text')
             ->attributes(['readOnly' => true]);
 
+        $form->add('images', '相册', 'text')
+            ->attributes(['readOnly' => true]);
+
 //        $form->add('tags', '标签', 'checkboxgroup')->options(Platv4HeadlineTag::where('status', Platv4HeadlineTag::COMMON_STATUS_NORMAL)->orderBy('sort', 'asc')->pluck('name', 'id'));
 
         $form->add('status', '状态', 'select')->options(OcProduct::$statusText);
@@ -161,8 +166,8 @@ class ProductController extends BaseController
 
         $form->submit('保存');
 
-        $imageDir = date('Ymd') . 'U' . Admin::user()->id;
-        return $form->view('rapyd.textbox-form', compact('form', 'imageDir', 'type'));
+        $imageDir = 'products/';
+        return $form->view('rapyd.textbox-form', compact('form', 'imageDir'));
     }
 
 
@@ -196,6 +201,9 @@ class ProductController extends BaseController
 
 
         $edit->add('image', '封面图', 'text')
+            ->attributes(['readOnly' => true]);
+
+        $edit->add('images', '相册', 'text')
             ->attributes(['readOnly' => true]);
 
 //        $form->add('tags', '标签', 'checkboxgroup')->options(Platv4HeadlineTag::where('status', Platv4HeadlineTag::COMMON_STATUS_NORMAL)->orderBy('sort', 'asc')->pluck('name', 'id'));
@@ -235,23 +243,6 @@ class ProductController extends BaseController
             ];
         }
         return DB::table('platv4_headline_to_tag')->insert($insertData);
-    }
-
-    private function saveHeadlineTagBak($headlineId, $tags)
-    {
-        if(empty($headlineId)) return false;
-        if(empty($tags)) return true;
-
-        Platv4HeadlineToTag::where('headline_id', $headlineId)->update(['status' => Platv4HeadlineToTag::COMMON_STATUS_DELETE]);
-        $initSql = 'INSERT INTO `platv4_headline_to_tag` (`headline_id`, `headline_tag_id`, `status`)
-                      VALUES ';
-        $sql = '';
-        foreach ($tags as $tag) {
-            $sql .=  '(' . intval($headlineId) . ', ' . intval($tag) . ', ' . Platv4HeadlineToTag::COMMON_STATUS_NORMAL . '),';
-        }
-        $sql = substr($sql, 0, -1) . ' ON DUPLICATE KEY UPDATE `status` = VALUES(status);';
-        DB::insert(DB::raw($initSql . $sql));
-        return true;
     }
 
     public function editHtml()
@@ -299,5 +290,16 @@ class ProductController extends BaseController
         $productDesc->meta_keyword = $product->title;
 
         $productDesc->save();
+
+        OcProductImage::where('product_id', $product->product_id)->delete();
+        $images = [];
+        foreach (Input::get('images') as $key => $image) {
+            $images[] = [
+                'product_id' => $product->product_id,
+                'image' => $image,
+                'sort_order' => $key
+            ];
+        }
+        $images && DB::table('oc_product_image')->insert($images);
     }
 }
