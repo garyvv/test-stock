@@ -293,7 +293,7 @@ class ProductController extends BaseController
 
         OcProductImage::where('product_id', $product->product_id)->delete();
         $images = [];
-        foreach (Input::get('images') as $key => $image) {
+        foreach ((array)explode(',', Input::get('images')) as $key => $image) {
             $images[] = [
                 'product_id' => $product->product_id,
                 'image' => $image,
