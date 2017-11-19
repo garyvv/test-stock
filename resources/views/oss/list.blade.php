@@ -17,7 +17,7 @@
 
         <div id="container">
             <a id="selectfiles" href="javascript:void(0);" class='btn btn-primary'>选择文件</a>
-            <button id="postfiles" onclick="set_upload_param(uploader, '', false, '{!! $dir !!}')"
+            <button id="postfiles" onclick="set_upload_param(uploader, '', false, '{!! $dir !!}', '{!! $bucket !!}')"
                     class='btn btn-primary'>开始上传
             </button>
         </div>
@@ -56,20 +56,20 @@
         var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
 
 //        计算选的封面图数量
-        parent.$('#count-photo').text(parseInt(parent.$('#count-photo').text()) + 1);
+        parent.$('#count-{{ $modelId }}').text(parseInt(parent.$('#count-{{ $modelId }}').text()) + 1);
 
 //        入库数据
-        var image = parent.$('#image').val();
-        if (image == '') parent.$('#image').val(url);
-        else parent.$('#image').val(image + ',' + url);
+        var image = parent.$('#{{ $modelId }}').val();
+        if (image == '') parent.$('#{{ $modelId }}').val(url);
+        else parent.$('#{{ $modelId }}').val(image + ',' + url);
 
 //        预览
         var img = '<img ' +
                     'id="' + photoId + '" ' +
-                    'onclick="delPhoto(\'' + photoId + '\', \'image\')" ' +
+                    'onclick="delPhoto(\'' + photoId + '\', \'{{ $modelId }}\')" ' +
                     'style="border: 1px solid #3c8dbc; border-radius: 5px;padding: 2px; height: 50px;width: auto;margin-right: 3px; max-width: 300px" ' +
                     'src="' + url + '">';
-        parent.$('#photo-preview').append(img);
+        parent.$('#{{ $modelId }}-preview').append(img);
 //        parent.layer.close(index);
     }
 </script>

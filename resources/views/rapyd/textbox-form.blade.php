@@ -78,7 +78,9 @@
             });
         }
 
+        var thumb = new Array();
         var images = new Array();
-        ossImage('div_image', 'image', '/admin/toy/products/oss/home', images)
+        ossImage('image', '/admin/oss/bucket/static-toy?prefix={{ $imageDir }}&model_id=image', thumb)
+        ossImage('images', '/admin/oss/bucket/static-toy?prefix={{ $imageDir }}&model_id=images', images)
     </script>
 @endsection

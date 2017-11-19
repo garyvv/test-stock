@@ -10,57 +10,93 @@ namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
+use OSS\Core\OssException;
 use OSS\OssClient;
 
 class OssController extends Controller
 {
-    public $ossBucket;
+    public $ossDomains;
+    public $ossEndpoints;
+
     public $ossAppId;
     public $ossAppSecret;
-    public $ossEndpoint;
-    public $ossViewDomain;
 
     public function __construct()
     {
-        $this->ossBucket = env('ALI_OSS_VICKY_BUCKET');
-        $this->ossAppId = env('ALI_OSS_VICKY_ACCESS_KEY');
-        $this->ossAppSecret = env('ALI_OSS_VICKY_ACCESS_SECRET');
-        $this->ossEndpoint = env('ALI_OSS_VICKY_ENDPOINT');
-        $this->ossViewDomain = env('ALI_OSS_VICKY_VIEW_DOMAIN');
+        $this->ossAppId = env('ALI_OSS_ACCESS_KEY');
+        $this->ossAppSecret = env('ALI_OSS_ACCESS_SECRET');
+
+        $this->ossDomains[env('ALI_OSS_VICKY_BUCKET')] = env('ALI_OSS_VICKY_VIEW_DOMAIN');
+        $this->ossDomains[env('ALI_OSS_TOY_BUCKET')] = env('ALI_OSS_TOY_VIEW_DOMAIN');
+
+        $this->ossEndpoints[env('ALI_OSS_VICKY_BUCKET')] = env('ALI_OSS_HZ_ENDPOINT');
+        $this->ossEndpoints[env('ALI_OSS_TOY_BUCKET')] = env('ALI_OSS_SZ_ENDPOINT');
     }
 
-    public function vickyObject($prefix)
+    public function listObject($bucket)
     {
-        $oss = new OssClient($this->ossAppId, $this->ossAppSecret, $this->ossEndpoint);
-        $options = [
-            'prefix' => $prefix . '/',
-            'delimiter' => '/',
-        ];
-        $objectInfo = $oss->listObjects($this->ossBucket, $options);
-        $objectList = $objectInfo->getObjectList();
+        $this->requestValidate([
+            'prefix' => 'required',
+            'model_id' => 'required',
+        ], []);
+        $prefix = Input::get('prefix', null);
+        $modelId = Input::get('model_id', null);
+
+        $endPoint = isset($this->ossEndpoints[$bucket]) ? $this->ossEndpoints[$bucket] : '';
+        $domain = isset($this->ossDomains[$bucket]) ? $this->ossDomains[$bucket] : ($bucket . '.' . $endPoint);
+
+        $nextMarker = '';
+        $oss = new OssClient($this->ossAppId, $this->ossAppSecret, $endPoint);
 
         $list = [];
         $sort = [];
-        foreach ($objectList as $key => $item) {
-            if (strpos($item->getKey(), 'html') !== false) continue;
-            $list[] = [
-                'auto_id' => $key,
-                'name' => str_replace($options['prefix'], '', $item->getKey()),
-                'key' => $item->getKey(),
-                'last_modify' => date('Y-m-d H:i:s',strtotime($item->getLastModified())),
-                'eTag' => $item->getETag(),
-                'type' => $item->getType(),
-                'size' => $this->fileSizeFormat($item->getSize()),
-                'storageClass' => $item->getStorageClass(),
-                'url' => 'http://' . $this->ossViewDomain . '/' . $item->getKey(),
+        while (true) {
+            $options = [
+                'prefix' => $prefix,
+                'delimiter' => '/',
+                'max-keys' => 200,
+                'marker' => $nextMarker,
             ];
-            $sort[] = strtotime($item->getLastModified());
+
+            try {
+                $objectInfo = $oss->listObjects($bucket, $options);
+            } catch (OssException $e) {
+                printf(__FUNCTION__ . ": FAILED\n");
+                printf($e->getMessage() . "\n");
+                return false;
+            }
+
+//            得到nextMarker，从上一次listObjects读到的最后一个文件的下一个文件开始继续获取文件列表
+            $nextMarker = $objectInfo->getNextMarker();
+
+            $objectList = $objectInfo->getObjectList();
+
+            foreach ($objectList as $key => $item) {
+                $list[] = [
+                    'auto_id' => $key,
+                    'name' => str_replace($options['prefix'], '', $item->getKey()),
+                    'key' => $item->getKey(),
+                    'last_modify' => date('Y-m-d H:i:s', strtotime($item->getLastModified())),
+                    'eTag' => $item->getETag(),
+                    'type' => $item->getType(),
+                    'size' => $this->fileSizeFormat($item->getSize()),
+                    'storageClass' => $item->getStorageClass(),
+                    'url' => 'http://' . $domain . '/' . $item->getKey(),
+                ];
+                $sort[] = strtotime($item->getLastModified());
+            }
+
+            if ($nextMarker === '') {
+                break;
+            }
+
         }
         array_multisort($sort, SORT_DESC, $list);
 
-        $dir = $options['prefix'];
-        return view('oss.list', compact('list', 'dir'));
+        $dir = $prefix;
+        return view('oss.list', compact('list', 'dir', 'modelId', 'bucket'));
     }
+
 
     /**
      * 文件大小格式化
@@ -85,8 +121,11 @@ class OssController extends Controller
     {
         $this->requestValidate([
             'dir' => 'required',
+            'bucket' => 'required'
         ], []);
         $dir = Input::get('dir', null);
+        $bucket = Input::get('bucket', null);
+        $endPoint = isset($this->ossEndpoints[$bucket]) ? $this->ossEndpoints[$bucket] : '';
 
         $now = time();
         $expire = 30; //设置该policy超时时间是10s. 即这个policy过了这个有效时间，将不能访问
@@ -111,7 +150,7 @@ class OssController extends Controller
 
         $response = [];
         $response['accessid'] = $this->ossAppId;
-        $response['host'] = 'http://' . $this->ossViewDomain;
+        $response['host'] = 'http://' . $bucket . '.' . $endPoint;
         $response['policy'] = $base64Policy;
         $response['signature'] = $signature;
         $response['expire'] = $end;
