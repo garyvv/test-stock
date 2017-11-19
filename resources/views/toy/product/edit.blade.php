@@ -5,7 +5,7 @@
         #div_style label{
             width: 100px;
         }
-        #fg_tags label{
+        #fg_categories label{
             margin-left: 30px;
             width: 120px;
         }

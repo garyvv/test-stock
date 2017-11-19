@@ -3,9 +3,11 @@
 namespace App\Admin\Controllers\Toy;
 
 use App\Admin\Controllers\BaseController;
+use App\Models\Toy\OcCategory;
 use App\Models\Toy\OcProduct;
 use App\Models\Toy\OcProductDescription;
 use App\Models\Toy\OcProductImage;
+use App\Models\Toy\OcProductToCategory;
 use Encore\Admin\Facades\Admin;
 use Garyvv\WebCreator\WeChatCreator;
 use Illuminate\Support\Facades\DB;
@@ -125,7 +127,10 @@ class ProductController extends BaseController
         $form->add('images', '相册', 'text')
             ->attributes(['readOnly' => true]);
 
-//        $form->add('tags', '标签', 'checkboxgroup')->options(Platv4HeadlineTag::where('status', Platv4HeadlineTag::COMMON_STATUS_NORMAL)->orderBy('sort', 'asc')->pluck('name', 'id'));
+        $form->add('categories', '分类', 'checkboxgroup')
+            ->options(OcCategory::where([
+                'status' => OcCategory::STATUS_COMMON_NORMAL,
+            ])->orderBy('sort_order', 'asc')->pluck('name', 'id'));
 
         $form->add('status', '状态', 'select')->options(OcProduct::$statusText);
 
@@ -182,11 +187,11 @@ class ProductController extends BaseController
         $id = Input::get('modify', 0);
         $imageData = OcProductImage::where('product_id', $id)->orderBy('sort_order', 'DESC')->get()->toArray();
         $images = $imageData ? array_column($imageData, 'image') : [];
-//        if ($id) {
-//            $tagList = OcProduct::where('product_id', $id)->get()->toArray();
-//            $tags = array_column($tagList, 'headline_tag_id');
-//            Input::offsetSet('tags', array_values($tags));   // 选中tags
-//        }
+        if ($id) {
+            $categoryList = OcProductToCategory::where('product_id', $id)->get()->toArray();
+            $categories = array_column($categoryList, 'category_id');
+            Input::offsetSet('categories', array_values($categories));   // 选中分类
+        }
 
         $edit = DataEdit::source(new OcProduct());
 
@@ -212,6 +217,11 @@ class ProductController extends BaseController
 
         $edit->add('status', '状态', 'select')->options(OcProduct::$statusText);
 
+        $edit->add('categories', '分类', 'checkboxgroup')
+            ->options(OcCategory::where([
+                'status' => OcCategory::STATUS_COMMON_NORMAL,
+            ])->orderBy('sort_order', 'asc')->pluck('name', 'id'));
+
         $edit->add('date_modified', 'date', 'hidden')->updateValue(date('Y-m-d H:i:s'));
 
         $edit->saved(function () use ($edit) {
@@ -221,7 +231,6 @@ class ProductController extends BaseController
             $product->model = $edit->model->title;
             $product->save();
             $this->saveProduct($product);
-//            $this->saveHeadlineTag($edit->model->id, Input::get('tags'));
         });
 
         $edit->build();
@@ -230,22 +239,6 @@ class ProductController extends BaseController
         return $edit->view('toy.product.edit', compact('edit', 'id', 'imageDir', 'images'));
     }
 
-
-    private function saveHeadlineTag($headlineId, $tags)
-    {
-        if(empty($headlineId)) return false;
-        if(empty($tags)) return true;
-
-        Platv4HeadlineToTag::where('headline_id', $headlineId)->delete();
-        $insertData = [];
-        foreach ($tags as $tag) {
-            $insertData[] = [
-                'headline_id' => $headlineId,
-                'headline_tag_id' => $tag,
-            ];
-        }
-        return DB::table('platv4_headline_to_tag')->insert($insertData);
-    }
 
     public function editHtml()
     {
@@ -296,6 +289,7 @@ class ProductController extends BaseController
         OcProductImage::where('product_id', $product->product_id)->delete();
         $images = [];
         foreach ((array)explode(',', Input::get('images')) as $key => $image) {
+            if (empty($image)) continue;
             $images[] = [
                 'product_id' => $product->product_id,
                 'image' => $image,
@@ -303,5 +297,16 @@ class ProductController extends BaseController
             ];
         }
         $images && DB::table('oc_product_image')->insert($images);
+
+        OcProductToCategory::where('product_id', $product->product_id)->delete();
+        $categories = [];
+        foreach ((array)explode(',', Input::get('categories')) as $key => $category) {
+            if (empty($category)) continue;
+            $categories[] = [
+                'product_id' => $product->product_id,
+                'image' => $category,
+            ];
+        }
+        $categories && DB::table('oc_product_to_category')->insert($categories);
     }
 }
