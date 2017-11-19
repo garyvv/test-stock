@@ -167,7 +167,7 @@ class ProductController extends BaseController
         $form->submit('保存');
 
         $imageDir = 'products/';
-        return $form->view('rapyd.textbox-form', compact('form', 'imageDir'));
+        return $form->view('toy.product.form', compact('form', 'imageDir'));
     }
 
 
@@ -179,7 +179,9 @@ class ProductController extends BaseController
             return redirect('/admin/toy/products');
         }
 
-//        $id = Input::get('modify', 0);
+        $id = Input::get('modify', 0);
+        $imageData = OcProductImage::where('product_id', $id)->orderBy('sort_order', 'DESC')->get()->toArray();
+        $images = $imageData ? array_column($imageData, 'image') : [];
 //        if ($id) {
 //            $tagList = OcProduct::where('product_id', $id)->get()->toArray();
 //            $tags = array_column($tagList, 'headline_tag_id');
@@ -204,7 +206,7 @@ class ProductController extends BaseController
             ->attributes(['readOnly' => true]);
 
         $edit->add('images', '相册', 'text')
-            ->attributes(['readOnly' => true]);
+            ->attributes(['readOnly' => true])->updateValue(implode(',', $images));
 
 //        $form->add('tags', '标签', 'checkboxgroup')->options(Platv4HeadlineTag::where('status', Platv4HeadlineTag::COMMON_STATUS_NORMAL)->orderBy('sort', 'asc')->pluck('name', 'id'));
 
@@ -224,8 +226,8 @@ class ProductController extends BaseController
 
         $edit->build();
 
-        $imageDir = date('Ymd') . 'U' . Admin::user()->id;
-        return $edit->view('rapyd.edit', compact('edit', 'id', 'imageDir'));
+        $imageDir = 'products/';
+        return $edit->view('toy.product.edit', compact('edit', 'id', 'imageDir', 'images'));
     }
 
 

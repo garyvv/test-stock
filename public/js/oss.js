@@ -64,7 +64,7 @@ function ossImage(modelId, ossUrl, images) {
         imageNum++;
         var img = '<img ' +
             'id="photo-' + i + '" ' +
-            'onclick="delPhoto(\'photo-' + i + '\', ' + modelId + ')" ' +
+            'onclick="delPhoto(\'photo-' + i + '\', \'' + modelId + '\')" ' +
             'style="border: 1px solid #3c8dbc; border-radius: 5px;padding: 2px; height: 50px;width: auto;margin-right: 3px" ' +
             'src="' + value + '">';
         $('#' + modelId + '-preview').append(img);
