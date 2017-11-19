@@ -130,7 +130,7 @@ class ProductController extends BaseController
         $form->add('categories', '分类', 'checkboxgroup')
             ->options(OcCategory::where([
                 'status' => OcCategory::STATUS_COMMON_NORMAL,
-            ])->orderBy('sort_order', 'asc')->pluck('name', 'id'));
+            ])->orderBy('sort_order', 'asc')->pluck('name', 'category_id'));
 
         $form->add('status', '状态', 'select')->options(OcProduct::$statusText);
 
@@ -220,7 +220,7 @@ class ProductController extends BaseController
         $edit->add('categories', '分类', 'checkboxgroup')
             ->options(OcCategory::where([
                 'status' => OcCategory::STATUS_COMMON_NORMAL,
-            ])->orderBy('sort_order', 'asc')->pluck('name', 'id'));
+            ])->orderBy('sort_order', 'asc')->pluck('name', 'category_id'));
 
         $edit->add('date_modified', 'date', 'hidden')->updateValue(date('Y-m-d H:i:s'));
 
