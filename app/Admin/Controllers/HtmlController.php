@@ -9,6 +9,7 @@
 namespace App\Admin\Controllers;
 
 
+use App\Models\Toy\OcProduct;
 use Garyvv\WebCreator\WeChatCreator;
 use Illuminate\Support\Facades\Input;
 
@@ -48,6 +49,12 @@ class HtmlController extends BaseController
             }
             $httpServer = env('HTTP_SERVER') . $path;
             $web->dealImage($dir, $httpServer, 'text');
+
+            $product = OcProduct::find($id);
+            if ($product) {
+                $product->content = $web->link;
+                $product->save();
+            }
         }
 
 
