@@ -5,8 +5,10 @@ namespace App\Admin\Controllers\Toy;
 use App\Admin\Controllers\BaseController;
 use App\Models\Toy\OcProduct;
 use App\Models\Toy\OcProductDescription;
+use App\Models\Toy\OcProductImage;
 use Encore\Admin\Facades\Admin;
 use Garyvv\WebCreator\WeChatCreator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Zofe\Rapyd\DataEdit\DataEdit;
 use Zofe\Rapyd\DataForm\DataForm;
@@ -164,7 +166,7 @@ class ProductController extends BaseController
 
         $form->submit('保存');
 
-        $imageDir = 'products';
+        $imageDir = 'products/';
         return $form->view('rapyd.textbox-form', compact('form', 'imageDir'));
     }
 
@@ -288,5 +290,16 @@ class ProductController extends BaseController
         $productDesc->meta_keyword = $product->title;
 
         $productDesc->save();
+
+        OcProductImage::where('product_id', $product->product_id)->delete();
+        $images = [];
+        foreach (Input::get('images') as $key => $image) {
+            $images[] = [
+                'product_id' => $product->product_id,
+                'image' => $image,
+                'sort_order' => $key
+            ];
+        }
+        $images && DB::table('oc_product_image')->insert($images);
     }
 }
