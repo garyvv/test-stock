@@ -184,7 +184,13 @@ class ProductController extends BaseController
 //                $this->saveHeadlineTag($form->model->id, Input::get('tags'));
 
                 if (Input::get('textbox', null)) {
-                    $web = new WeChatCreator(Input::get('textbox'));
+                    $commonHead = '-化州金利玩具店,玩具批发,儿童玩具,深冬工作室';
+                    $header = [
+                        'title' => $form->model->title . $commonHead,
+                        'description' => $form->model->title . $commonHead,
+                        'keywords' => $form->model->title . $commonHead,
+                    ];
+                    $web = new WeChatCreator(Input::get('textbox'), $header);
                     $path = 'toy/products/' . $productId . '/';
                     $dir = public_path($path);
                     if (!is_dir($dir)) {
