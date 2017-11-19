@@ -304,7 +304,7 @@ class ProductController extends BaseController
             if (empty($category)) continue;
             $categories[] = [
                 'product_id' => $product->product_id,
-                'image' => $category,
+                'category_id' => $category,
             ];
         }
         $categories && DB::table('oc_product_to_category')->insert($categories);
