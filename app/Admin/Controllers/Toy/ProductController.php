@@ -42,6 +42,9 @@ class ProductController extends BaseController
         $grid->add('product_id', 'ID', true);
         $grid->add('title', '标题', false);
         $grid->add('image', '封面图', true);
+        $grid->add('price', '零售价', true);
+        $grid->add('sale_price', '批发价', true);
+        $grid->add('in_price', '入货价', true);
         $grid->add('status', '状态', true);
         $grid->add('date_added', '创建日期', true);
 
@@ -114,6 +117,18 @@ class ProductController extends BaseController
         $form->add('title', '标题', 'text')
             ->rule("required|min:2")
             ->placeholder("请输入 标题");
+
+        $form->add('price', '零售价', 'text')
+            ->rule("required")
+            ->placeholder("请输入 零售价");
+
+        $form->add('sale_price', '批发价', 'text')
+            ->rule("required")
+            ->placeholder("请输入 批发价");
+
+        $form->add('in_price', '入货价', 'text')
+            ->rule("required")
+            ->placeholder("请输入 入货价");
 
         $form->add('sort_order', '排序', 'text')->insertValue(99);
 
@@ -201,6 +216,18 @@ class ProductController extends BaseController
         $edit->add('title', '标题', 'text')
             ->rule("required|min:2")
             ->placeholder("请输入 标题");
+
+        $edit->add('price', '零售价', 'text')
+            ->rule("required")
+            ->placeholder("请输入 零售价");
+
+        $edit->add('sale_price', '批发价', 'text')
+            ->rule("required")
+            ->placeholder("请输入 批发价");
+
+        $edit->add('in_price', '入货价', 'text')
+            ->rule("required")
+            ->placeholder("请输入 入货价");
 
         $edit->add('sort_order', '排序', 'text');
 
