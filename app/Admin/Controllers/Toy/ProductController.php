@@ -45,6 +45,7 @@ class ProductController extends BaseController
         $grid->add('image', '封面图', true);
         $grid->add('price', '零售价', true);
         $grid->add('sale_price', '批发价', true);
+        $grid->add('vip_price', '会员价', true);
         $grid->add('in_price', '入货价', true);
         $grid->add('status', '状态', true);
         $grid->add('date_added', '创建日期', true);
@@ -130,6 +131,10 @@ class ProductController extends BaseController
         $form->add('sale_price', '批发价', 'text')
             ->rule("required")
             ->placeholder("请输入 批发价");
+
+        $form->add('vip_price', '会员价', 'text')
+            ->rule("required")
+            ->placeholder("请输入 入货价");
 
         $form->add('in_price', '入货价', 'text')
             ->rule("required")
@@ -233,6 +238,10 @@ class ProductController extends BaseController
         $edit->add('sale_price', '批发价', 'text')
             ->rule("required")
             ->placeholder("请输入 批发价");
+
+        $edit->add('vip_price', '会员价', 'text')
+            ->rule("required")
+            ->placeholder("请输入 入货价");
 
         $edit->add('in_price', '入货价', 'text')
             ->rule("required")
