@@ -71,7 +71,7 @@ class ProductController extends BaseController
 //            skin: 'layui-layer-rim', //加上边框
 //            shadeClose: true,   //点击遮罩关闭
             if ($row->data->content) $link = $row->data->content;
-            else $link = '(空)';
+            else $link = '';
 
             $btnEditHtml = "btn: ['编辑'],btn1: function(index, layero){
                                 //按钮【按钮一】的回调
