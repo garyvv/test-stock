@@ -39,7 +39,18 @@ class HtmlController extends BaseController
         $imageDir = Input::get('image_dir', null);
         $content = Input::get('content', null);
 
-        $web = new WeChatCreator($content);
+        $product = OcProduct::find($id);
+        $header = [];
+        if ($product){
+            $commonHead = '-化州金利玩具店,玩具批发,儿童玩具,深冬工作室';
+            $header = [
+                'title' => $product->title . $commonHead,
+                'description' => $product->title . $commonHead,
+                'keywords' => $product->title . $commonHead,
+            ];
+        }
+
+        $web = new WeChatCreator($content, $header);
 
         if ($type == 'product') {
             $path = 'toy/products/' . $id . '/';
@@ -50,7 +61,6 @@ class HtmlController extends BaseController
             $httpServer = env('HTTP_SERVER') . $path;
             $web->dealImage($dir, $httpServer, 'text');
 
-            $product = OcProduct::find($id);
             if ($product) {
                 $product->content = $web->link;
                 $product->save();
