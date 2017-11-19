@@ -13,6 +13,6 @@ use App\Http\Controllers\Controller;
 
 class BaseController extends Controller
 {
-    const DEFAULT_PER_PAGE = 20;
+    const DEFAULT_PER_PAGE = 50;
 
 }
