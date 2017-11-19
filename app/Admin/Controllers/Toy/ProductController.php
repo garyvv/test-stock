@@ -300,7 +300,7 @@ class ProductController extends BaseController
 
         OcProductToCategory::where('product_id', $product->product_id)->delete();
         $categories = [];
-        foreach ((array)explode(',', Input::get('categories')) as $key => $category) {
+        foreach ((array)Input::get('categories') as $key => $category) {
             if (empty($category)) continue;
             $categories[] = [
                 'product_id' => $product->product_id,
