@@ -41,6 +41,7 @@ class ProductController extends BaseController
         $grid->attributes(array("class" => "table table-bordered table-striped table-hover"));
         $grid->add('product_id', 'ID', true);
         $grid->add('title', '标题', false);
+        $grid->add('bar_code', '条形码', true);
         $grid->add('image', '封面图', true);
         $grid->add('price', '零售价', true);
         $grid->add('sale_price', '批发价', true);
@@ -117,6 +118,10 @@ class ProductController extends BaseController
         $form->add('title', '标题', 'text')
             ->rule("required|min:2")
             ->placeholder("请输入 标题");
+
+        $form->add('bar_code', '条形码', 'text')
+            ->rule("required")
+            ->placeholder("请输入 条形码，小程序扫码识别的条形码");
 
         $form->add('price', '零售价', 'text')
             ->rule("required")
@@ -216,6 +221,10 @@ class ProductController extends BaseController
         $edit->add('title', '标题', 'text')
             ->rule("required|min:2")
             ->placeholder("请输入 标题");
+
+        $edit->add('bar_code', '条形码', 'text')
+            ->rule("required")
+            ->placeholder("请输入 条形码，小程序扫码识别的条形码");
 
         $edit->add('price', '零售价', 'text')
             ->rule("required")
