@@ -63,4 +63,10 @@ Route::group([
     $router->any('products/create', 'ProductController@anyForm');
     $router->any('products/edit', 'ProductController@anyEdit');
 
+    $router->any('depots', 'DepotController@index');
+    $router->any('depots/edit', 'DepotController@anyEdit');
+
+    $router->any('categories', 'CategoryController@index');
+    $router->any('categories/edit', 'CategoryController@anyEdit');
+
 });

@@ -4,6 +4,7 @@ namespace App\Admin\Controllers\Toy;
 
 use App\Admin\Controllers\BaseController;
 use App\Models\Toy\OcCategory;
+use App\Models\Toy\OcDepot;
 use App\Models\Toy\OcProduct;
 use App\Models\Toy\OcProductDescription;
 use App\Models\Toy\OcProductImage;
@@ -25,7 +26,7 @@ class ProductController extends BaseController
     {
 
         $title = '商品管理';
-        $filter = DataFilter::source(new OcProduct());
+        $filter = DataFilter::source(OcProduct::where('status', '!=', -1));
 
         $filter->add('title', '标题', 'text');
         $filter->add('status', '状态', 'select')->options(['' => '全部状态'] + OcProduct::$statusText);
@@ -47,7 +48,10 @@ class ProductController extends BaseController
         $grid->add('sale_price', '批发价', true);
         $grid->add('vip_price', '会员价', true);
         $grid->add('in_price', '入货价', true);
+        $grid->add('quantity', '库存', true);
+        $grid->add('total_sale', '销量', true);
         $grid->add('status', '状态', true);
+        $grid->add('depot_id', '仓库位', true);
         $grid->add('date_added', '创建日期', true);
 
         $grid->add('operation','操作', false);
@@ -140,6 +144,14 @@ class ProductController extends BaseController
             ->rule("required")
             ->placeholder("请输入 入货价");
 
+        $form->add('quantity', '库存', 'text')
+            ->rule("required")
+            ->placeholder("请输入 库存");
+
+        $form->add('total_sale', '销量', 'text')
+            ->rule("required")
+            ->placeholder("请输入 销量");
+
         $form->add('sort_order', '排序', 'text')->insertValue(99);
 
         $form->add('viewed', '浏览数', 'text')->insertValue(rand(10,100));
@@ -156,6 +168,9 @@ class ProductController extends BaseController
             ->options(OcCategory::where([
                 'status' => OcCategory::STATUS_COMMON_NORMAL,
             ])->orderBy('sort_order', 'asc')->pluck('name', 'category_id'));
+
+        $form->add('depot_id', '仓库', 'radiogroup')
+            ->options(OcDepot::orderBy('sort_order', 'asc')->pluck('name', 'depot_id'));
 
         $form->add('status', '状态', 'select')->options(OcProduct::$statusText);
 
@@ -241,11 +256,19 @@ class ProductController extends BaseController
 
         $edit->add('vip_price', '会员价', 'text')
             ->rule("required")
-            ->placeholder("请输入 入货价");
+            ->placeholder("请输入 会员价");
 
         $edit->add('in_price', '入货价', 'text')
             ->rule("required")
             ->placeholder("请输入 入货价");
+
+        $edit->add('quantity', '库存', 'text')
+            ->rule("required")
+            ->placeholder("请输入 库存");
+
+        $edit->add('total_sale', '销量', 'text')
+            ->rule("required")
+            ->placeholder("请输入 销量");
 
         $edit->add('sort_order', '排序', 'text');
 
@@ -266,6 +289,9 @@ class ProductController extends BaseController
             ->options(OcCategory::where([
                 'status' => OcCategory::STATUS_COMMON_NORMAL,
             ])->orderBy('sort_order', 'asc')->pluck('name', 'category_id'));
+
+        $edit->add('depot_id', '仓库', 'radiogroup')
+            ->options(OcDepot::orderBy('sort_order', 'asc')->pluck('name', 'depot_id'));
 
         $edit->add('date_modified', 'date', 'hidden')->updateValue(date('Y-m-d H:i:s'));
 

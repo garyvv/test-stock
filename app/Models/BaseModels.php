@@ -16,4 +16,9 @@ class BaseModels extends Model
     const STATUS_COMMON_NORMAL = 1;
     const STATUS_COMMON_OFFLINE = 0;
     const STATUS_COMMON_DELETED = -1;
+
+    public static $statusCommonText = [
+        self::STATUS_COMMON_OFFLINE => '下线',
+        self::STATUS_COMMON_NORMAL => '上线',
+    ];
 }
