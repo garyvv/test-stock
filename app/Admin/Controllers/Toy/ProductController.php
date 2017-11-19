@@ -240,37 +240,6 @@ class ProductController extends BaseController
     }
 
 
-    public function editHtml()
-    {
-        $id = Input::get('id', null);
-        $link = Input::get('link', null);
-
-        $content = $link ? file_get_contents($link) : '';
-
-        $imageDir = date('Ymd') . 'U' . Admin::user()->id;
-
-        return view('headline.article', compact('content', 'id', 'imageDir'));
-    }
-
-    public function updateHtml()
-    {
-        $id = Input::get('id', null);
-        $imageDir = Input::get('image_dir', null);
-        $content = Input::get('content', null);
-        $ajax = Input::get('ajax', false);
-        $result = $this->dealWeChatImage($imageDir, $content, $ajax, $id);
-
-        if ($ajax) return $this->respData(['content' => $result]);
-        else {
-            $data = Platv4Headline::find($id);
-            if ($data) {
-                $data->link = $result;
-                $data->save();
-            }
-            return redirect('/headlines');
-        }
-    }
-
     private function saveProduct($product)
     {
         $productDesc = OcProductDescription::find($product->product_id);
