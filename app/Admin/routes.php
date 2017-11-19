@@ -36,6 +36,9 @@ Route::group([
     $router->get('oss/bucket/{bucket}', 'OssController@listObject');
     $router->get('oss/auth', 'OssController@auth');
 
+    $router->get('html', 'HtmlController@editHtml');
+    $router->post('html', 'HtmlController@updateHtml');
+
 });
 
 Route::group([
