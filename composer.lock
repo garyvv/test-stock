@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b3133f2fe55287fcd0149d18e8510904",
+    "content-hash": "d0eb73a52af8e27a2b4425d180469cc2",
     "packages": [
         {
             "name": "aliyuncs/oss-sdk-php",
@@ -433,16 +433,16 @@
         },
         {
             "name": "garyvv/web-creator",
-            "version": "v1.0.4",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/garyvv/web-creator.git",
-                "reference": "d53ab4b7b26ba5fb0465779e3828dfdeb466c462"
+                "reference": "5a831e75a6eafa984cd7668b8575365a5cb50589"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/garyvv/web-creator/d53ab4b7b26ba5fb0465779e3828dfdeb466c462.zip",
-                "reference": "d53ab4b7b26ba5fb0465779e3828dfdeb466c462",
+                "url": "https://files.phpcomposer.com/files/garyvv/web-creator/5a831e75a6eafa984cd7668b8575365a5cb50589.zip",
+                "reference": "5a831e75a6eafa984cd7668b8575365a5cb50589",
                 "shasum": ""
             },
             "require": {
@@ -476,7 +476,7 @@
                 "php",
                 "ueditor"
             ],
-            "time": "2017-11-19T16:14:22+00:00"
+            "time": "2017-11-20T15:17:21+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

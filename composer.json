@@ -9,7 +9,7 @@
         "aliyuncs/oss-sdk-php": "^2.2",
         "encore/laravel-admin": "1.3.*",
         "garveen/laravoole": "^0.5.1",
-        "garyvv/web-creator": "v1.0.4",
+        "garyvv/web-creator": "v1.1.0",
         "illuminate/redis": "^5.3",
         "laravel/framework": "5.3.*",
         "overtrue/wechat": "^3.2",

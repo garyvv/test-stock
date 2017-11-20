@@ -10,6 +10,8 @@ namespace App\Admin\Controllers;
 
 
 use App\Models\Toy\OcProduct;
+use DiDom\Document;
+use Garyvv\WebCreator\TmallCreator;
 use Garyvv\WebCreator\WeChatCreator;
 use Illuminate\Support\Facades\Input;
 
@@ -20,7 +22,11 @@ class HtmlController extends BaseController
         $productId = Input::get('product_id', null);
         $link = Input::get('link', null);
 
-        $content = $link ? file_get_contents($link) : '';
+        if ($link && strpos($link, 'http') !== false) {
+            $html = new Document($link, true);
+            $content = $html->find('body');
+            $content = $content[0]->html();
+        } else $content = '';
 
         $type = '';
         if ($productId) {
@@ -50,7 +56,7 @@ class HtmlController extends BaseController
             ];
         }
 
-        $web = new WeChatCreator($content, $header);
+        $web = new TmallCreator($content, $header);
 
         if ($type == 'product') {
             $path = 'toy/products/' . $id . '/';
@@ -60,6 +66,16 @@ class HtmlController extends BaseController
             }
             $httpServer = env('HTTP_SERVER') . $path;
             $web->dealImage($dir, $httpServer, 'text');
+
+//            传OSS
+            $oss = config('oss');
+            $oss['bucket'] = $oss['toy_bucket'];
+            $oss['view_domain'] = $oss['toy_view_domain'];
+            $oss['end_point'] = $oss['toy_end_point'];
+            $oss['bucket_prefix'] = 'products/' . $id . '/';
+            $web->setOss($oss);
+            $web->uploadImageToOss();
+            $web->uploadHtmlToOss('text.html');
 
             if ($product) {
                 $product->content = $web->link;

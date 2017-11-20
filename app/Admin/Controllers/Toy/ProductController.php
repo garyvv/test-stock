@@ -10,6 +10,7 @@ use App\Models\Toy\OcProductDescription;
 use App\Models\Toy\OcProductImage;
 use App\Models\Toy\OcProductToCategory;
 use Encore\Admin\Facades\Admin;
+use Garyvv\WebCreator\TmallCreator;
 use Garyvv\WebCreator\WeChatCreator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -71,7 +72,7 @@ class ProductController extends BaseController
 //            skin: 'layui-layer-rim', //加上边框
 //            shadeClose: true,   //点击遮罩关闭
             if ($row->data->content) $link = $row->data->content;
-            else $link = '(空)';
+            else $link = '';
 
             $btnEditHtml = "btn: ['编辑'],btn1: function(index, layero){
                                 //按钮【按钮一】的回调
@@ -161,8 +162,8 @@ class ProductController extends BaseController
         $form->add('image', '封面图', 'text')
             ->attributes(['readOnly' => true]);
 
-        $form->add('images', '相册', 'text')
-            ->attributes(['readOnly' => true]);
+//        $form->add('images', '相册', 'text')
+//            ->attributes(['readOnly' => true]);
 
         $form->add('categories', '分类', 'checkboxgroup')
             ->options(OcCategory::where([
@@ -181,8 +182,7 @@ class ProductController extends BaseController
             $product = OcProduct::find($productId);
             $product->model = $form->model->title;
             try{
-//                $this->saveHeadlineTag($form->model->id, Input::get('tags'));
-
+                $images = [];// 使用富文本框内的图片
                 if (Input::get('textbox', null)) {
                     $commonHead = '-化州金利玩具店,玩具批发,儿童玩具,深冬工作室';
                     $header = [
@@ -190,7 +190,7 @@ class ProductController extends BaseController
                         'description' => $form->model->title . $commonHead,
                         'keywords' => $form->model->title . $commonHead,
                     ];
-                    $web = new WeChatCreator(Input::get('textbox'), $header);
+                    $web = new TmallCreator(Input::get('textbox'), $header);
                     $path = 'toy/products/' . $productId . '/';
                     $dir = public_path($path);
                     if (!is_dir($dir)) {
@@ -199,11 +199,23 @@ class ProductController extends BaseController
                     $httpServer = env('HTTP_SERVER') . $path;
                     $web->dealImage($dir, $httpServer, 'text');
 
+//                   传OSS
+                    $oss = config('oss');
+                    $oss['bucket'] = $oss['toy_bucket'];
+                    $oss['view_domain'] = $oss['toy_view_domain'];
+                    $oss['end_point'] = $oss['toy_end_point'];
+                    $oss['bucket_prefix'] = 'products/' . $id . '/';
+                    $web->setOss($oss);
+                    $web->uploadImageToOss();
+                    $web->uploadHtmlToOss('text.html');
+
                     $product->content = $web->link;
+                    $images = array_column($web->images, 'url');
                 }
 
                 $product->save();
 
+                $product->images = $images;
                 $this->saveProduct($product);
 
                 $form->message("新建商品成功");
@@ -334,7 +346,7 @@ class ProductController extends BaseController
 
         OcProductImage::where('product_id', $product->product_id)->delete();
         $images = [];
-        foreach ((array)explode(',', Input::get('images')) as $key => $image) {
+        foreach ((array)$product->images as $key => $image) {
             if (empty($image)) continue;
             $images[] = [
                 'product_id' => $product->product_id,
