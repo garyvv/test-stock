@@ -199,6 +199,16 @@ class ProductController extends BaseController
                     $httpServer = env('HTTP_SERVER') . $path;
                     $web->dealImage($dir, $httpServer, 'text');
 
+//                   传OSS
+                    $oss = config('oss');
+                    $oss['bucket'] = $oss['toy_bucket'];
+                    $oss['view_domain'] = $oss['toy_view_domain'];
+                    $oss['end_point'] = $oss['toy_end_point'];
+                    $oss['bucket_prefix'] = 'products/' . $id . '/';
+                    $web->setOss($oss);
+                    $web->uploadImageToOss();
+                    $web->uploadHtmlToOss('text.html');
+
                     $product->content = $web->link;
                 }
 
