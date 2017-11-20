@@ -204,7 +204,7 @@ class ProductController extends BaseController
                     $oss['bucket'] = $oss['toy_bucket'];
                     $oss['view_domain'] = $oss['toy_view_domain'];
                     $oss['end_point'] = $oss['toy_end_point'];
-                    $oss['bucket_prefix'] = 'products/' . $id . '/';
+                    $oss['bucket_prefix'] = 'products/' . $productId . '/';
                     $web->setOss($oss);
                     $web->uploadImageToOss();
                     $web->uploadHtmlToOss('text.html');
