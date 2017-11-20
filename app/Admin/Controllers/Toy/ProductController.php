@@ -10,6 +10,7 @@ use App\Models\Toy\OcProductDescription;
 use App\Models\Toy\OcProductImage;
 use App\Models\Toy\OcProductToCategory;
 use Encore\Admin\Facades\Admin;
+use Garyvv\WebCreator\TmallCreator;
 use Garyvv\WebCreator\WeChatCreator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -190,7 +191,7 @@ class ProductController extends BaseController
                         'description' => $form->model->title . $commonHead,
                         'keywords' => $form->model->title . $commonHead,
                     ];
-                    $web = new WeChatCreator(Input::get('textbox'), $header);
+                    $web = new TmallCreator(Input::get('textbox'), $header);
                     $path = 'toy/products/' . $productId . '/';
                     $dir = public_path($path);
                     if (!is_dir($dir)) {

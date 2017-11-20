@@ -11,6 +11,7 @@ namespace App\Admin\Controllers;
 
 use App\Models\Toy\OcProduct;
 use DiDom\Document;
+use Garyvv\WebCreator\TmallCreator;
 use Garyvv\WebCreator\WeChatCreator;
 use Illuminate\Support\Facades\Input;
 
@@ -55,7 +56,7 @@ class HtmlController extends BaseController
             ];
         }
 
-        $web = new WeChatCreator($content, $header);
+        $web = new TmallCreator($content, $header);
 
         if ($type == 'product') {
             $path = 'toy/products/' . $id . '/';
