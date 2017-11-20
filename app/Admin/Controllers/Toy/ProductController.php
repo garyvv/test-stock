@@ -162,8 +162,8 @@ class ProductController extends BaseController
         $form->add('image', '封面图', 'text')
             ->attributes(['readOnly' => true]);
 
-        $form->add('images', '相册', 'text')
-            ->attributes(['readOnly' => true]);
+//        $form->add('images', '相册', 'text')
+//            ->attributes(['readOnly' => true]);
 
         $form->add('categories', '分类', 'checkboxgroup')
             ->options(OcCategory::where([
@@ -182,8 +182,7 @@ class ProductController extends BaseController
             $product = OcProduct::find($productId);
             $product->model = $form->model->title;
             try{
-//                $this->saveHeadlineTag($form->model->id, Input::get('tags'));
-
+                $images = [];// 使用富文本框内的图片
                 if (Input::get('textbox', null)) {
                     $commonHead = '-化州金利玩具店,玩具批发,儿童玩具,深冬工作室';
                     $header = [
@@ -211,10 +210,12 @@ class ProductController extends BaseController
                     $web->uploadHtmlToOss('text.html');
 
                     $product->content = $web->link;
+                    $images = array_column($web->images, 'url');
                 }
 
                 $product->save();
 
+                $product->images = $images;
                 $this->saveProduct($product);
 
                 $form->message("新建商品成功");
@@ -345,7 +346,7 @@ class ProductController extends BaseController
 
         OcProductImage::where('product_id', $product->product_id)->delete();
         $images = [];
-        foreach ((array)explode(',', Input::get('images')) as $key => $image) {
+        foreach ((array)$product->images as $key => $image) {
             if (empty($image)) continue;
             $images[] = [
                 'product_id' => $product->product_id,
