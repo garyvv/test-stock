@@ -10,6 +10,7 @@ namespace App\Admin\Controllers;
 
 
 use App\Models\Toy\OcProduct;
+use DiDom\Document;
 use Garyvv\WebCreator\WeChatCreator;
 use Illuminate\Support\Facades\Input;
 
@@ -20,7 +21,11 @@ class HtmlController extends BaseController
         $productId = Input::get('product_id', null);
         $link = Input::get('link', null);
 
-        $content = $link ? file_get_contents($link) : '';
+        if ($link && strpos($link, 'http') !== false) {
+            $html = new Document($link, true);
+            $content = $html->find('body');
+            $content = $content[0]->html();
+        } else $content = '';
 
         $type = '';
         if ($productId) {
