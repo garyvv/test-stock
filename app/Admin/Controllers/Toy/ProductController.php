@@ -197,7 +197,6 @@ class ProductController extends BaseController
                         mkdir($dir, 0777, true);
                     }
                     $httpServer = env('HTTP_SERVER') . $path;
-                    $web->dealImage($dir, $httpServer, 'text');
 
 //                   传OSS
                     $oss = config('oss');
@@ -206,6 +205,9 @@ class ProductController extends BaseController
                     $oss['end_point'] = $oss['toy_end_point'];
                     $oss['bucket_prefix'] = 'products/' . $productId . '/';
                     $web->setOss($oss);
+
+                    $web->dealImage($dir, $httpServer, 'text');
+
                     $web->uploadImageToOss();
                     $web->uploadHtmlToOss('text.html');
 
@@ -236,6 +238,8 @@ class ProductController extends BaseController
 
     public function anyEdit()
     {
+        $imageDir = 'products/';
+
         $deleteId = Input::get('delete', null);
         if ($deleteId) {
             OcProduct::where('product_id', $deleteId)->update(['status' => -1]);
@@ -249,6 +253,8 @@ class ProductController extends BaseController
             $categoryList = OcProductToCategory::where('product_id', $id)->get()->toArray();
             $categories = array_column($categoryList, 'category_id');
             Input::offsetSet('categories', array_values($categories));   // 选中分类
+
+            $imageDir = 'products/' . $id . '/'; //编辑则在该商品的文件夹下
         }
 
         $edit = DataEdit::source(new OcProduct());
@@ -324,7 +330,6 @@ class ProductController extends BaseController
 
         $edit->build();
 
-        $imageDir = 'products/';
         return $edit->view('toy.product.edit', compact('edit', 'id', 'imageDir', 'images'));
     }
 
@@ -347,6 +352,7 @@ class ProductController extends BaseController
         OcProductImage::where('product_id', $product->product_id)->delete();
         $images = [];
         foreach ((array)$product->images as $key => $image) {
+            if ($key >= 6) break; //限制6张
             if (empty($image)) continue;
             $images[] = [
                 'product_id' => $product->product_id,

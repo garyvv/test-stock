@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d0eb73a52af8e27a2b4425d180469cc2",
+    "content-hash": "80a380a45423d789973e5a19aa3f1c8b",
     "packages": [
         {
             "name": "aliyuncs/oss-sdk-php",
@@ -433,7 +433,7 @@
         },
         {
             "name": "garyvv/web-creator",
-            "version": "v1.1.0",
+            "version": "v1.1.08",
             "source": {
                 "type": "git",
                 "url": "https://github.com/garyvv/web-creator.git",

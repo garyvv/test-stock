@@ -65,7 +65,6 @@ class HtmlController extends BaseController
                 mkdir($dir, 0777, true);
             }
             $httpServer = env('HTTP_SERVER') . $path;
-            $web->dealImage($dir, $httpServer, 'text');
 
 //            传OSS
             $oss = config('oss');
@@ -74,6 +73,9 @@ class HtmlController extends BaseController
             $oss['end_point'] = $oss['toy_end_point'];
             $oss['bucket_prefix'] = 'products/' . $id . '/';
             $web->setOss($oss);
+
+            $web->dealImage($dir, $httpServer, 'text');
+
             $web->uploadImageToOss();
             $web->uploadHtmlToOss('text.html');
 
