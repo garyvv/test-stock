@@ -325,6 +325,8 @@ class ProductController extends BaseController
             $product = OcProduct::find($productId);
             $product->model = $edit->model->title;
             $product->save();
+
+            $product->images = explode(',', Input::get('images', ''));
             $this->saveProduct($product);
         });
 
