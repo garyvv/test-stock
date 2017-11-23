@@ -28,6 +28,11 @@ class HtmlController extends BaseController
             $content = $content[0]->html();
         } else $content = '';
 
+        $content = str_replace('<body>', '', $content);
+        $content = str_replace('</body>', '', $content);
+
+        $content = str_replace(array("\r\n", "\r", "\n"), "", $content);
+
         $type = '';
         if ($productId) {
             $imageDir = 'products/';

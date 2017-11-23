@@ -15,21 +15,21 @@
     </style>
 
     {{--百度 UEditor--}}
-    {{--<script type="text/javascript" src="{{ asset ("/js/ueditor/ueditor.config.js") }}"></script>--}}
-    {{--<script type="text/javascript" src="{{ asset ("/js/ueditor/ueditor.all.min.js") }}"></script>--}}
+    <script type="text/javascript" src="{{ asset ("/js/ueditor/ueditor.config.js") }}"></script>
+    <script type="text/javascript" src="{{ asset ("/js/ueditor/ueditor.all.min.js") }}"></script>
 
     {{--jQuery 轻量级redactor--}}
     {{--<link rel="stylesheet" href="{{ asset("/packages/zofe/rapyd/assets/redactor/css/redactor.css") }}">--}}
     {{--<script type="text/javascript" src="{{ asset ("/packages/zofe/rapyd/assets/redactor/jquery.browser.min.js") }}"></script>--}}
     {{--<script type="text/javascript" src="{{ asset ("/packages/zofe/rapyd/assets/redactor/redactor.js") }}"></script>--}}
 
-    <link rel="stylesheet" href="{{ asset("/js/simditor/styles/simditor.css") }}">
+    {{--<link rel="stylesheet" href="{{ asset("/js/simditor/styles/simditor.css") }}">--}}
 
-    <script type="text/javascript" src="{{ asset ("/js/simditor/scripts/jquery.min.js") }}"></script>
-    <script type="text/javascript" src="{{ asset ("/js/simditor/scripts/module.js") }}"></script>
-    <script type="text/javascript" src="{{ asset ("/js/simditor/scripts/hotkeys.js") }}"></script>
-    <script type="text/javascript" src="{{ asset ("/js/simditor/scripts/uploader.js") }}"></script>
-    <script type="text/javascript" src="{{ asset ("/js/simditor/scripts/simditor.js") }}"></script>
+    {{--<script type="text/javascript" src="{{ asset ("/js/simditor/scripts/jquery.min.js") }}"></script>--}}
+    {{--<script type="text/javascript" src="{{ asset ("/js/simditor/scripts/module.js") }}"></script>--}}
+    {{--<script type="text/javascript" src="{{ asset ("/js/simditor/scripts/hotkeys.js") }}"></script>--}}
+    {{--<script type="text/javascript" src="{{ asset ("/js/simditor/scripts/uploader.js") }}"></script>--}}
+    {{--<script type="text/javascript" src="{{ asset ("/js/simditor/scripts/simditor.js") }}"></script>--}}
 
     <div style="padding:2%">
         <div class="rpd-edit">
@@ -37,18 +37,18 @@
         </div>
     </div>
 
-    {{--<script type="text/javascript">--}}
-        {{--$('#div_link').html('').attr("name","link");--}}
-        {{--UE.getEditor("div_link");--}}
-    {{--</script>--}}
-
     <script>
-        var editor = new Simditor({
-            textarea: $('#textbox')
-        });
-//            上传HTML
-            var btn = '<br><button onclick="uploadHtml()" type="button" class="pull-left btn btn-primary">上传文章图片</button><br><hr>';
-            $('#div_link').append(btn);
+//        var editor = new Simditor({
+//            textarea: $('#textbox')
+//        });
+        $('#div_textbox').html('').attr("name","textbox");
+        UE.getEditor("div_textbox");
+
+//        上传HTML
+//        var btn = '<br><button onclick="uploadHtml()" type="button" class="pull-left btn btn-primary">上传文章图片</button><br><hr>';
+//        setTimeout(function(){
+//            $('#div_textbox').append(btn);
+//        },1000);
 
         function uploadHtml() {
 //            loading
