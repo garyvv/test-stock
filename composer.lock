@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5a1c0d234867e87fe3a552d3999fddad",
+    "content-hash": "0c7a55aa5485ebb4cc5c6a4d0fb5419a",
     "packages": [
         {
             "name": "aliyuncs/oss-sdk-php",
@@ -332,106 +332,6 @@
             "time": "2017-03-15T05:09:48+00:00"
         },
         {
-            "name": "garveen/fastcgi",
-            "version": "0.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/garveen/fastcgi.git",
-                "reference": "1fc385fe8cedd1f4f3a19afe6cf0303f3efb4e4e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/garveen/fastcgi/1fc385fe8cedd1f4f3a19afe6cf0303f3efb4e4e.zip",
-                "reference": "1fc385fe8cedd1f4f3a19afe6cf0303f3efb4e4e",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/psr7": "^1.3",
-                "psr/http-message": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Garveen\\FastCgi\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Gavin",
-                    "email": "acabin@live.com"
-                }
-            ],
-            "description": "An effective FastCGI to psr-7 adapter",
-            "keywords": [
-                "fastcgi",
-                "psr-7",
-                "psr7"
-            ],
-            "time": "2017-03-12T20:17:18+00:00"
-        },
-        {
-            "name": "garveen/laravoole",
-            "version": "0.5.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/garveen/laravoole.git",
-                "reference": "7891dc067120649e4ad71024a8485427ac6bb2db"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/garveen/laravoole/7891dc067120649e4ad71024a8485427ac6bb2db.zip",
-                "reference": "7891dc067120649e4ad71024a8485427ac6bb2db",
-                "shasum": ""
-            },
-            "require": {
-                "ext-posix": "*",
-                "garveen/fastcgi": "^0.1",
-                "laravel/framework": "~5.1",
-                "php": ">=5.5.16",
-                "symfony/psr-http-message-bridge": "^1.0",
-                "zendframework/zend-diactoros": "^1.3"
-            },
-            "require-dev": {
-                "adoy/fastcgi-client": "^1.0",
-                "laravel/laravel": "~5.1",
-                "phpunit/phpunit": ">4.8 <6.0",
-                "textalk/websocket": "^1.2",
-                "workerman/workerman": "^3.3"
-            },
-            "suggest": {
-                "ext-swoole": "event-based extension for best performance",
-                "workerman/workerman": "event-based library without need for any extension"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Laravoole\\": "src/",
-                    "Laravoole\\Test\\": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Gavin",
-                    "email": "acabin@live.com"
-                }
-            ],
-            "description": "Get 10x performance for Laravel on Swoole or Workerman",
-            "keywords": [
-                "laravel",
-                "swoole",
-                "workerman"
-            ],
-            "time": "2017-03-14T08:17:31+00:00"
-        },
-        {
             "name": "garyvv/web-creator",
             "version": "v1.1.09",
             "source": {
@@ -596,41 +496,46 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.4.2",
+            "version": "1.8.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c"
+                "reference": "337e3ad8e5716c15f9657bd214d16cc5e69df268"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/guzzle/psr7/f5b8a8512e2b58b0071a7280e39f14f72e05d87c.zip",
-                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/337e3ad8e5716c15f9657bd214d16cc5e69df268",
+                "reference": "337e3ad8e5716c15f9657bd214d16cc5e69df268",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0",
-                "psr/http-message": "~1.0"
+                "psr/http-message": "~1.0",
+                "ralouphie/getallheaders": "^2.0.5 || ^3.0.0"
             },
             "provide": {
                 "psr/http-message-implementation": "1.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "ext-zlib": "*",
+                "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.14 || ^7.5.20 || ^8.5.8 || ^9.3.10"
+            },
+            "suggest": {
+                "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4-dev"
+                    "dev-master": "1.7-dev"
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Psr7\\": "src/"
-                },
                 "files": [
                     "src/functions_include.php"
-                ]
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\Psr7\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -638,12 +543,33 @@
             ],
             "authors": [
                 {
+                    "name": "Graham Campbell",
+                    "email": "hello@gjcampbell.co.uk",
+                    "homepage": "https://github.com/GrahamCampbell"
+                },
+                {
                     "name": "Michael Dowling",
                     "email": "mtdowling@gmail.com",
                     "homepage": "https://github.com/mtdowling"
                 },
                 {
+                    "name": "George Mponos",
+                    "email": "gmponos@gmail.com",
+                    "homepage": "https://github.com/gmponos"
+                },
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com",
+                    "homepage": "https://github.com/Nyholm"
+                },
+                {
+                    "name": "Márk Sági-Kazár",
+                    "email": "mark.sagikazar@gmail.com",
+                    "homepage": "https://github.com/sagikazarmark"
+                },
+                {
                     "name": "Tobias Schultze",
+                    "email": "webmaster@tubo-world.de",
                     "homepage": "https://github.com/Tobion"
                 }
             ],
@@ -651,13 +577,32 @@
             "keywords": [
                 "http",
                 "message",
+                "psr-7",
                 "request",
                 "response",
                 "stream",
                 "uri",
                 "url"
             ],
-            "time": "2017-03-20T17:10:46+00:00"
+            "support": {
+                "issues": "https://github.com/guzzle/psr7/issues",
+                "source": "https://github.com/guzzle/psr7/tree/1.8.5"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/GrahamCampbell",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/Nyholm",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/guzzlehttp/psr7",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-03-20T21:51:18+00:00"
         },
         {
             "name": "imangazaliev/didom",
@@ -1796,7 +1741,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/php-fig/http-message/f6561bf28d520154e4b0ec72be95418abe6d9363.zip",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
                 "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
                 "shasum": ""
             },
@@ -1834,6 +1779,9 @@
                 "request",
                 "response"
             ],
+            "support": {
+                "source": "https://github.com/php-fig/http-message/tree/master"
+            },
             "time": "2016-08-06T14:39:51+00:00"
         },
         {
@@ -1955,6 +1903,50 @@
                 "shell"
             ],
             "time": "2017-11-16T14:29:51+00:00"
+        },
+        {
+            "name": "ralouphie/getallheaders",
+            "version": "3.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ralouphie/getallheaders.git",
+                "reference": "120b605dfeb996808c31b6477290a714d356e822"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ralouphie/getallheaders/zipball/120b605dfeb996808c31b6477290a714d356e822",
+                "reference": "120b605dfeb996808c31b6477290a714d356e822",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^5 || ^6.5"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/getallheaders.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ralph Khattar",
+                    "email": "ralph.khattar@gmail.com"
+                }
+            ],
+            "description": "A polyfill for getallheaders.",
+            "support": {
+                "issues": "https://github.com/ralouphie/getallheaders/issues",
+                "source": "https://github.com/ralouphie/getallheaders/tree/develop"
+            },
+            "time": "2019-03-08T08:55:37+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -2984,58 +2976,6 @@
                 "environment"
             ],
             "time": "2016-09-01T10:05:43+00:00"
-        },
-        {
-            "name": "zendframework/zend-diactoros",
-            "version": "1.6.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-diactoros.git",
-                "reference": "c8664b92a6d5bc229e48b0923486c097e45a7877"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/zendframework/zend-diactoros/c8664b92a6d5bc229e48b0923486c097e45a7877.zip",
-                "reference": "c8664b92a6d5bc229e48b0923486c097e45a7877",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0",
-                "psr/http-message": "^1.0"
-            },
-            "provide": {
-                "psr/http-message-implementation": "1.0"
-            },
-            "require-dev": {
-                "ext-dom": "*",
-                "ext-libxml": "*",
-                "phpunit/phpunit": "^5.7.16 || ^6.0.8",
-                "zendframework/zend-coding-standard": "~1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.6-dev",
-                    "dev-develop": "1.7-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\Diactoros\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "description": "PSR HTTP Message implementations",
-            "homepage": "https://github.com/zendframework/zend-diactoros",
-            "keywords": [
-                "http",
-                "psr",
-                "psr-7"
-            ],
-            "time": "2017-10-12T15:24:51+00:00"
         },
         {
             "name": "zofe/burp",
@@ -4735,5 +4675,6 @@
     "platform": {
         "php": ">=5.6.4"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.2.0"
 }
